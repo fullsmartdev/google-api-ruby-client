@@ -14,7 +14,6 @@
 
 require 'spec_helper'
 
-require 'json'
 require 'signet/oauth_1/client'
 require 'httpadapter/adapters/net_http'
 
@@ -238,19 +237,6 @@ describe Google::APIClient do
           {'data' => '12345'}
         )
       end).should raise_error(Google::APIClient::ClientError)
-    end
-
-    it 'should correctly handle unnamed parameters' do
-      @client.authorization = :oauth_2
-      @client.authorization.access_token = '12345'
-      result = @client.execute(
-        @prediction.training.insert,
-        {},
-        JSON.generate({"id" => "bucket/object"}),
-        {'Content-Type' => 'application/json'}
-      )
-      method, uri, headers, body = result.request
-      Hash[headers]['Content-Type'].should == 'application/json'
     end
   end
 
