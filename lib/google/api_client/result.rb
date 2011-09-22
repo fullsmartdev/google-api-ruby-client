@@ -12,6 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+require 'google/api_client/parsers/json_parser'
+
 module Google
   class APIClient
     ##
@@ -52,27 +54,9 @@ module Google
           _, content_type = self.headers.detect do |h, v|
             h.downcase == 'Content-Type'.downcase
           end
-          media_type = content_type[/^([^;]*);?.*$/, 1].strip.downcase
-          data = self.body
-          case media_type
-          when 'application/json'
-            data = JSON.parse(data)
-            # Strip data wrapper, if present
-            data = data['data'] if data.has_key?('data')
-          else
-            raise ArgumentError,
-              "Content-Type not supported for parsing: #{media_type}"
-          end
-          if @reference.api_method && @reference.api_method.response_schema
-            # Automatically parse using the schema designated for the
-            # response of this API method.
-            data = @reference.api_method.response_schema.new(data)
-            data
-          else
-            # Otherwise, return the raw unparsed value.
-            # This value must be indexable like a Hash.
-            data
-          end
+          parser_type =
+            Google::APIClient::Parser.match_content_type(content_type)
+          parser_type.parse(self.body)
         end)
       end
 
