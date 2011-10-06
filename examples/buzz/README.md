@@ -14,11 +14,11 @@ sample.
 - Ruby Gems 1.3.7+
 - Are you on a Mac? If so, be sure you have XCode 3.2+
 - A few gems (run 'sudo gem install <gem name>' to install)
-    - sinatra
-    - httpadapter
-    - extlib
-    - dm-sqlite-adapter
-    - google-api-ruby-client
+-- sinatra
+-- httpadapter
+-- extlib
+-- dm-sqlite-adapter
+-- google-api-ruby-client
 
 ## Setup Authentication
 
@@ -51,7 +51,7 @@ directory. If not check out the code to a local directory.
 
 1. Start up the embedded Sinatra web server
 
-        $ ruby buzz.rb
+    $ ruby buzz.rb
 
 2. Open your web browser and see your activities! Go to `http://localhost:4567/`
 
