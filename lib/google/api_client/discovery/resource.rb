@@ -35,8 +35,7 @@ module Google
       #   The section of the discovery document that applies to this resource.
       #
       # @return [Google::APIClient::Resource] The constructed resource object.
-      def initialize(api, method_base, resource_name, discovery_document)
-        @api = api
+      def initialize(method_base, resource_name, discovery_document)
         @method_base = method_base
         @name = resource_name
         @discovery_document = discovery_document
@@ -96,9 +95,7 @@ module Google
       def resources
         return @resources ||= (
           (@discovery_document['resources'] || []).inject([]) do |accu, (k, v)|
-            accu << Google::APIClient::Resource.new(
-              @api, self.method_base, k, v
-            )
+            accu << Google::APIClient::Resource.new(self.method_base, k, v)
             accu
           end
         )
@@ -111,7 +108,7 @@ module Google
       def methods
         return @methods ||= (
           (@discovery_document['methods'] || []).inject([]) do |accu, (k, v)|
-            accu << Google::APIClient::Method.new(@api, self.method_base, k, v)
+            accu << Google::APIClient::Method.new(self.method_base, k, v)
             accu
           end
         )
