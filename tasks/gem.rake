@@ -1,4 +1,4 @@
-require 'rake/gempackagetask'
+require 'rubygems/package_task'
 
 namespace :gem do
   GEM_SPEC = Gem::Specification.new do |s|
@@ -24,7 +24,6 @@ namespace :gem do
     s.add_runtime_dependency('signet', '~> 0.2.2')
     s.add_runtime_dependency('addressable', '~> 2.2.2')
     s.add_runtime_dependency('httpadapter', '~> 1.0.0')
-    s.add_runtime_dependency('autoparse', '~> 0.2.0')
     s.add_runtime_dependency('json', '>= 1.4.6')
     s.add_runtime_dependency('extlib', '>= 0.9.15')
 
@@ -44,7 +43,7 @@ namespace :gem do
     s.homepage = PKG_HOMEPAGE
   end
 
-  Rake::GemPackageTask.new(GEM_SPEC) do |p|
+  Gem::PackageTask.new(GEM_SPEC) do |p|
     p.gem_spec = GEM_SPEC
     p.need_tar = true
     p.need_zip = true
