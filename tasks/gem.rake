@@ -17,7 +17,6 @@ namespace :gem do
     s.files = PKG_FILES.to_a
     s.executables << 'google-api'
 
-    s.has_rdoc = true
     s.extra_rdoc_files = %w( README.md )
     s.rdoc_options.concat ['--main',  'README.md']
 
@@ -25,7 +24,6 @@ namespace :gem do
     s.add_runtime_dependency('signet', '~> 0.2.2')
     s.add_runtime_dependency('addressable', '~> 2.2.2')
     s.add_runtime_dependency('httpadapter', '~> 1.0.0')
-    s.add_runtime_dependency('autoparse', '~> 0.2.0')
     s.add_runtime_dependency('json', '>= 1.4.6')
     s.add_runtime_dependency('extlib', '>= 0.9.15')
 
