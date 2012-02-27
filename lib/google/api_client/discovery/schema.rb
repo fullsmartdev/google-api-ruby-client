@@ -48,7 +48,11 @@ module Google
           # issue since it should only be called only once per schema per
           # process.
           if data.kind_of?(Hash) && data['$ref']
-            reference = data['$ref']
+            if data['$ref'].respond_to?(:to_str)
+              reference = data['$ref'].to_str
+            else
+              raise TypeError, "Expected String, got #{data['$ref'].class}"
+            end
             reference = '#' + reference if reference[0..0] != '#'
             data.merge({
               '$ref' => reference
