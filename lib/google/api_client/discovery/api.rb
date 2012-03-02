@@ -18,7 +18,7 @@ require 'addressable/uri'
 require 'google/inflection'
 require 'google/api_client/discovery/resource'
 require 'google/api_client/discovery/method'
-require 'google/api_client/discovery/media'
+
 
 module Google
   class APIClient
@@ -43,7 +43,7 @@ module Google
       def initialize(document_base, discovery_document)
         @document_base = Addressable::URI.parse(document_base)
         @discovery_document = discovery_document
-        metaclass = (class <<self; self; end)
+        metaclass = (class << self; self; end)
         self.discovered_resources.each do |resource|
           method_name = Google::INFLECTOR.underscore(resource.name).to_sym
           if !self.respond_to?(method_name)
@@ -149,7 +149,8 @@ module Google
       def method_base
         if @discovery_document['basePath']
           return @method_base ||= (
-            self.document_base.join(Addressable::URI.parse(@discovery_document['basePath']))
+            self.document_base +
+            Addressable::URI.parse(@discovery_document['basePath'])
           ).normalize
         else
           return nil
