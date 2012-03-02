@@ -47,13 +47,8 @@ module Google
           # and excess object creation, but this hopefully shouldn't be an
           # issue since it should only be called only once per schema per
           # process.
-          if data.kind_of?(Hash) &&
-              data['$ref'] && !data['$ref'].kind_of?(Hash)
-            if data['$ref'].respond_to?(:to_str)
-              reference = data['$ref'].to_str
-            else
-              raise TypeError, "Expected String, got #{data['$ref'].class}"
-            end
+          if data.kind_of?(Hash) && data['$ref']
+            reference = data['$ref']
             reference = '#' + reference if reference[0..0] != '#'
             data.merge({
               '$ref' => reference
@@ -79,26 +74,22 @@ module Google
             Google::INFLECTOR.camelize(api.name)
           api_version_string =
             Google::INFLECTOR.camelize(api.version).gsub('.', '_')
-          # This is for compatibility with Ruby 1.8.7.
-          # TODO(bobaman) Remove this when we eventually stop supporting 1.8.7.
-          args = []
-          args << false if Class.method(:const_defined?).arity != 1
-          if Google::APIClient::Schema.const_defined?(api_name_string, *args)
+          if Google::APIClient::Schema.const_defined?(api_name_string, false)
             api_name = Google::APIClient::Schema.const_get(
-              api_name_string, *args
+              api_name_string, false
             )
           else
             api_name = Google::APIClient::Schema.const_set(
               api_name_string, Module.new
             )
           end
-          if api_name.const_defined?(api_version_string, *args)
-            api_version = api_name.const_get(api_version_string, *args)
+          if api_name.const_defined?(api_version_string, false)
+            api_version = api_name.const_get(api_version_string, false)
           else
             api_version = api_name.const_set(api_version_string, Module.new)
           end
-          if api_version.const_defined?(schema_name, *args)
-            schema_class = api_version.const_get(schema_name, *args)
+          if api_version.const_defined?(schema_name, false)
+            schema_class = api_version.const_get(schema_name, false)
           end
         end
 
