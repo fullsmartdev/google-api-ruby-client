@@ -25,7 +25,7 @@ require 'google/api_client/environment'
 require 'google/api_client/discovery'
 require 'google/api_client/reference'
 require 'google/api_client/result'
-
+require 'google/api_client/media'
 
 module Google
   # TODO(bobaman): Document all this stuff.
@@ -87,7 +87,8 @@ module Google
       ).strip
       # The writer method understands a few Symbols and will generate useful
       # default authentication mechanisms.
-      self.authorization = options.key?("authorization") ? options["authorization"] : :oauth_2
+      self.authorization =
+        options.key?("authorization") ? options["authorization"] : :oauth_2
       self.key = options["key"]
       self.user_ip = options["user_ip"]
       @discovery_uris = {}
@@ -718,13 +719,15 @@ module Google
     # @see Google::APIClient#execute
     def execute!(*params)
       result = self.execute(*params)
-      if result.data.respond_to?(:error) &&
-          result.data.error.respond_to?(:message)
-        # You're going to get a terrible error message if the response isn't
-        # parsed successfully as an error.
-        error_message = result.data.error.message
-      elsif result.data['error'] && result.data['error']['message']
-        error_message = result.data['error']['message']
+      if result.data?
+        if result.data.respond_to?(:error) &&
+             result.data.error.respond_to?(:message)
+          # You're going to get a terrible error message if the response isn't
+          # parsed successfully as an error.
+          error_message = result.data.error.message
+        elsif result.data['error'] && result.data['error']['message']
+          error_message = result.data['error']['message']
+        end
       end
       if result.response.status >= 400
         case result.response.status
