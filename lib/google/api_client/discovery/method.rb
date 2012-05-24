@@ -28,8 +28,6 @@ module Google
       ##
       # Creates a description of a particular method.
       #
-      # @param [Google::APIClient::API] api
-      #   The API this method belongs to.
       # @param [Addressable::URI] method_base
       #   The base URI for the service.
       # @param [String] method_name
@@ -44,12 +42,6 @@ module Google
         @name = method_name
         @discovery_document = discovery_document
       end
-
-      ##
-      # Returns the API this method belongs to.
-      #
-      # @return [Google::APIClient::API] The API this method belongs to.
-      attr_reader :api
 
       ##
       # Returns the identifier for the method.
@@ -119,7 +111,7 @@ module Google
           return nil
         end
       end
-
+      
       ##
       # Returns the Schema object for the method's request, if any.
       #
@@ -191,7 +183,7 @@ module Google
           end
           case upload_type.last
           when 'media', 'multipart', 'resumable'
-            uri = self.media_upload.uri_template.expand(parameters)
+            uri = self.media_upload.uri_template.expand(parameters)            
           else
             raise ArgumentException, "Invalid uploadType '#{upload_type}'"
           end
@@ -240,7 +232,7 @@ module Google
           req.body = body
         end
       end
-
+      
 
       ##
       # Returns a <code>Hash</code> of the parameter descriptions for
