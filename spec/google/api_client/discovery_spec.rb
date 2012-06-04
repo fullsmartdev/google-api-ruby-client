@@ -142,12 +142,6 @@ describe Google::APIClient do
       ).name.should == 'delete'
     end
 
-    it 'should define the origin API in discovered methods' do
-      @client.discovered_method(
-        'prediction.training.insert', 'prediction', 'v1.2'
-      ).api.name.should == 'prediction'
-    end
-
     it 'should not find methods that are not in the discovery document' do
       @client.discovered_method(
         'prediction.bogus', 'prediction', 'v1.2'
@@ -169,10 +163,6 @@ describe Google::APIClient do
     it 'should correctly determine the preferred version' do
       @client.preferred_version('prediction').version.should_not == 'v1'
       @client.preferred_version(:prediction).version.should_not == 'v1'
-    end
-
-    it 'should return a batch path' do
-      @client.discovered_api('prediction', 'v1.2').batch_path.should_not be_nil
     end
 
     it 'should generate valid requests' do
@@ -334,12 +324,6 @@ describe Google::APIClient do
       ).name.should == 'list'
     end
 
-    it 'should define the origin API in discovered methods' do
-      @client.discovered_method(
-        'plus.activities.list', 'plus'
-      ).api.name.should == 'plus'
-    end
-
     it 'should not find methods that are not in the discovery document' do
       @client.discovered_method('plus.bogus', 'plus').should == nil
     end
@@ -397,20 +381,10 @@ describe Google::APIClient do
       @client.discovered_api('latitude').version.should == 'v1'
     end
 
-    it 'should return a batch path' do
-      @client.discovered_api('latitude').batch_path.should_not be_nil
-    end
-
     it 'should find methods that are in the discovery document' do
       @client.discovered_method(
         'latitude.currentLocation.get', 'latitude'
       ).name.should == 'get'
-    end
-
-    it 'should define the origin API in discovered methods' do
-      @client.discovered_method(
-        'latitude.currentLocation.get', 'latitude'
-      ).api.name.should == 'latitude'
     end
 
     it 'should not find methods that are not in the discovery document' do
@@ -466,18 +440,8 @@ describe Google::APIClient do
       ).name.should == 'get'
     end
 
-    it 'should define the origin API in discovered methods' do
-      @client.discovered_method(
-        'moderator.profiles.get', 'moderator'
-      ).api.name.should == 'moderator'
-    end
-
     it 'should not find methods that are not in the discovery document' do
       @client.discovered_method('moderator.bogus', 'moderator').should == nil
-    end
-
-    it 'should return a batch path' do
-      @client.discovered_api('moderator').batch_path.should_not be_nil
     end
 
     it 'should generate requests against the correct URIs' do
@@ -524,10 +488,6 @@ describe Google::APIClient do
     it 'should find APIs that are in the discovery document' do
       @client.discovered_api('adsense').name.should == 'adsense'
       @client.discovered_api('adsense').version.should == 'v1'
-    end
-
-    it 'should return a batch path' do
-      @client.discovered_api('adsense').batch_path.should_not be_nil
     end
 
     it 'should find methods that are in the discovery document' do

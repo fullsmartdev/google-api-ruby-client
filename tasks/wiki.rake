@@ -1,3 +1,4 @@
+require 'google/api_client'
 require 'rake'
 require 'rake/clean'
 
@@ -17,7 +18,6 @@ the following Google APIs.
 
 WIKI
     preferred_apis = {}
-    require 'google/api_client'
     client = Google::APIClient.new
     for api in client.discovered_apis
       if !preferred_apis.has_key?(api.name)

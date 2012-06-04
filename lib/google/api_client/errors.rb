@@ -41,9 +41,5 @@ module Google
     # An exception that is raised if an ID token could not be validated.
     class InvalidIDTokenError < StandardError
     end
-
-    # Error class for problems in batch requests.
-    class BatchError < StandardError
-    end
   end
 end
