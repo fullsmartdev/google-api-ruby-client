@@ -13,7 +13,7 @@
 # limitations under the License.
 
 
-gem 'faraday', '~> 0.7.0'
+gem 'faraday', '~> 0.8.1'
 require 'faraday'
 require 'faraday/utils'
 require 'multi_json'
@@ -113,7 +113,7 @@ module Google
     def authorization=(new_authorization)
       case new_authorization
       when :oauth_1, :oauth
-        gem 'signet', '~> 0.3.0'
+        gem 'signet', '~> 0.4.0'
         require 'signet/oauth_1/client'
         # NOTE: Do not rely on this default value, as it may change
         new_authorization = Signet::OAuth1::Client.new(
@@ -127,7 +127,7 @@ module Google
           :client_credential_secret => 'anonymous'
         )
       when :two_legged_oauth_1, :two_legged_oauth
-        gem 'signet', '~> 0.3.0'
+        gem 'signet', '~> 0.4.0'
         require 'signet/oauth_1/client'
         # NOTE: Do not rely on this default value, as it may change
         new_authorization = Signet::OAuth1::Client.new(
@@ -136,7 +136,7 @@ module Google
           :two_legged => true
         )
       when :oauth_2
-        gem 'signet', '~> 0.3.0'
+        gem 'signet', '~> 0.4.0'
         require 'signet/oauth_2/client'
         # NOTE: Do not rely on this default value, as it may change
         new_authorization = Signet::OAuth2::Client.new(
@@ -542,7 +542,7 @@ module Google
     def generate_request(options={})
       # Note: The merge method on a Hash object will coerce an API Reference
       # object into a Hash and merge with the default options.
-      
+
       options={
         :version => 'v1',
         :authorization => self.authorization,
@@ -550,7 +550,7 @@ module Google
         :user_ip => self.user_ip,
         :connection => Faraday.default_connection
       }.merge(options)
-      
+
       # The Reference object is going to need this to do method ID lookups.
       options[:client] = self
       # The default value for the :authenticated option depends on whether an
@@ -655,8 +655,10 @@ module Google
         end
       end
 
-      request = Faraday::Request.create(method.to_s.downcase.to_sym) do |req|
-        req.url(Addressable::URI.parse(uri))
+      request = options[:connection].build_request(
+        method.to_s.downcase.to_sym
+      ) do |req|
+        req.url(Addressable::URI.parse(uri).normalize.to_s)
         req.headers = Faraday::Utils::Headers.new(headers)
         req.body = body
       end
@@ -709,6 +711,7 @@ module Google
           params.size == 1
         batch = params.pop
         options = batch.options
+        options[:connection] ||= Faraday.default_connection
         http_request = batch.to_http_request
         request = nil
 
@@ -716,8 +719,10 @@ module Google
           method, uri, headers, body = http_request
           method = method.to_s.downcase.to_sym
 
-          faraday_request = Faraday::Request.create(method) do |req|
-            req.url(uri.to_s)
+          faraday_request = options[:connection].build_request(
+            method.to_s.downcase.to_sym
+          ) do |req|
+            req.url(Addressable::URI.parse(uri).normalize.to_s)
             req.headers = Faraday::Utils::Headers.new(headers)
             req.body = body
           end
@@ -755,6 +760,7 @@ module Google
         options[:body] = params.shift if params.size > 0
         options[:headers] = params.shift if params.size > 0
         options[:client] = self
+        options[:connection] ||= Faraday.default_connection
         reference = Google::APIClient::Reference.new(options)
         request = self.generate_request(reference)
         response = self.transmit(
@@ -772,18 +778,27 @@ module Google
     # @see Google::APIClient#execute
     def execute!(*params)
       result = self.execute(*params)
-      if result.error?
-        error_message = result.error_message
+      if result.data?
+        if result.data.respond_to?(:error) &&
+             result.data.error.respond_to?(:message)
+          # You're going to get a terrible error message if the response isn't
+          # parsed successfully as an error.
+          error_message = result.data.error.message
+        elsif result.data['error'] && result.data['error']['message']
+          error_message = result.data['error']['message']
+        end
+      end
+      if result.response.status >= 400
         case result.response.status
-          when 400...500
-            exception_type = ClientError
-            error_message ||= "A client error has occurred."
-          when 500...600
-            exception_type = ServerError
-            error_message ||= "A server error has occurred."
-          else
-            exception_type = TransmissionError
-            error_message ||= "A transmission error has occurred."
+        when 400...500
+          exception_type = ClientError
+          error_message ||= "A client error has occurred."
+        when 500...600
+          exception_type = ServerError
+          error_message ||= "A server error has occurred."
+        else
+          exception_type = TransmissionError
+          error_message ||= "A transmission error has occurred."
         end
         raise exception_type, error_message
       end
