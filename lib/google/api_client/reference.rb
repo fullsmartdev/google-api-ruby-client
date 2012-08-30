@@ -17,6 +17,7 @@ gem 'faraday', '~> 0.8.1'
 require 'faraday'
 require 'faraday/utils'
 require 'multi_json'
+require 'compat/multi_json'
 require 'addressable/uri'
 require 'stringio'
 require 'google/api_client/discovery'
@@ -63,7 +64,7 @@ module Google
         self.headers = options[:headers] || {}
         if options[:media]
           self.media = options[:media]
-          upload_type = self.parameters.find { |(k, _)| ['uploadType', 'upload_type'].include?(k) }.last
+          upload_type = parameters['uploadType'] || parameters['upload_type']
           case upload_type
           when "media"
             if options[:body] || options[:body_object]
