@@ -29,9 +29,13 @@ module Google
       ##
       # Creates a description of a particular version of a service.
       #
-      # @param [String] document_base
-      #   Base URI for the service
-      # @param [Hash] discovery_document
+      # @param [String] api
+      #   The identifier for the service.  Note that while this frequently
+      #   matches the first segment of all of the service's RPC names, this
+      #   should not be assumed.  There is no requirement that these match.
+      # @param [String] version
+      #   The identifier for the service version.
+      # @param [Hash] api_description
       #   The section of the discovery document that applies to this service
       #   version.
       #
@@ -53,9 +57,6 @@ module Google
           end
         end
       end
-      
-      # @return [String] unparsed discovery document for the API
-      attr_reader :discovery_document
 
       ##
       # Returns the id of the service.
@@ -158,7 +159,7 @@ module Google
       ##
       # Updates the hierarchy of resources and methods with the new base.
       #
-      # @param [Addressable::URI, #to_str, String] new_method_base
+      # @param [Addressable::URI, #to_str, String] new_base
       #   The new base URI to use for the service.
       def method_base=(new_method_base)
         @method_base = Addressable::URI.parse(new_method_base)

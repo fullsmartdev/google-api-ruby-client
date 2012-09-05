@@ -21,8 +21,8 @@ if !defined?(::Google::APIClient::VERSION)
     class APIClient
       module VERSION
         MAJOR = 0
-        MINOR = 5
-        TINY  = 0
+        MINOR = 4
+        TINY  = 7
 
         STRING = [MAJOR, MINOR, TINY].join('.')
       end

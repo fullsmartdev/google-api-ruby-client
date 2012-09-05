@@ -1,10 +1,6 @@
-# 0.5.0
-* Beta candidate, potential incompatible changes with how requests are processed. 
-    * All requests should be made using execute() or execute!()
-    * :api_method in request can no longer be a string
-    * Deprecated ResumableUpload.send_* methods.
-* Reduce memory utilization when uploading large files
-* Simplify internal request processing.
+# 0.4.7
+
+* Added the ability to convert client secrets to an authorization object
 
 # 0.4.6
 
