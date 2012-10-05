@@ -27,8 +27,6 @@ require 'google/api_client/errors'
 
 module Google
   class APIClient
-    ##
-    # @api private
     module Schema
       def self.parse(api, schema_data)
         # This method is super-long, but hard to break up due to the

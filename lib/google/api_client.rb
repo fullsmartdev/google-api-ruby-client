@@ -13,6 +13,7 @@
 # limitations under the License.
 
 
+gem 'faraday', '~> 0.8.1'
 require 'faraday'
 require 'faraday/utils'
 require 'multi_json'
@@ -30,6 +31,9 @@ require 'google/api_client/service_account'
 require 'google/api_client/batch'
 
 module Google
+  # TODO(bobaman): Document all this stuff.
+
+
   ##
   # This class manages APIs communication.
   class APIClient
@@ -63,23 +67,23 @@ module Google
     def initialize(options={})
       # Normalize key to String to allow indifferent access.
       options = options.inject({}) do |accu, (key, value)|
-        accu[key.to_sym] = value
+        accu[key.to_s] = value
         accu
       end
       # Almost all API usage will have a host of 'www.googleapis.com'.
-      self.host = options[:host] || 'www.googleapis.com'
-      self.port = options[:port] || 443
-      self.discovery_path = options[:discovery_path] || '/discovery/v1'
+      self.host = options["host"] || 'www.googleapis.com'
+      self.port = options["port"] || 443
+      self.discovery_path = options["discovery_path"] || '/discovery/v1'
 
       # Most developers will want to leave this value alone and use the
       # application_name option.
       application_string = (
-        options[:application_name] ? (
-          "#{options[:application_name]}/" +
-          "#{options[:application_version] || '0.0.0'}"
+        options["application_name"] ? (
+          "#{options["application_name"]}/" +
+          "#{options["application_version"] || '0.0.0'}"
         ) : ""
       )
-      self.user_agent = options[:user_agent] || (
+      self.user_agent = options["user_agent"] || (
         "#{application_string} " +
         "google-api-ruby-client/#{VERSION::STRING} " +
          ENV::OS_VERSION
@@ -87,9 +91,9 @@ module Google
       # The writer method understands a few Symbols and will generate useful
       # default authentication mechanisms.
       self.authorization =
-        options.key?(:authorization) ? options[:authorization] : :oauth_2
-      self.key = options[:key]
-      self.user_ip = options[:user_ip]
+        options.key?("authorization") ? options["authorization"] : :oauth_2
+      self.key = options["key"]
+      self.user_ip = options["user_ip"]
       @discovery_uris = {}
       @discovery_documents = {}
       @discovered_apis = {}
@@ -110,6 +114,7 @@ module Google
     def authorization=(new_authorization)
       case new_authorization
       when :oauth_1, :oauth
+        gem 'signet', '~> 0.4.0'
         require 'signet/oauth_1/client'
         # NOTE: Do not rely on this default value, as it may change
         new_authorization = Signet::OAuth1::Client.new(
@@ -123,6 +128,7 @@ module Google
           :client_credential_secret => 'anonymous'
         )
       when :two_legged_oauth_1, :two_legged_oauth
+        gem 'signet', '~> 0.4.0'
         require 'signet/oauth_1/client'
         # NOTE: Do not rely on this default value, as it may change
         new_authorization = Signet::OAuth1::Client.new(
@@ -131,6 +137,7 @@ module Google
           :two_legged => true
         )
       when :oauth_2
+        gem 'signet', '~> 0.4.0'
         require 'signet/oauth_2/client'
         # NOTE: Do not rely on this default value, as it may change
         new_authorization = Signet::OAuth2::Client.new(
@@ -191,6 +198,31 @@ module Google
     # @return [String]
     #   The base path. Should almost always be '/discovery/v1'.
     attr_accessor :discovery_path
+
+    ##
+    # Resolves a URI template against the client's configured base.
+    #
+    # @param [String, Addressable::URI, Addressable::Template] template
+    #   The template to resolve.
+    # @param [Hash] mapping The mapping that corresponds to the template.
+    # @return [Addressable::URI] The expanded URI.
+    def resolve_uri(template, mapping={})
+      @base_uri ||= Addressable::URI.new(
+        :scheme => 'https',
+        :host => self.host,
+        :port => self.port
+      ).normalize
+      template = if template.kind_of?(Addressable::Template)
+        template.pattern
+      elsif template.respond_to?(:to_str)
+        template.to_str
+      else
+        raise TypeError,
+          "Expected String, Addressable::URI, or Addressable::Template, " +
+          "got #{template.class}."
+      end
+      return Addressable::Template.new(@base_uri + template).expand(mapping)
+    end
 
     ##
     # Returns the URI for the directory document.
@@ -261,12 +293,27 @@ module Google
     # @return [Hash] The parsed JSON from the directory document.
     def directory_document
       return @directory_document ||= (begin
-        response = self.execute!(
+        request = self.generate_request(
           :http_method => :get,
           :uri => self.directory_uri,
           :authenticated => false
         )
-        response.data
+        response = self.transmit(:request => request)
+        if response.status >= 200 && response.status < 300
+          MultiJson.load(response.body)
+        elsif response.status >= 400
+          case response.status
+          when 400...500
+            exception_type = ClientError
+          when 500...600
+            exception_type = ServerError
+          else
+            exception_type = TransmissionError
+          end
+          url = request.to_env(Faraday.default_connection)[:url]
+          raise exception_type,
+            "Could not retrieve directory document at: #{url}"
+        end
       end)
     end
 
@@ -280,12 +327,27 @@ module Google
       api = api.to_s
       version = version || 'v1'
       return @discovery_documents["#{api}:#{version}"] ||= (begin
-        response = self.execute!(
+        request = self.generate_request(
           :http_method => :get,
           :uri => self.discovery_uri(api, version),
           :authenticated => false
         )
-        response.data
+        response = self.transmit(:request => request)
+        if response.status >= 200 && response.status < 300
+          MultiJson.load(response.body)
+        elsif response.status >= 400
+          case response.status
+          when 400...500
+            exception_type = ClientError
+          when 500...600
+            exception_type = ServerError
+          else
+            exception_type = TransmissionError
+          end
+          url = request.to_env(Faraday.default_connection)[:url]
+          raise exception_type,
+            "Could not retrieve discovery document at: #{url}"
+        end
       end)
     end
 
@@ -341,7 +403,7 @@ module Google
     # Returns the method object for a given RPC name and service version.
     #
     # @param [String, Symbol] rpc_name The RPC name of the desired method.
-    # @param [String, Symbol] api The API the method is within.
+    # @param [String, Symbol] rpc_name The API the method is within.
     # @param [String] version The desired version of the API.
     #
     # @return [Google::APIClient::Method] The method object.
@@ -387,6 +449,7 @@ module Google
     # an ID token supplied by an untrusted client-side mechanism is valid.
     # Raises an error if the token is invalid or missing.
     def verify_id_token!
+      gem 'jwt', '~> 0.1.4'
       require 'jwt'
       require 'openssl'
       @certificates ||= {}
@@ -416,16 +479,31 @@ module Google
         if check_cached_certs.call()
           return true
         end
-        response = self.execute!(
+        request = self.generate_request(
           :http_method => :get,
           :uri => 'https://www.googleapis.com/oauth2/v1/certs',
           :authenticated => false
         )
-        @certificates.merge!(
-          Hash[MultiJson.load(response.body).map do |key, cert|
-            [key, OpenSSL::X509::Certificate.new(cert)]
-          end]
-        )
+        response = self.transmit(:request => request)
+        if response.status >= 200 && response.status < 300
+          @certificates.merge!(
+            Hash[MultiJson.load(response.body).map do |key, cert|
+              [key, OpenSSL::X509::Certificate.new(cert)]
+            end]
+          )
+        elsif response.status >= 400
+          case response.status
+          when 400...500
+            exception_type = ClientError
+          when 500...600
+            exception_type = ServerError
+          else
+            exception_type = TransmissionError
+          end
+          url = request.to_env(Faraday.default_connection)[:url]
+          raise exception_type,
+            "Could not retrieve certificates from: #{url}"
+        end
         if check_cached_certs.call()
           return true
         else
@@ -439,7 +517,7 @@ module Google
     ##
     # Generates a request.
     #
-    # @option options [Google::APIClient::Method] :api_method
+    # @option options [Google::APIClient::Method, String] :api_method
     #   The method object or the RPC name of the method being executed.
     # @option options [Hash, Array] :parameters
     #   The parameters to send to the method.
@@ -454,7 +532,7 @@ module Google
     #   `true` if the request must be signed or somehow
     #   authenticated, `false` otherwise.
     #
-    # @return [Google::APIClient::Reference] The generated request.
+    # @return [Faraday::Request] The generated request.
     #
     # @example
     #   request = client.generate_request(
@@ -463,30 +541,153 @@ module Google
     #       {'collection' => 'public', 'userId' => 'me'}
     #   )
     def generate_request(options={})
-      options = {
-        :api_client => self
+      # Note: The merge method on a Hash object will coerce an API Reference
+      # object into a Hash and merge with the default options.
+
+      options={
+        :version => 'v1',
+        :authorization => self.authorization,
+        :key => self.key,
+        :user_ip => self.user_ip,
+        :connection => Faraday.default_connection
       }.merge(options)
-      return Google::APIClient::Request.new(options)
+
+      # The Reference object is going to need this to do method ID lookups.
+      options[:client] = self
+      # The default value for the :authenticated option depends on whether an
+      # authorization mechanism has been set.
+      if options[:authorization]
+        options = {:authenticated => true}.merge(options)
+      else
+        options = {:authenticated => false}.merge(options)
+      end
+      reference = Google::APIClient::Reference.new(options)
+      request = reference.to_request
+      if options[:authenticated]
+        request = options[:authorization].generate_authenticated_request(
+          :request => request,
+          :connection => options[:connection]
+        )
+      end
+      return request
+    end
+
+    ##
+    # Signs a request using the current authorization mechanism.
+    #
+    # @param [Hash] options a customizable set of options
+    #
+    # @return [Faraday::Request] The signed or otherwise authenticated request.
+    # @deprecated No longer used internally
+    def generate_authenticated_request(options={})
+      return authorization.generate_authenticated_request(options)
+    end
+
+    ##
+    # Transmits the request using the current HTTP adapter.
+    #
+    # @option options [Array, Faraday::Request] :request
+    #   The HTTP request to transmit.
+    # @option options [String, Symbol] :method
+    #   The method for the HTTP request.
+    # @option options [String, Addressable::URI] :uri
+    #   The URI for the HTTP request.
+    # @option options [Array, Hash] :headers
+    #   The headers for the HTTP request.
+    # @option options [String] :body
+    #   The body for the HTTP request.
+    # @option options [Faraday::Connection] :connection
+    #   The HTTP connection to use.
+    #
+    # @return [Faraday::Response] The response from the server.
+    def transmit(options={})
+      options[:connection] ||= Faraday.default_connection
+      if options[:request]
+        if options[:request].kind_of?(Array)
+          method, uri, headers, body = options[:request]
+        elsif options[:request].kind_of?(Faraday::Request)
+          unless options[:connection]
+            raise ArgumentError,
+              "Faraday::Request used, requires a connection to be provided."
+          end
+          method = options[:request].method.to_s.downcase.to_sym
+          uri = options[:connection].build_url(
+            options[:request].path, options[:request].params
+          )
+          headers = options[:request].headers || {}
+          body = options[:request].body || ''
+        end
+      else
+        method = options[:method] || :get
+        uri = options[:uri]
+        headers = options[:headers] || []
+        body = options[:body] || ''
+      end
+      headers = headers.to_a if headers.kind_of?(Hash)
+      request_components = {
+        :method => method,
+        :uri => uri,
+        :headers => headers,
+        :body => body
+      }
+      # Verify that we have all pieces required to transmit an HTTP request
+      request_components.each do |(key, value)|
+        unless value
+          raise ArgumentError, "Missing :#{key} parameter."
+        end
+      end
+
+      if self.user_agent != nil
+        # If there's no User-Agent header, set one.
+        unless headers.kind_of?(Enumerable)
+          # We need to use some Enumerable methods, relying on the presence of
+          # the #each method.
+          class << headers
+            include Enumerable
+          end
+        end
+        if self.user_agent.kind_of?(String)
+          unless headers.any? { |k, v| k.downcase == 'User-Agent'.downcase }
+            headers = headers.to_a.insert(0, ['User-Agent', self.user_agent])
+          end
+        elsif self.user_agent != nil
+          raise TypeError,
+            "Expected User-Agent to be String, got #{self.user_agent.class}"
+        end
+      end
+
+      request = options[:connection].build_request(
+        method.to_s.downcase.to_sym
+      ) do |req|
+        req.url(Addressable::URI.parse(uri).normalize.to_s)
+        req.headers = Faraday::Utils::Headers.new(headers)
+        req.body = body
+      end
+      request_env = request.to_env(options[:connection])
+      response = options[:connection].app.call(request_env)
+      return response
     end
 
     ##
     # Executes a request, wrapping it in a Result object.
     #
-    # @param [Google::APIClient::Request, Hash, Array] params
-    #   Either a Google::APIClient::Request, a Hash, or an Array.
+    # @param [Google::APIClient::BatchRequest, Hash, Array] params
+    #   Either a Google::APIClient::BatchRequest, a Hash, or an Array.
     #
-    #   If a Google::APIClient::Request, no other parameters are expected.
+    #   If a Google::APIClient::BatchRequest, no other parameters are expected.
     #
     #   If a Hash, the below parameters are handled. If an Array, the
     #   parameters are assumed to be in the below order:
     #
-    #   - (Google::APIClient::Method) api_method:
+    #   - (Google::APIClient::Method, String) api_method:
     #     The method object or the RPC name of the method being executed.
     #   - (Hash, Array) parameters:
     #     The parameters to send to the method.
     #   - (String) body: The body of the request.
     #   - (Hash, Array) headers: The HTTP headers for the request.
     #   - (Hash) options: A set of options for the request, of which:
+    #     - (String) :version (default: "v1") -
+    #       The service version. Only used if `api_method` is a `String`.
     #     - (#generate_authenticated_request) :authorization (default: true) -
     #       The authorization mechanism for the response. Used only if
     #       `:authenticated` is `true`.
@@ -500,18 +701,50 @@ module Google
     #   result = client.execute(batch_request)
     #
     # @example
-    #   plus = client.discovered_api('plus')
     #   result = client.execute(
-    #     :api_method => plus.activities.list,
+    #     :api_method => 'plus.activities.list',
     #     :parameters => {'collection' => 'public', 'userId' => 'me'}
     #   )
     #
     # @see Google::APIClient#generate_request
     def execute(*params)
-      if params.last.kind_of?(Google::APIClient::Request) &&
+      if params.last.kind_of?(Google::APIClient::BatchRequest) &&
           params.size == 1
-        request = params.pop
-        options = {}
+        batch = params.pop
+        options = batch.options
+        options[:connection] ||= Faraday.default_connection
+        http_request = batch.to_http_request
+        request = nil
+
+        if @authorization
+          method, uri, headers, body = http_request
+          method = method.to_s.downcase.to_sym
+
+          faraday_request = options[:connection].build_request(
+            method.to_s.downcase.to_sym
+          ) do |req|
+            req.url(Addressable::URI.parse(uri).normalize.to_s)
+            req.headers = Faraday::Utils::Headers.new(headers)
+            req.body = body
+          end
+
+          request = {
+            :request => self.generate_authenticated_request(
+              :request => faraday_request,
+              :connection => options[:connection]
+            ),
+            :connection => options[:connection]
+          }
+        else
+          request = {
+            :request => http_request,
+            :connection => options[:connection]
+          }
+        end
+
+        response = self.transmit(request)
+        batch.process_response(response)
+        return nil
       else
         # This block of code allows us to accept multiple parameter passing
         # styles, and maintaining some backwards compatibility.
@@ -527,19 +760,16 @@ module Google
         options[:parameters] = params.shift if params.size > 0
         options[:body] = params.shift if params.size > 0
         options[:headers] = params.shift if params.size > 0
-        options.update(params.shift) if params.size > 0
-        request = self.generate_request(options)
+        options[:client] = self
+        options[:connection] ||= Faraday.default_connection
+        reference = Google::APIClient::Reference.new(options)
+        request = self.generate_request(reference)
+        response = self.transmit(
+          :request => request,
+          :connection => options[:connection]
+        )
+        return Google::APIClient::Result.new(reference, request, response)
       end
-      
-      request.headers['User-Agent'] ||= '' + self.user_agent unless self.user_agent.nil?
-      request.parameters['key'] ||= self.key unless self.key.nil?
-      request.parameters['userIp'] ||= self.user_ip unless self.user_ip.nil?
-
-      connection = options[:connection] || Faraday.default_connection
-      request.authorization = options[:authorization] || self.authorization unless options[:authenticated] == false
-
-      result = request.send(connection)
-      return result
     end
 
     ##
@@ -566,35 +796,6 @@ module Google
       end
       return result
     end
-    
-    protected
-    
-    ##
-    # Resolves a URI template against the client's configured base.
-    #
-    # @api private
-    # @param [String, Addressable::URI, Addressable::Template] template
-    #   The template to resolve.
-    # @param [Hash] mapping The mapping that corresponds to the template.
-    # @return [Addressable::URI] The expanded URI.
-    def resolve_uri(template, mapping={})
-      @base_uri ||= Addressable::URI.new(
-        :scheme => 'https',
-        :host => self.host,
-        :port => self.port
-      ).normalize
-      template = if template.kind_of?(Addressable::Template)
-        template.pattern
-      elsif template.respond_to?(:to_str)
-        template.to_str
-      else
-        raise TypeError,
-          "Expected String, Addressable::URI, or Addressable::Template, " +
-          "got #{template.class}."
-      end
-      return Addressable::Template.new(@base_uri + template).expand(mapping)
-    end
-    
   end
 end
 

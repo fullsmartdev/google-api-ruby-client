@@ -20,8 +20,6 @@ module Google
     ##
     # Helper for loading keys from the PKCS12 files downloaded when
     # setting up service accounts at the APIs Console.
-    #
-
     module PKCS12
       
       ##
@@ -53,29 +51,9 @@ module Google
     ##
     # Generates access tokens using the JWT assertion profile. Requires a
     # service account & access to the private key.
-    #
-    # @example
-    #
-    #    client = Google::APIClient.new
-    #    key = Google::APIClient::PKCS12.load_key('client.p12', 'notasecret')
-    #    service_account = Google::APIClient::JWTAsserter(
-    #        '123456-abcdef@developer.gserviceaccount.com',
-    #        'https://www.googleapis.com/auth/prediction',
-    #        key)
-    #    client.authorization = service_account.authorize
-    #    client.execute(...)
-    #
-    # @see https://developers.google.com/accounts/docs/OAuth2ServiceAccount
     class JWTAsserter
-      # @return [String] ID/email of the issuing party
-      attr_accessor :issuer
-      # @return [Fixnum] How long, in seconds, the assertion is valid for
-      attr_accessor :expiry
-      # @return [Fixnum] Seconds to expand the issued at/expiry window to account for clock skew
-      attr_accessor :skew
-      # @return [String] Scopes to authorize
+      attr_accessor :issuer, :expiry
       attr_reader :scope
-      # @return [OpenSSL::PKey] key for signing assertions
       attr_writer :key
 
       ##
@@ -83,22 +61,21 @@ module Google
       #
       # @param [String] issuer
       #    Name/ID of the client issuing the assertion
-      # @param [String, Array] scope
+      # @param [String or Array] scope
       #   Scopes to authorize. May be a space delimited string or array of strings
-      # @param [OpenSSL::PKey] key
+      # @param [OpenSSL::PKey]
       #   RSA private key for signing assertions
       def initialize(issuer, scope, key)
         self.issuer = issuer
         self.scope = scope
-        self.expiry = 60 # 1 min default 
-        self.skew = 60      
+        self.expiry = 60 # 1 min default        
         self.key = key
       end
 
       ##
       # Set the scopes to authorize
       #
-      # @param [String, Array] new_scope
+      # @param [String or Array] scope
       #   Scopes to authorize. May be a space delimited string or array of strings
       def scope=(new_scope)
         case new_scope
@@ -126,7 +103,7 @@ module Google
           "scope" => self.scope,
           "aud" => "https://accounts.google.com/o/oauth2/token",
           "exp" => (now + expiry).to_i,
-          "iat" => (now - skew).to_i
+          "iat" => now.to_i
         }
         assertion['prn'] = person unless person.nil?
         return JWT.encode(assertion, @key, "RS256")
