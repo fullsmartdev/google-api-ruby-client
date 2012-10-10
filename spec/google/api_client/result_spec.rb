@@ -32,7 +32,7 @@ describe Google::APIClient::Result do
           'maxResults' => 20
         }
       })
-      @request = @reference.to_request
+      @request = @reference.to_http_request
 
       # Response stub
       @response = stub("response")
@@ -66,7 +66,7 @@ describe Google::APIClient::Result do
           }
           END_OF_STRING
         )
-        @result = Google::APIClient::Result.new(@reference, @request, @response)
+        @result = Google::APIClient::Result.new(@reference, @response)
       end
 
       it 'should indicate a successful response' do
@@ -78,11 +78,10 @@ describe Google::APIClient::Result do
       end
 
       it 'should escape the next page token when calling next_page' do
-        pending("This is caused by Faraday's encoding of query parameters.")
         reference = @result.next_page
         Hash[reference.parameters].should include('pageToken')
         Hash[reference.parameters]['pageToken'].should == 'NEXT+PAGE+TOKEN'
-        url = reference.to_request.to_env(Faraday.default_connection)[:url]
+        url = reference.to_env(Faraday.default_connection)[:url]
         url.to_s.should include('pageToken=NEXT%2BPAGE%2BTOKEN')
       end
 
@@ -124,7 +123,7 @@ describe Google::APIClient::Result do
           }
           END_OF_STRING
         )
-        @result = Google::APIClient::Result.new(@reference, @request, @response)
+        @result = Google::APIClient::Result.new(@reference, @response)
       end
 
       it 'should not return a next page token' do
@@ -170,7 +169,7 @@ describe Google::APIClient::Result do
          END_OF_STRING
         )
         @response.stub(:status).and_return(400)
-        @result = Google::APIClient::Result.new(@reference, @request, @response)
+        @result = Google::APIClient::Result.new(@reference, @response)
       end
       
       it 'should return error status correctly' do
@@ -180,7 +179,27 @@ describe Google::APIClient::Result do
       it 'should return the correct error message' do
         @result.error_message.should == 'Parse Error'
       end
+    end
+    
+    describe 'with 204 No Content response' do
+      before do
+        @response.stub(:body).and_return('')
+        @response.stub(:status).and_return(204)
+        @response.stub(:headers).and_return({})
+        @result = Google::APIClient::Result.new(@reference, @response)
+      end
 
+      it 'should indicate no data is available' do
+        @result.data?.should be_false
+      end
+      
+      it 'should return nil for data' do
+        @result.data.should == nil
+      end
+      
+      it 'should return nil for media_type' do
+        @result.media_type.should == nil
+      end
     end
   end
 end
