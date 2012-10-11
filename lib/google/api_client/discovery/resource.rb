@@ -28,13 +28,11 @@ module Google
       ##
       # Creates a description of a particular version of a resource.
       #
-      # @param [Google::APIClient::API] api
-      #   The API this resource belongs to.
-      # @param [Addressable::URI] method_base
+      # @param [Addressable::URI] base
       #   The base URI for the service.
       # @param [String] resource_name
       #   The identifier for the resource.
-      # @param [Hash] discovery_document
+      # @param [Hash] resource_description
       #   The section of the discovery document that applies to this resource.
       #
       # @return [Google::APIClient::Resource] The constructed resource object.
@@ -58,14 +56,18 @@ module Google
         end
       end
 
-      # @return [String] unparsed discovery document for the resource
-      attr_reader :discovery_document
-
       ##
       # Returns the identifier for the resource.
       #
       # @return [String] The resource identifier.
       attr_reader :name
+
+      ##
+      # Returns the parsed section of the discovery document that applies to
+      # this resource.
+      #
+      # @return [Hash] The resource description.
+      attr_reader :description
 
       ##
       # Returns the base URI for this resource.
@@ -74,17 +76,9 @@ module Google
       attr_reader :method_base
 
       ##
-      # Returns a human-readable description of the resource.
-      #
-      # @return [Hash] The API description.
-      def description
-        return @discovery_document['description']
-      end
-
-      ##
       # Updates the hierarchy of resources and methods with the new base.
       #
-      # @param [Addressable::URI, #to_str, String] new_method_base
+      # @param [Addressable::URI, #to_str, String] new_base
       #   The new base URI to use for the resource.
       def method_base=(new_method_base)
         @method_base = Addressable::URI.parse(new_method_base)

@@ -34,7 +34,7 @@ module Google
       #   The base URI for the service.
       # @param [String] method_name
       #   The identifier for the method.
-      # @param [Hash] discovery_document
+      # @param [Hash] method_description
       #   The section of the discovery document that applies to this method.
       #
       # @return [Google::APIClient::Method] The constructed method object.
@@ -44,9 +44,6 @@ module Google
         @name = method_name
         @discovery_document = discovery_document
       end
-
-      # @return [String] unparsed discovery document for the method
-      attr_reader :discovery_document
 
       ##
       # Returns the API this method belongs to.
@@ -61,6 +58,13 @@ module Google
       attr_reader :name
 
       ##
+      # Returns the parsed section of the discovery document that applies to
+      # this method.
+      #
+      # @return [Hash] The method description.
+      attr_reader :description
+
+      ##
       # Returns the base URI for the method.
       #
       # @return [Addressable::URI]
@@ -70,21 +74,13 @@ module Google
       ##
       # Updates the method with the new base.
       #
-      # @param [Addressable::URI, #to_str, String] new_method_base
+      # @param [Addressable::URI, #to_str, String] new_base
       #   The new base URI to use for the method.
       def method_base=(new_method_base)
         @method_base = Addressable::URI.parse(new_method_base)
         @uri_template = nil
       end
 
-      ##
-      # Returns a human-readable description of the method.
-      #
-      # @return [Hash] The API description.
-      def description
-        return @discovery_document['description']
-      end
-      
       ##
       # Returns the method ID.
       #
@@ -180,7 +176,6 @@ module Google
       ##
       # Expands the method's URI template using a parameter list.
       #
-      # @api private
       # @param [Hash, Array] parameters
       #   The parameter list to use.
       #
@@ -219,7 +214,6 @@ module Google
       ##
       # Generates an HTTP request for this method.
       #
-      # @api private
       # @param [Hash, Array] parameters
       #   The parameters to send.
       # @param [String, StringIO] body The body for the HTTP request.
@@ -228,14 +222,28 @@ module Google
       #   The HTTP connection to use.
       #
       # @return [Array] The generated HTTP request.
-      def generate_request(parameters={}, body='', headers={}, options={})
+      def generate_request(parameters={}, body='', headers=[], options={})
+        options[:connection] ||= Faraday.default_connection
+        if body.respond_to?(:string)
+          body = body.string
+        elsif body.respond_to?(:to_str)
+          body = body.to_str
+        else
+          raise TypeError, "Expected String or StringIO, got #{body.class}."
+        end
         if !headers.kind_of?(Array) && !headers.kind_of?(Hash)
           raise TypeError, "Expected Hash or Array, got #{headers.class}."
         end
-        method = self.http_method.to_s.downcase.to_sym
+        method = self.http_method
         uri = self.generate_uri(parameters)
-        headers = Faraday::Utils::Headers.new(headers)
-        return [method, uri, headers, body]
+        headers = headers.to_a if headers.kind_of?(Hash)
+        return options[:connection].build_request(
+          method.to_s.downcase.to_sym
+        ) do |req|
+          req.url(Addressable::URI.parse(uri).normalize.to_s)
+          req.headers = Faraday::Utils::Headers.new(headers)
+          req.body = body
+        end
       end
 
 
@@ -294,7 +302,6 @@ module Google
       # Verifies that the parameters are valid for this method.  Raises an
       # exception if validation fails.
       #
-      # @api private
       # @param [Hash, Array] parameters
       #   The parameters to verify.
       #

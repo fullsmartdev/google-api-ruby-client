@@ -11,7 +11,6 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-require 'google/api_client/reference'
 
 module Google
   class APIClient
@@ -24,8 +23,7 @@ module Google
     class UploadIO < Faraday::UploadIO      
       ##
       # Get the length of the stream
-      #
-      # @return [Fixnum]
+      # @return [Integer]
       #   Length of stream, in bytes
       def length
         io.respond_to?(:length) ? io.length : File.size(local_path)
@@ -35,35 +33,41 @@ module Google
     ##
     # Resumable uploader.
     #
-    class ResumableUpload < Request
-      # @return [Fixnum] Max bytes to send in a single request
+    class ResumableUpload
+      attr_reader :result
+      attr_accessor :client
       attr_accessor :chunk_size
+      attr_accessor :media
+      attr_accessor :location
   
       ##
       # Creates a new uploader.
       #
-      # @param [Hash] options
-      #   Request options
-      def initialize(options={})
-        super options
-        self.uri = options[:uri]
-        self.http_method = :put
-        @offset = options[:offset] || 0
+      # @param [Google::APIClient::Result] result
+      #   Result of the initial request that started the upload
+      # @param [Google::APIClient::UploadIO] media
+      #   Media to upload
+      # @param [String] location
+      #  URL to upload to    
+      def initialize(result, media, location)
+        self.media = media
+        self.location = location
+        self.chunk_size = 256 * 1024
+        
+        @api_method = result.reference.api_method
+        @result = result
+        @offset = 0
         @complete = false
-        @expired = false
       end
       
       ##
       # Sends all remaining chunks to the server
       #
-      # @deprecated Pass the instance to {Google::APIClient#execute} instead
-      #
       # @param [Google::APIClient] api_client
       #   API Client instance to use for sending
       def send_all(api_client)
-        result = nil
         until complete?
-          result = send_chunk(api_client)
+          send_chunk(api_client)
           break unless result.status == 308
         end
         return result
@@ -73,12 +77,28 @@ module Google
       ##
       # Sends the next chunk to the server
       #
-      # @deprecated Pass the instance to {Google::APIClient#execute} instead
-      #
       # @param [Google::APIClient] api_client
       #   API Client instance to use for sending
       def send_chunk(api_client)
-        return api_client.execute(self)
+        if @offset.nil?
+          return resync_range(api_client)
+        end
+
+        start_offset = @offset
+        self.media.io.pos = start_offset
+        chunk = self.media.io.read(chunk_size)
+        content_length = chunk.bytesize
+
+        end_offset = start_offset + content_length - 1
+        @result = api_client.execute(
+          :uri => self.location,
+          :http_method => :put,
+          :headers => {
+            'Content-Length' => "#{content_length}",
+            'Content-Type' => self.media.content_type, 
+            'Content-Range' => "bytes #{start_offset}-#{end_offset}/#{media.length}" },
+          :body => chunk)
+        return process_result(@result)
       end
 
       ##
@@ -97,86 +117,54 @@ module Google
       # @return [TrueClass, FalseClass]
       #   Whether or not the upload has expired and can not be resumed
       def expired?
-        return @expired
+        return @result.status == 404 || @result.status == 410
       end
       
       ##
-      # Check if upload is resumable. That is, neither complete nor expired
+      # Get the last saved range from the server in case an error occurred 
+      # and the offset is not known.
       #
-      # @return [TrueClass, FalseClass] True if upload can be resumed
-      def resumable?
-        return !(self.complete? or self.expired?)
-      end
-      
-      ##
-      # Convert to an HTTP request. Returns components in order of method, URI,
-      # request headers, and body
-      #
-      # @api private
-      #
-      # @return [Array<(Symbol, Addressable::URI, Hash, [#read,#to_str])>]
-      def to_http_request
-        if @complete
-          raise Google::APIClient::ClientError, "Upload already complete"
-        elsif @offset.nil?
-          self.headers.update({ 
+      # @param [Google::APIClient] api_client
+      #   API Client instance to use for sending
+      def resync_range(api_client)
+        r = api_client.execute(
+          :uri => self.location,
+          :http_method => :put,
+          :headers => { 
             'Content-Length' => "0", 
             'Content-Range' => "bytes */#{media.length}" })
-        else
-          start_offset = @offset
-          self.media.io.pos = start_offset
-          chunk = self.media.io.read(chunk_size)
-          content_length = chunk.bytesize
-          end_offset = start_offset + content_length - 1
-          
-          self.headers.update({
-            'Content-Length' => "#{content_length}",
-            'Content-Type' => self.media.content_type, 
-            'Content-Range' => "bytes #{start_offset}-#{end_offset}/#{media.length}" })
-          self.body = chunk
-        end
-        super
+        return process_result(r)
       end
       
       ##
       # Check the result from the server, updating the offset and/or location
       # if available.
       #
-      # @api private
-      #
-      # @param [Faraday::Response] response
-      #   HTTP response
-      #
-      # @return [Google::APIClient::Result]
-      #   Processed API response
-      def process_http_response(response)
-        case response.status
+      # @param [Google::APIClient::Result] r
+      #  Result of a chunk upload or range query
+      def process_result(result)
+        case result.status
         when 200...299
           @complete = true
+          if @api_method
+            # Inject the original API method so data is parsed correctly
+            result.reference.api_method = @api_method
+          end
+          return result
         when 308
-          range = response.headers['range']
+          range = result.headers['range']
           if range
             @offset = range.scan(/\d+/).collect{|x| Integer(x)}.last + 1
           end
-          if response.headers['location']
-            self.uri = response.headers['location']
+          if result.headers['location']
+            self.location = result.headers['location']
           end
-        when 400...499
-          @expired = true
         when 500...599
           # Invalidate the offset to mark it needs to be queried on the
           # next request
           @offset = nil
         end
-        return Google::APIClient::Result.new(self, response)
-      end
-      
-      ##
-      # Hashified verison of the API request
-      #
-      # @return [Hash]
-      def to_hash
-        super.merge(:offset => @offset)
+        return nil
       end
       
     end
