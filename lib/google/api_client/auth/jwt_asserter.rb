@@ -22,31 +22,17 @@ module Google
     # Generates access tokens using the JWT assertion profile. Requires a
     # service account & access to the private key.
     #
-    # @example Using Signet
-    #
-    #   key = Google::APIClient::KeyUtils.load_from_pkcs12('client.p12', 'notasecret')
-    #   client.authorization = Signet::OAuth2::Client.new(
-    #     :token_credential_uri => 'https://accounts.google.com/o/oauth2/token',
-    #     :audience => 'https://accounts.google.com/o/oauth2/token',
-    #     :scope => 'https://www.googleapis.com/auth/prediction',
-    #     :issuer => '123456-abcdef@developer.gserviceaccount.com',
-    #     :signing_key => key)
-    #   client.authorization.fetch_access_token!
-    #   client.execute(...)
-    #
-    # @example Deprecated version
+    # @example
     #
     #    client = Google::APIClient.new
     #    key = Google::APIClient::PKCS12.load_key('client.p12', 'notasecret')
     #    service_account = Google::APIClient::JWTAsserter.new(
-    #     '123456-abcdef@developer.gserviceaccount.com',
-    #     'https://www.googleapis.com/auth/prediction',
-    #     key)
+    #        '123456-abcdef@developer.gserviceaccount.com',
+    #        'https://www.googleapis.com/auth/prediction',
+    #        key)
     #    client.authorization = service_account.authorize
     #    client.execute(...)
     #
-    # @deprecated
-    #  Service accounts are now supported directly in Signet
     # @see https://developers.google.com/accounts/docs/OAuth2ServiceAccount
     class JWTAsserter
       # @return [String] ID/email of the issuing party
@@ -57,11 +43,9 @@ module Google
       attr_accessor :skew
       # @return [String] Scopes to authorize
       attr_reader :scope
-      # @return [String,OpenSSL::PKey] key for signing assertions
+      # @return [OpenSSL::PKey] key for signing assertions
       attr_writer :key
-      # @return [String] Algorithm used for signing
-      attr_accessor :algorithm
-      
+
       ##
       # Initializes the asserter for a service account.
       #
@@ -69,18 +53,14 @@ module Google
       #    Name/ID of the client issuing the assertion
       # @param [String, Array] scope
       #   Scopes to authorize. May be a space delimited string or array of strings
-      # @param [String,OpenSSL::PKey] key
-      #   Key for signing assertions
-      # @param [String] algorithm
-      #   Algorithm to use, either 'RS256' for RSA with SHA-256 
-      #   or 'HS256' for HMAC with SHA-256
-      def initialize(issuer, scope, key, algorithm = "RS256")
+      # @param [OpenSSL::PKey] key
+      #   RSA private key for signing assertions
+      def initialize(issuer, scope, key)
         self.issuer = issuer
         self.scope = scope
         self.expiry = 60 # 1 min default 
         self.skew = 60      
         self.key = key
-        self.algorithm = algorithm
       end
 
       ##
@@ -102,6 +82,25 @@ module Google
       end
       
       ##
+      # Builds & signs the assertion.
+      # 
+      # @param [String] person
+      #   Email address of a user, if requesting a token to act on their behalf
+      # @return [String] Encoded JWT
+      def to_jwt(person=nil)
+        now = Time.new        
+        assertion = {
+          "iss" => @issuer,
+          "scope" => self.scope,
+          "aud" => "https://accounts.google.com/o/oauth2/token",
+          "exp" => (now + expiry).to_i,
+          "iat" => (now - skew).to_i
+        }
+        assertion['prn'] = person unless person.nil?
+        return JWT.encode(assertion, @key, "RS256")
+      end
+
+      ##
       # Request a new access token.
       # 
       # @param [String] person
@@ -112,26 +111,43 @@ module Google
       #
       # @see Signet::OAuth2::Client.fetch_access_token!
       def authorize(person = nil, options={})
-        authorization = self.to_authorization
-        authorization.fetch_access_token!(options)
-        return authorization
-      end
-      
-      ##
-      # Builds a Signet OAuth2 client
-      #
-      # @return [Signet::OAuth2::Client] Access token 
-      def to_authorization(person = nil)
-        return Signet::OAuth2::Client.new(
-          :token_credential_uri => 'https://accounts.google.com/o/oauth2/token',
-          :audience => 'https://accounts.google.com/o/oauth2/token',
-          :scope => self.scope,
-          :issuer => @issuer,
-          :signing_key => @key,
-          :signing_algorithm => @algorithm,
-          :person => person
+        assertion = self.to_jwt(person)
+        authorization = Signet::OAuth2::Client.new(
+          :token_credential_uri => 'https://accounts.google.com/o/oauth2/token'
         )
-      end      
+        authorization.grant_type = 'urn:ietf:params:oauth:grant-type:jwt-bearer'
+        authorization.extension_parameters = { :assertion => assertion }
+        authorization.fetch_access_token!(options)
+        return JWTAuthorization.new(authorization, self, person)
+      end
+    end
+    
+    ##
+    # Proxy for authorization that allows refreshing the access token
+    # using assertions instead of refresh tokens.
+    class JWTAuthorization < DelegateClass(Signet::OAuth2::Client)
+      ##
+      # Initialize the proxy
+      #
+      # @param [Signet::OAuth2::Client] authorization
+      #   Original authorization instance
+      # @param [Google::APIClient::JWTAsserter]
+      #   Asserter for generating new access tokens
+      # @param [String] person
+      #   Optional target user if impersonating.
+      def initialize(authorization, asserter, person = nil)
+        @asserter = asserter
+        @person = person
+        super(authorization)
+      end
+
+      ##
+      # @see Signet::OAuth2::Client#fetch_access_token!
+      def fetch_access_token!(options={})
+        new_authorization = @asserter.authorize(@person, options)
+        __setobj__(new_authorization)
+        self
+      end
     end
   end
 end

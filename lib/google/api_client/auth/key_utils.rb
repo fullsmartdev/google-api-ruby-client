@@ -79,7 +79,7 @@ module Google
       def self.load_key(keyfile, passphrase, &block)
         begin
           begin
-            content = File.open(keyfile, 'rb') { |io| io.read }
+            content = File.read(keyfile)
           rescue
             content = keyfile
           end
