@@ -19,6 +19,7 @@ require 'multi_json'
 require 'compat/multi_json'
 require 'stringio'
 
+require 'google/api_client/logging'
 require 'google/api_client/version'
 require 'google/api_client/errors'
 require 'google/api_client/environment'
@@ -29,11 +30,15 @@ require 'google/api_client/result'
 require 'google/api_client/media'
 require 'google/api_client/service_account'
 require 'google/api_client/batch'
+require 'google/api_client/railtie' if defined?(Rails)
 
 module Google
+
   ##
   # This class manages APIs communication.
   class APIClient
+    include Google::Logging
+    
     ##
     # Creates a new Google API client.
     #
@@ -78,12 +83,13 @@ module Google
 
       # Most developers will want to leave this value alone and use the
       # application_name option.
-      application_string = (
-        options[:application_name] ? (
-          "#{options[:application_name]}/" +
-          "#{options[:application_version] || '0.0.0'}"
-        ) : ""
-      )
+      if options[:application_name]
+        app_name = options[:application_name]
+        app_version = options[:application_version]
+        application_string = "#{app_name}/#{app_version || '0.0.0'}"
+      else
+        logger.warn("Please provide :application_name and :application_version when initializing the APIClient") 
+      end
       self.user_agent = options[:user_agent] || (
         "#{application_string} " +
         "google-api-ruby-client/#{VERSION::STRING} " +
@@ -93,7 +99,7 @@ module Google
       # default authentication mechanisms.
       self.authorization =
         options.key?(:authorization) ? options[:authorization] : :oauth_2
-      self.auto_refresh_token = options.fetch(:auto_refresh_token) { true }
+      self.auto_refresh_token = options.fetch(:auto_refresh_token){ true }
       self.key = options[:key]
       self.user_ip = options[:user_ip]
       @discovery_uris = {}
@@ -159,17 +165,17 @@ module Google
     end
 
     ##
+    # The application's API key issued by the API console.
+    #
+    # @return [String] The API key.
+    attr_accessor :key
+
+    ##
     # The setting that controls whether or not the api client attempts to
     # refresh authorization when a 401 is hit in #execute. 
     #
     # @return [Boolean]
     attr_accessor :auto_refresh_token
-
-    ##
-    # The application's API key issued by the API console.
-    #
-    # @return [String] The API key.
-    attr_accessor :key
 
     ##
     # The IP address of the user this request is being performed on behalf of.
