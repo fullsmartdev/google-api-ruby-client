@@ -187,7 +187,6 @@ module Google
       # @return [Addressable::URI] The URI after expansion.
       def generate_uri(parameters={})
         parameters = self.normalize_parameters(parameters)
-        
         self.validate_parameters(parameters)
         template_variables = self.uri_template.variables
         upload_type = parameters.assoc('uploadType') || parameters.assoc('upload_type')

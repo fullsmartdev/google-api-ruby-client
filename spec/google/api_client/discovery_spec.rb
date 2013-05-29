@@ -25,6 +25,22 @@ require 'signet/oauth_1/client'
 require 'google/api_client'
 require 'google/api_client/version'
 
+def TestHandler
+  def initialize(&block)
+    @block = block
+  end
+  
+  def call(env)
+    @block.call(env)
+  end
+end
+
+def mock_connection(&block)
+    connection = Faraday.new do |builder|
+      use TestHandler block
+  end
+end
+
 describe Google::APIClient do
   include ConnectionHelpers
   CLIENT = Google::APIClient.new(:application_name => 'API Client Tests') unless defined?(CLIENT)
@@ -215,18 +231,16 @@ describe Google::APIClient do
       conn.verify
     end
 
-    it 'should generate valid requests when multivalued parameters are passed' do
+    it 'should generate valid requests when repeated parameters are passed' do
+      pending("This is caused by Faraday's encoding of query parameters.")
       conn = stub_connection do |stub|
          stub.post('/prediction/v1.2/training?data=1&data=2') do |env|
-           # Test is now passing with Faraday 0.9.0.rc1, but small bug in test adapter
-           #params = env[:params]
-           params = Faraday::FlatParamsEncoder.decode(env.url.query)
-           params['data'].should include('1', '2')
+           env[:params]['data'].should include('1', '2')
          end
        end
       request = CLIENT.execute(
         :api_method => @prediction.training.insert,
-        :parameters => {'data' => ['1', '2']},
+        :parameters => [['data', '1'], ['data','2']],
         :connection => conn
       )
       conn.verify
@@ -451,7 +465,7 @@ describe Google::APIClient do
             'userId' => '107807692475771887386', 'collection' => 'bogus'
           },
           :authenticated => false
-        ).to_env(CLIENT.connection)
+        ).to_env(Faraday.default_connection)
       end).should raise_error(ArgumentError)
     end
   end
@@ -497,7 +511,7 @@ describe Google::APIClient do
         :api_method => @latitude.current_location.get,
         :authenticated => false
       )
-      request.to_env(CLIENT.connection)[:url].to_s.should ===
+      request.to_env(Faraday.default_connection)[:url].to_s.should ===
         'https://www.googleapis.com/latitude/v1/currentLocation'
     end
 
@@ -506,7 +520,7 @@ describe Google::APIClient do
         :api_method => @latitude.current_location.get,
         :authenticated => false
       )
-      request.to_env(CLIENT.connection)[:url].to_s.should ===
+      request.to_env(Faraday.default_connection)[:url].to_s.should ===
         'https://www.googleapis.com/latitude/v1/currentLocation'
     end
 
@@ -616,7 +630,7 @@ describe Google::APIClient do
     end
 
     it 'should succeed when validating repeated parameters in a correct call' do
-#      pending("This is caused by Faraday's encoding of query parameters.")
+      pending("This is caused by Faraday's encoding of query parameters.")
       conn = stub_connection do |stub|
         stub.get('/adsense/v1/reports?dimension=DATE&dimension=PRODUCT_CODE'+
                  '&endDate=2010-01-01&metric=CLICKS&metric=PAGE_VIEWS&'+

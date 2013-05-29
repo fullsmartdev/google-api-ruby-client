@@ -107,12 +107,7 @@ module Google
       @discovery_uris = {}
       @discovery_documents = {}
       @discovered_apis = {}
-      
-      self.connection = Faraday.new do |faraday|
-        faraday.adapter  Faraday.default_adapter
-        faraday.options.params_encoder = Faraday::FlatParamsEncoder
-      end      
-
+            
       return self
     end
 
@@ -171,13 +166,6 @@ module Google
       @authorization = new_authorization
       return @authorization
     end
-
-
-    ##
-    # Default Faraday/HTTP connection.
-    #
-    # @return [Faraday::Connection]
-    attr_accessor :connection
 
     ##
     # The setting that controls whether or not the api client attempts to
@@ -542,9 +530,10 @@ module Google
     #
     # @see Google::APIClient#generate_request
     def execute(*params)
-      if params.first.kind_of?(Google::APIClient::Request)
-        request = params.shift
-        options = params.shift || {}
+      if params.last.kind_of?(Google::APIClient::Request) &&
+          params.size == 1
+        request = params.pop
+        options = {}
       else
         # This block of code allows us to accept multiple parameter passing
         # styles, and maintaining some backwards compatibility.
@@ -568,7 +557,7 @@ module Google
       request.parameters['key'] ||= self.key unless self.key.nil?
       request.parameters['userIp'] ||= self.user_ip unless self.user_ip.nil?
 
-      connection = options[:connection] || self.connection
+      connection = options[:connection] || Faraday.default_connection
       request.authorization = options[:authorization] || self.authorization unless options[:authenticated] == false
 
       result = request.send(connection)
