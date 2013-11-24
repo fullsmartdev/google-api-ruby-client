@@ -92,10 +92,9 @@ module Google
           :Logger => WEBrick::Log.new(STDOUT, 0),
           :AccessLog => []
         )
-        begin
-          trap("INT") { server.shutdown }
-
-          server.mount_proc '/' do |req, res|
+        trap("INT") { server.shutdown }
+        
+        server.mount_proc '/' do |req, res|
             auth.code = req.query['code']
             if auth.code
               auth.fetch_access_token!
@@ -103,13 +102,10 @@ module Google
             res.status = WEBrick::HTTPStatus::RC_ACCEPTED
             res.body = RESPONSE_BODY
             server.stop
-          end
-
-          Launchy.open(auth.authorization_uri.to_s)
-          server.start
-        ensure
-          server.shutdown
         end
+
+        Launchy.open(auth.authorization_uri.to_s)
+        server.start
         if @authorization.access_token
           if storage.respond_to?(:write_credentials)
             storage.write_credentials(@authorization)
