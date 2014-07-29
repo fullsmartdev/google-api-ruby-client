@@ -109,7 +109,6 @@ module Google
       self.key = options[:key]
       self.user_ip = options[:user_ip]
       self.retries = options.fetch(:retries) { 0 }
-      self.expired_auth_retry = options.fetch(:expired_auth_retry) { true }
       @discovery_uris = {}
       @discovery_documents = {}
       @discovered_apis = {}
@@ -120,6 +119,11 @@ module Google
         faraday.ssl.ca_file = ca_file
         faraday.ssl.verify = true
         faraday.adapter Faraday.default_adapter
+        if options[:faraday_option].is_a?(Hash)
+          options[:faraday_option].each_pair do |option, value|
+            faraday.options.send("#{option}=", value)
+          end
+        end
       end
       return self
     end
@@ -239,13 +243,6 @@ module Google
     # @return [FixNum]
     #  Number of retries
     attr_accessor :retries
-
-    ##
-    # Whether or not an expired auth token should be re-acquired
-    # (and the operation retried) regardless of retries setting
-    # @return [Boolean]
-    #  Auto retry on auth expiry
-    attr_accessor :expired_auth_retry
 
     ##
     # Returns the URI for the directory document.
@@ -601,41 +598,28 @@ module Google
       request.authorization = options[:authorization] || self.authorization unless options[:authenticated] == false
       
       tries = 1 + (options[:retries] || self.retries)
-      attempt = 0
 
       Retriable.retriable :tries => tries, 
                           :on => [TransmissionError],
-                          :on_retry => client_error_handler,
+                          :on_retry => client_error_handler(request.authorization),
                           :interval => lambda {|attempts| (2 ** attempts) + rand} do
-        attempt += 1
+        result = request.send(connection, true)
 
-        # This 2nd level retriable only catches auth errors, and supports 1 retry, which allows
-        # auth to be re-attempted without having to retry all sorts of other failures like
-        # NotFound, etc
-        Retriable.retriable :tries => ((expired_auth_retry || tries > 1) && attempt == 1) ? 2 : 1, 
-                            :on => [AuthorizationError],
-                            :on_retry => authorization_error_handler(request.authorization),
-                            :interval => lambda {|attempts| (2 ** attempts) + rand} do
-          result = request.send(connection, true)
-
-          case result.status
-            when 200...300
-              result
-            when 301, 302, 303, 307
-              request = generate_request(request.to_hash.merge({
-                :uri => result.headers['location'],
-                :api_method => nil
-              }))
-              raise RedirectError.new(result.headers['location'], result)
-            when 401
-              raise AuthorizationError.new(result.error_message || 'Invalid/Expired Authentication', result)
-            when 400, 402...500
-              raise ClientError.new(result.error_message || "A client error has occurred", result)
-            when 500...600
-              raise ServerError.new(result.error_message || "A server error has occurred", result)
-            else
-              raise TransmissionError.new(result.error_message || "A transmission error has occurred", result)
-          end
+        case result.status
+          when 200...300
+            result
+          when 301, 302, 303, 307
+            request = generate_request(request.to_hash.merge({
+              :uri => result.headers['location'],
+              :api_method => nil
+            }))
+            raise RedirectError.new(result.headers['location'], result)
+          when 400...500
+            raise ClientError.new(result.error_message || "A client error has occurred", result)
+          when 500...600
+            raise ServerError.new(result.error_message || "A server error has occurred", result)
+          else
+            raise TransmissionError.new(result.error_message || "A transmission error has occurred", result)
         end
       end
     end
@@ -683,17 +667,18 @@ module Google
     
 
     ##
-    # Returns on proc for special processing of retries for authorization errors
-    # Only 401s should be retried and only if the credentials are refreshable
+    # Returns on proc for special processing of retries as not all client errors
+    # are recoverable. Only 401s should be retried and only if the credentials
+    # are refreshable
     #
     # @param [#fetch_access_token!] authorization
     #   OAuth 2 credentials
-    # @return [Proc]
-    def authorization_error_handler(authorization)
+    # @return [Proc] 
+    def client_error_handler(authorization)  
       can_refresh = authorization.respond_to?(:refresh_token) && auto_refresh_token 
       Proc.new do |exception, tries|
-        next unless exception.kind_of?(AuthorizationError)
-        if can_refresh
+        next unless exception.kind_of?(ClientError)
+        if exception.result.status == 401 && can_refresh && tries == 1
           begin
             logger.debug("Attempting refresh of access token & retry of request")
             authorization.fetch_access_token!
@@ -702,17 +687,6 @@ module Google
           end
         end
         raise exception
-      end
-    end
-
-    ##
-    # Returns on proc for special processing of retries as not all client errors
-    # are recoverable. Only 401s should be retried (via authorization_error_handler)
-    #
-    # @return [Proc]
-    def client_error_handler
-      Proc.new do |exception, tries|
-        raise exception if exception.kind_of?(ClientError)
       end
     end
 
