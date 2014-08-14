@@ -21,22 +21,22 @@ require 'google/api_client/version'
 
 shared_examples_for 'configurable user agent' do
   include ConnectionHelpers
-
+  
   it 'should allow the user agent to be modified' do
     client.user_agent = 'Custom User Agent/1.2.3'
-    client.user_agent.should == 'Custom User Agent/1.2.3'
+    expect(client.user_agent).to eq('Custom User Agent/1.2.3')
   end
 
   it 'should allow the user agent to be set to nil' do
     client.user_agent = nil
-    client.user_agent.should == nil
+    expect(client.user_agent).to eq(nil)
   end
 
   it 'should not allow the user agent to be used with bogus values' do
-    (lambda do
+    expect(lambda do
       client.user_agent = 42
       client.execute(:uri=>'https://www.google.com/')
-    end).should raise_error(TypeError)
+    end).to raise_error(TypeError)
   end
 
   it 'should transmit a User-Agent header when sending requests' do
@@ -45,8 +45,8 @@ shared_examples_for 'configurable user agent' do
     conn = stub_connection do |stub|
       stub.get('/') do |env|
         headers = env[:request_headers]
-        headers.should have_key('User-Agent')
-        headers['User-Agent'].should == client.user_agent
+        expect(headers).to have_key('User-Agent')
+        expect(headers['User-Agent']).to eq(client.user_agent)
         [200, {}, ['']]
       end
     end
@@ -60,17 +60,12 @@ describe Google::APIClient do
 
   let(:client) { Google::APIClient.new(:application_name => 'API Client Tests') }
 
-  it "should pass the faraday options provided on initialization to FaraDay configuration block" do
-    client = Google::APIClient.new(faraday_option: {timeout: 999})
-    client.connection.options.timeout.should == 999
-  end
-
   it 'should make its version number available' do
-    Google::APIClient::VERSION::STRING.should be_instance_of(String)
+    expect(Google::APIClient::VERSION::STRING).to be_instance_of(String)
   end
 
   it 'should default to OAuth 2' do
-    Signet::OAuth2::Client.should === client.authorization
+    expect(Signet::OAuth2::Client).to be === client.authorization
   end
 
   describe 'configure for no authentication' do
@@ -79,7 +74,7 @@ describe Google::APIClient do
     end
     it_should_behave_like 'configurable user agent'
   end
-
+    
   describe 'configured for OAuth 1' do
     before do
       client.authorization = :oauth_1
@@ -88,15 +83,17 @@ describe Google::APIClient do
     end
 
     it 'should use the default OAuth1 client configuration' do
-      client.authorization.temporary_credential_uri.to_s.should ==
+      expect(client.authorization.temporary_credential_uri.to_s).to eq(
         'https://www.google.com/accounts/OAuthGetRequestToken'
-      client.authorization.authorization_uri.to_s.should include(
+      )
+      expect(client.authorization.authorization_uri.to_s).to include(
         'https://www.google.com/accounts/OAuthAuthorizeToken'
       )
-      client.authorization.token_credential_uri.to_s.should ==
+      expect(client.authorization.token_credential_uri.to_s).to eq(
         'https://www.google.com/accounts/OAuthGetAccessToken'
-      client.authorization.client_credential_key.should == 'anonymous'
-      client.authorization.client_credential_secret.should == 'anonymous'
+      )
+      expect(client.authorization.client_credential_key).to eq('anonymous')
+      expect(client.authorization.client_credential_secret).to eq('anonymous')
     end
 
     it_should_behave_like 'configurable user agent'
@@ -111,14 +108,14 @@ describe Google::APIClient do
     # TODO
     it_should_behave_like 'configurable user agent'
   end
-
+  
   describe 'when executing requests' do
     before do
       @prediction = client.discovered_api('prediction', 'v1.2')
       client.authorization = :oauth_2
       @connection = stub_connection do |stub|
         stub.post('/prediction/v1.2/training?data=12345') do |env|
-          env[:request_headers]['Authorization'].should == 'Bearer 12345'
+          expect(env[:request_headers]['Authorization']).to eq('Bearer 12345')
           [200, {}, '{}']
         end
       end
@@ -127,10 +124,10 @@ describe Google::APIClient do
     after do
       @connection.verify
     end
-
+    
     it 'should use default authorization' do
       client.authorization.access_token = "12345"
-      client.execute(
+      client.execute(  
         :api_method => @prediction.training.insert,
         :parameters => {'data' => '12345'},
         :connection => @connection
@@ -140,14 +137,14 @@ describe Google::APIClient do
     it 'should use request scoped authorization when provided' do
       client.authorization.access_token = "abcdef"
       new_auth = Signet::OAuth2::Client.new(:access_token => '12345')
-      client.execute(
+      client.execute(  
         :api_method => @prediction.training.insert,
         :parameters => {'data' => '12345'},
         :authorization => new_auth,
         :connection => @connection
       )
     end
-
+    
     it 'should accept options with batch/request style execute' do
       client.authorization.access_token = "abcdef"
       new_auth = Signet::OAuth2::Client.new(:access_token => '12345')
@@ -161,17 +158,17 @@ describe Google::APIClient do
         :connection => @connection
       )
     end
-
-
+    
+    
     it 'should accept options in array style execute' do
        client.authorization.access_token = "abcdef"
        new_auth = Signet::OAuth2::Client.new(:access_token => '12345')
-       client.execute(
+       client.execute(  
          @prediction.training.insert, {'data' => '12345'}, '', {},
-         { :authorization => new_auth, :connection => @connection }
+         { :authorization => new_auth, :connection => @connection }         
        )
      end
-  end
+  end  
 
   describe 'when retries enabled' do
     before do
@@ -181,7 +178,7 @@ describe Google::APIClient do
     after do
       @connection.verify
     end
-
+    
     it 'should follow redirects' do
       client.authorization = nil
       @connection = stub_connection do |stub|
@@ -193,7 +190,7 @@ describe Google::APIClient do
         end
       end
 
-      client.execute(
+      client.execute(  
         :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       )
@@ -212,7 +209,7 @@ describe Google::APIClient do
         end
       end
 
-      client.execute(
+      client.execute(  
         :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       )
@@ -229,7 +226,7 @@ describe Google::APIClient do
         end
       end
 
-      client.execute(
+      client.execute(  
         :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       )
@@ -239,13 +236,13 @@ describe Google::APIClient do
       count = 0
       @connection = stub_connection do |stub|
         stub.get('/foo') do |env|
-          count.should == 0
+          expect(count).to eq(0)
           count += 1
           [403, {}, '{}']
         end
       end
 
-      client.execute(
+      client.execute(  
         :uri => 'https://www.gogole.com/foo',
         :connection => @connection,
         :authenticated => false
@@ -264,10 +261,10 @@ describe Google::APIClient do
         end
       end
 
-      client.execute(
+      expect(client.execute(  
         :uri => 'https://www.gogole.com/foo',
         :connection => @connection
-      ).status.should == 200
+      ).status).to eq(200)
 
     end
 
@@ -281,12 +278,12 @@ describe Google::APIClient do
         end
       end
 
-      client.execute(
+      expect(client.execute(  
         :uri => 'https://www.gogole.com/foo',
         :connection => @connection
-      ).status.should == 500
-      count.should == 3
+      ).status).to eq(500)
+      expect(count).to eq(3)
     end
 
-  end
+  end  
 end
