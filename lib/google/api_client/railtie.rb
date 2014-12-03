@@ -1,4 +1,3 @@
-require 'rails/railtie'
 require 'google/api_client/logging'
 
 module Google
@@ -10,7 +9,7 @@ module Google
     #
     class Railtie < Rails::Railtie
       initializer 'google-api-client' do |app|
-        Google::APIClient.logger = app.logger
+        Google::APIClient.logger = Rails.logger
       end
     end
   end

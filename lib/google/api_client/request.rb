@@ -14,6 +14,7 @@
 
 require 'faraday'
 require 'faraday/request/multipart'
+require 'multi_json'
 require 'compat/multi_json'
 require 'addressable/uri'
 require 'stringio'

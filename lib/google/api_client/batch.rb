@@ -14,7 +14,7 @@
 
 require 'addressable/uri'
 require 'google/api_client/reference'
-require 'securerandom'
+require 'uuidtools'
 
 module Google
   class APIClient
@@ -90,7 +90,8 @@ module Google
         @global_callback = block if block_given?
         @last_auto_id = 0
         
-        @base_id = SecureRandom.uuid
+        # TODO(sgomes): Use SecureRandom.uuid, drop UUIDTools when we drop 1.8
+        @base_id = UUIDTools::UUID.random_create.to_s
 
         options[:uri] ||= 'https://www.googleapis.com/batch'
         options[:http_method] ||= 'POST'

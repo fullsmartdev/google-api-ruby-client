@@ -13,19 +13,16 @@
 # limitations under the License.
 
 
-# Used to prevent the class/module from being loaded more than once
-if !defined?(::Google::APIClient::VERSION)
-
-
-  module Google
-    class APIClient
-      module VERSION
-        MAJOR = 0
-        MINOR = 7
-        TINY  = 1
-        PATCH = nil
-        STRING = [MAJOR, MINOR, TINY, PATCH].compact.join('.')
-      end
+module Google
+  if defined?(ActiveSupport::Inflector)
+    INFLECTOR = ActiveSupport::Inflector
+  else
+    begin
+      require 'extlib/inflection'
+      INFLECTOR = Extlib::Inflection
+    rescue LoadError
+      require 'active_support/inflector'
+      INFLECTOR = ActiveSupport::Inflector
     end
   end
 end

@@ -18,7 +18,7 @@ require 'google/api_client'
 
 fixtures_path = File.expand_path('../../../fixtures', __FILE__)
 
-RSpec.describe Google::APIClient::KeyUtils do
+describe Google::APIClient::KeyUtils do
   it 'should read PKCS12 files from the filesystem' do
     if RUBY_PLATFORM == 'java' && RUBY_VERSION.start_with?('1.8')
       pending "Reading from PKCS12 not supported on jruby 1.8.x"
@@ -53,7 +53,7 @@ RSpec.describe Google::APIClient::KeyUtils do
 
 end
 
-RSpec.describe Google::APIClient::JWTAsserter do
+describe Google::APIClient::JWTAsserter do
   include ConnectionHelpers
 
   before do
@@ -146,7 +146,7 @@ RSpec.describe Google::APIClient::JWTAsserter do
   end
 end
 
-RSpec.describe Google::APIClient::ComputeServiceAccount do
+describe Google::APIClient::ComputeServiceAccount do
   include ConnectionHelpers
 
   it 'should query metadata server' do

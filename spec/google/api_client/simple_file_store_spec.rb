@@ -18,9 +18,13 @@ require 'spec_helper'
 
 require 'google/api_client/service/simple_file_store'
 
-RSpec.describe Google::APIClient::Service::SimpleFileStore do
+describe Google::APIClient::Service::SimpleFileStore do
 
   FILE_NAME = 'test.cache'
+
+  before(:all) do
+    File.delete(FILE_NAME) if File.exists?(FILE_NAME)
+  end
 
   describe 'with no cache file' do
     before(:each) do

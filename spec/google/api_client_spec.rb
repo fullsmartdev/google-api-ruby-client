@@ -17,6 +17,7 @@ require 'spec_helper'
 require 'faraday'
 require 'signet/oauth_1/client'
 require 'google/api_client'
+require 'google/api_client/version'
 
 shared_examples_for 'configurable user agent' do
   include ConnectionHelpers
@@ -54,7 +55,7 @@ shared_examples_for 'configurable user agent' do
   end
 end
 
-RSpec.describe Google::APIClient do
+describe Google::APIClient do
   include ConnectionHelpers
 
   let(:client) { Google::APIClient.new(:application_name => 'API Client Tests') }
@@ -190,7 +191,7 @@ RSpec.describe Google::APIClient do
       end
 
       client.execute(  
-        :uri => 'https://www.google.com/foo',
+        :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       )
     end
@@ -209,7 +210,7 @@ RSpec.describe Google::APIClient do
       end
 
       client.execute(  
-        :uri => 'https://www.google.com/foo',
+        :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       )
     end
@@ -226,7 +227,7 @@ RSpec.describe Google::APIClient do
       end
 
       client.execute(  
-        :uri => 'https://www.google.com/foo',
+        :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       )
     end
@@ -242,7 +243,7 @@ RSpec.describe Google::APIClient do
       end
 
       client.execute(  
-        :uri => 'https://www.google.com/foo',
+        :uri => 'https://www.gogole.com/foo',
         :connection => @connection,
         :authenticated => false
       )
@@ -261,7 +262,7 @@ RSpec.describe Google::APIClient do
       end
 
       expect(client.execute(  
-        :uri => 'https://www.google.com/foo',
+        :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       ).status).to eq(200)
 
@@ -278,7 +279,7 @@ RSpec.describe Google::APIClient do
       end
 
       expect(client.execute(  
-        :uri => 'https://www.google.com/foo',
+        :uri => 'https://www.gogole.com/foo',
         :connection => @connection
       ).status).to eq(500)
       expect(count).to eq(3)

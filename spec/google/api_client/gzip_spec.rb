@@ -15,8 +15,9 @@
 require 'spec_helper'
 
 require 'google/api_client'
+require 'google/api_client/version'
 
-RSpec.describe Google::APIClient::Gzip do
+describe Google::APIClient::Gzip do
 
   def create_connection(&block)
     Faraday.new do |b|
