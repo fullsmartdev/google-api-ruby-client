@@ -10,8 +10,13 @@ module Google
     #
     class Railtie < Rails::Railtie
       initializer 'google-api-client' do |app|
-        logger = app.config.logger || Rails.logger
-        Google::APIClient.logger = logger unless logger.nil?
+        _logger = case
+                    when app.respond_to?(:logger)        then app.logger
+                    when app.config.respond_to?(:logger) then app.config.logger
+                    else                                      Rails.logger
+                  end
+                  
+        Google::APIClient.logger = _logger
       end
     end
   end
