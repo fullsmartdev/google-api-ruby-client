@@ -30,7 +30,7 @@ module Google
       # Creates a description of a particular version of a service.
       #
       # @param [String] document_base
-      #   Base URI for the discovery document.
+      #   Base URI for the service
       # @param [Hash] discovery_document
       #   The section of the discovery document that applies to this service
       #   version.
@@ -127,16 +127,6 @@ module Google
       end
 
       ##
-      # Returns the root URI for this service.
-      #
-      # @return [Addressable::URI] The root URI.
-      def root_uri
-        return @root_uri ||= (
-          Addressable::URI.parse(self.discovery_document['rootUrl'])
-        )
-      end
-
-      ##
       # Returns true if this API uses a data wrapper.
       #
       # @return [TrueClass, FalseClass]
@@ -158,7 +148,7 @@ module Google
       def method_base
         if @discovery_document['basePath']
           return @method_base ||= (
-            self.root_uri.join(Addressable::URI.parse(@discovery_document['basePath']))
+            self.document_base.join(Addressable::URI.parse(@discovery_document['basePath']))
           ).normalize
         else
           return nil
