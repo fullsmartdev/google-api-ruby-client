@@ -15,7 +15,8 @@ migrate to the latest version.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'google-api-client'
+gem 'google-api-client', '0.9.pre1'
+
 ```
 
 And then execute:
@@ -215,9 +216,9 @@ A URL can also be specified:
 This library is licensed under Apache 2.0. Full license text is
 available in [LICENSE.txt](LICENSE.txt).
 
-## Contributing
+## contributing
 
-See [CONTRIBUTING](contributing).
+See [CONTRIBUTING](CONTRIBUTING.md).
 
 ## Support
 
