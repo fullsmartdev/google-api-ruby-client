@@ -46,6 +46,7 @@ module Google
     #     }
     #   }
     class ClientSecrets
+      
       ##
       # Reads client configuration from a file
       #
@@ -76,7 +77,7 @@ module Google
       end
 
       ##
-      # Initialize OAuth client settings.
+      # Intialize OAuth client settings.
       #
       # @param [Hash] options
       #   Parsed client secrets files
