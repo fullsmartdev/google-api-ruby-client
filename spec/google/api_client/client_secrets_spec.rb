@@ -58,10 +58,32 @@ RSpec.describe Google::APIClient::ClientSecrets do
     end
   end
 
+  context 'with no existing JSON file' do
+    it 'should raise exception' do
+      file = File.join(FIXTURES_PATH, 'files', 'no_file.json')
+      expect { Google::APIClient::ClientSecrets.load(file) }.to raise_exception(Errno::ENOENT)
+    end
+  end
+
+  context 'with invalid JSON file' do
+    it 'should raise exception' do
+      file = File.join(FIXTURES_PATH, 'files', 'invalid.json')
+      expect { Google::APIClient::ClientSecrets.load(file) }.to raise_exception(MultiJson::ParseError)
+    end
+  end
+
+  context 'with folder name, which have json file in parents' do
+    it 'should load the correct client id' do
+      folder = File.join(FIXTURES_PATH, 'files', 'child')
+      secrets = Google::APIClient::ClientSecrets.load(folder)
+      expect(secrets.client_id).to be == '898243283568.apps.googleusercontent.com'
+    end
+  end
+
   context 'with folder wihout client_secrets.json' do
-    it "should raise exception" do
-      folder = File.join(FIXTURES_PATH)
-      expect { Google::APIClient::ClientSecrets.load(folder) }.to raise_exception(ArgumentError)
+    it "should raise exception", fakefs: true do
+      FileUtils.mkdir("/tmp")
+      expect { Google::APIClient::ClientSecrets.load('/tmp') }.to raise_exception(ArgumentError)
     end
   end
 

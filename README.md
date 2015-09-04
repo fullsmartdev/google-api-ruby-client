@@ -15,7 +15,7 @@ migrate to the latest version.
 Add this line to your application's Gemfile:
 
 ```ruby
-gem 'google-api-client', '0.9.pre2'
+gem 'google-api-client', '0.9.pre3'
 
 ```
 
@@ -25,7 +25,7 @@ And then execute:
 
 Or install it yourself as:
 
-    $ gem install google-api-client
+    $ gem install google-api-client --pre
 
 ## Usage
 
@@ -129,7 +129,7 @@ Media operations -- uploads & downloads -- can not be included in batch with oth
 
 However, some APIs support batch uploads. To upload multiple files in a batch, use the `batch_upload` method instead.
 Batch uploads should only be used when uploading multiple small files. For large files, upload files individually to
-take advantage of the libraries built-in reusmable upload support.
+take advantage of the libraries built-in resumable upload support.
 
 ### Hashes
 

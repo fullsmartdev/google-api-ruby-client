@@ -14,6 +14,8 @@ group :development do
   gem 'coveralls', '~> 0.7.11'
   gem 'rubocop', '~> 0.29'
   gem 'launchy', '~> 2.4'
+  gem 'dotenv', '~> 2.0'
+  gem 'fakefs', '~> 0.6', require: "fakefs/safe"
 end
 
 platforms :jruby do
@@ -27,6 +29,8 @@ platforms :ruby do
     gem 'yard', '~> 0.8'
     gem 'redcarpet', '~> 3.2'
     gem 'github-markup', '~> 1.3'
+    gem 'pry-doc', '~> 0.8'
+    gem 'pry-byebug', '~> 3.2'
   end
 end
 
