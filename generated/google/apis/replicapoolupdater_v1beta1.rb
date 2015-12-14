@@ -26,13 +26,10 @@ module Google
     # @see https://cloud.google.com/compute/docs/instance-groups/manager/#applying_rolling_updates_using_the_updater_service
     module ReplicapoolupdaterV1beta1
       VERSION = 'V1beta1'
-      REVISION = '20150904'
+      REVISION = '20150722'
 
       # View and manage your data across Google Cloud Platform services
       AUTH_CLOUD_PLATFORM = 'https://www.googleapis.com/auth/cloud-platform'
-
-      # View your data across Google Cloud Platform services
-      AUTH_CLOUD_PLATFORM_READ_ONLY = 'https://www.googleapis.com/auth/cloud-platform.read-only'
 
       # View and manage replica pools
       AUTH_REPLICAPOOL = 'https://www.googleapis.com/auth/replicapool'

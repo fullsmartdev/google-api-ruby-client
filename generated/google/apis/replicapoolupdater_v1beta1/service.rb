@@ -83,7 +83,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def cancel_rolling_update(project, zone, rolling_update, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/cancel', options)
+          path = '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/cancel'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::Operation::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::Operation
           command.params['project'] = project unless project.nil?
@@ -124,7 +125,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_rolling_update(project, zone, rolling_update, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}', options)
+          path = '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::RollingUpdate::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::RollingUpdate
           command.params['project'] = project unless project.nil?
@@ -164,7 +166,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_rolling_update(project, zone, rolling_update_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/zones/{zone}/rollingUpdates', options)
+          path = '{project}/zones/{zone}/rollingUpdates'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::ReplicapoolupdaterV1beta1::RollingUpdate::Representation
           command.request_object = rolling_update_object
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::Operation::Representation
@@ -213,7 +216,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_rolling_updates(project, zone, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/zones/{zone}/rollingUpdates', options)
+          path = '{project}/zones/{zone}/rollingUpdates'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::RollingUpdateList::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::RollingUpdateList
           command.params['project'] = project unless project.nil?
@@ -264,7 +268,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_instance_updates(project, zone, rolling_update, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/instanceUpdates', options)
+          path = '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/instanceUpdates'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::InstanceUpdateList::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::InstanceUpdateList
           command.params['project'] = project unless project.nil?
@@ -309,7 +314,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def pause_rolling_update(project, zone, rolling_update, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/pause', options)
+          path = '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/pause'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::Operation::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::Operation
           command.params['project'] = project unless project.nil?
@@ -351,7 +357,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def resume_rolling_update(project, zone, rolling_update, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/resume', options)
+          path = '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/resume'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::Operation::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::Operation
           command.params['project'] = project unless project.nil?
@@ -393,7 +400,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def rollback_rolling_update(project, zone, rolling_update, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/rollback', options)
+          path = '{project}/zones/{zone}/rollingUpdates/{rollingUpdate}/rollback'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::Operation::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::Operation
           command.params['project'] = project unless project.nil?
@@ -434,61 +442,13 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_zone_operation(project, zone, operation, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/zones/{zone}/operations/{operation}', options)
+          path = '{project}/zones/{zone}/operations/{operation}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::Operation::Representation
           command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::Operation
           command.params['project'] = project unless project.nil?
           command.params['zone'] = zone unless zone.nil?
           command.params['operation'] = operation unless operation.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrieves the list of Operation resources contained within the specified zone.
-        # @param [String] project
-        #   Name of the project scoping this request.
-        # @param [String] zone
-        #   Name of the zone scoping this request.
-        # @param [String] filter
-        #   Optional. Filter expression for filtering listed resources.
-        # @param [Fixnum] max_results
-        #   Optional. Maximum count of results to be returned. Maximum value is 500 and
-        #   default value is 500.
-        # @param [String] page_token
-        #   Optional. Tag returned by a previous list request truncated by maxResults.
-        #   Used to continue a previous list request.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::ReplicapoolupdaterV1beta1::OperationList] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::ReplicapoolupdaterV1beta1::OperationList]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_zone_operations(project, zone, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/zones/{zone}/operations', options)
-          command.response_representation = Google::Apis::ReplicapoolupdaterV1beta1::OperationList::Representation
-          command.response_class = Google::Apis::ReplicapoolupdaterV1beta1::OperationList
-          command.params['project'] = project unless project.nil?
-          command.params['zone'] = zone unless zone.nil?
-          command.query['filter'] = filter unless filter.nil?
-          command.query['maxResults'] = max_results unless max_results.nil?
-          command.query['pageToken'] = page_token unless page_token.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?

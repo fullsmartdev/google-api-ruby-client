@@ -78,7 +78,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user_profile(user_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/profile', options)
+          path = '{userId}/profile'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::Profile::Representation
           command.response_class = Google::Apis::GmailV1::Profile
           command.params['userId'] = user_id unless user_id.nil?
@@ -114,7 +115,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def stop_user(user_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/stop', options)
+          path = '{userId}/stop'
+          command =  make_simple_command(:post, path, options)
           command.params['userId'] = user_id unless user_id.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -148,8 +150,9 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def watch_user(user_id, watch_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/watch', options)
+        def watch(user_id, watch_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          path = '{userId}/watch'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::GmailV1::WatchRequest::Representation
           command.request_object = watch_request_object
           command.response_representation = Google::Apis::GmailV1::WatchResponse::Representation
@@ -192,10 +195,11 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def create_user_draft(user_id, draft_object = nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil, &block)
+          path = '{userId}/drafts'
           if upload_source.nil?
-            command =  make_simple_command(:post, '{userId}/drafts', options)
+            command =  make_simple_command(:post, path, options)
           else
-            command = make_upload_command(:post, '{userId}/drafts', options)
+            command = make_upload_command(:post, path, options)
             command.upload_source = upload_source
             command.upload_content_type = content_type
           end
@@ -239,7 +243,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_user_draft(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, '{userId}/drafts/{id}', options)
+          path = '{userId}/drafts/{id}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userId'] = user_id unless user_id.nil?
           command.params['id'] = id unless id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -278,7 +283,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user_draft(user_id, id, format: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/drafts/{id}', options)
+          path = '{userId}/drafts/{id}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::Draft::Representation
           command.response_class = Google::Apis::GmailV1::Draft
           command.params['userId'] = user_id unless user_id.nil?
@@ -320,7 +326,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_user_drafts(user_id, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/drafts', options)
+          path = '{userId}/drafts'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::ListDraftsResponse::Representation
           command.response_class = Google::Apis::GmailV1::ListDraftsResponse
           command.params['userId'] = user_id unless user_id.nil?
@@ -364,10 +371,11 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def send_user_draft(user_id, draft_object = nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil, &block)
+          path = '{userId}/drafts/send'
           if upload_source.nil?
-            command =  make_simple_command(:post, '{userId}/drafts/send', options)
+            command =  make_simple_command(:post, path, options)
           else
-            command = make_upload_command(:post, '{userId}/drafts/send', options)
+            command = make_upload_command(:post, path, options)
             command.upload_source = upload_source
             command.upload_content_type = content_type
           end
@@ -415,10 +423,11 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_user_draft(user_id, id, draft_object = nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil, &block)
+          path = '{userId}/drafts/{id}'
           if upload_source.nil?
-            command =  make_simple_command(:put, '{userId}/drafts/{id}', options)
+            command =  make_simple_command(:put, path, options)
           else
-            command = make_upload_command(:put, '{userId}/drafts/{id}', options)
+            command = make_upload_command(:put, path, options)
             command.upload_source = upload_source
             command.upload_content_type = content_type
           end
@@ -478,7 +487,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_user_histories(user_id, label_id: nil, max_results: nil, page_token: nil, start_history_id: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/history', options)
+          path = '{userId}/history'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::ListHistoryResponse::Representation
           command.response_class = Google::Apis::GmailV1::ListHistoryResponse
           command.params['userId'] = user_id unless user_id.nil?
@@ -519,7 +529,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def create_user_label(user_id, label_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/labels', options)
+          path = '{userId}/labels'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::GmailV1::Label::Representation
           command.request_object = label_object
           command.response_representation = Google::Apis::GmailV1::Label::Representation
@@ -560,7 +571,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_user_label(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, '{userId}/labels/{id}', options)
+          path = '{userId}/labels/{id}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userId'] = user_id unless user_id.nil?
           command.params['id'] = id unless id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -597,7 +609,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user_label(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/labels/{id}', options)
+          path = '{userId}/labels/{id}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::Label::Representation
           command.response_class = Google::Apis::GmailV1::Label
           command.params['userId'] = user_id unless user_id.nil?
@@ -634,7 +647,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_user_labels(user_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/labels', options)
+          path = '{userId}/labels'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::ListLabelsResponse::Representation
           command.response_class = Google::Apis::GmailV1::ListLabelsResponse
           command.params['userId'] = user_id unless user_id.nil?
@@ -673,7 +687,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_user_label(user_id, id, label_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, '{userId}/labels/{id}', options)
+          path = '{userId}/labels/{id}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::GmailV1::Label::Representation
           command.request_object = label_object
           command.response_representation = Google::Apis::GmailV1::Label::Representation
@@ -715,7 +730,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_user_label(user_id, id, label_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, '{userId}/labels/{id}', options)
+          path = '{userId}/labels/{id}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::GmailV1::Label::Representation
           command.request_object = label_object
           command.response_representation = Google::Apis::GmailV1::Label::Representation
@@ -757,7 +773,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_user_message(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, '{userId}/messages/{id}', options)
+          path = '{userId}/messages/{id}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userId'] = user_id unless user_id.nil?
           command.params['id'] = id unless id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -798,7 +815,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user_message(user_id, id, format: nil, metadata_headers: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/messages/{id}', options)
+          path = '{userId}/messages/{id}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::Message::Representation
           command.response_class = Google::Apis::GmailV1::Message
           command.params['userId'] = user_id unless user_id.nil?
@@ -856,10 +874,11 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def import_user_message(user_id, message_object = nil, deleted: nil, internal_date_source: nil, never_mark_spam: nil, process_for_calendar: nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil, &block)
+          path = '{userId}/messages/import'
           if upload_source.nil?
-            command =  make_simple_command(:post, '{userId}/messages/import', options)
+            command =  make_simple_command(:post, path, options)
           else
-            command = make_upload_command(:post, '{userId}/messages/import', options)
+            command = make_upload_command(:post, path, options)
             command.upload_source = upload_source
             command.upload_content_type = content_type
           end
@@ -916,10 +935,11 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_user_message(user_id, message_object = nil, deleted: nil, internal_date_source: nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil, &block)
+          path = '{userId}/messages'
           if upload_source.nil?
-            command =  make_simple_command(:post, '{userId}/messages', options)
+            command =  make_simple_command(:post, path, options)
           else
-            command = make_upload_command(:post, '{userId}/messages', options)
+            command = make_upload_command(:post, path, options)
             command.upload_source = upload_source
             command.upload_content_type = content_type
           end
@@ -974,7 +994,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_user_messages(user_id, include_spam_trash: nil, label_ids: nil, max_results: nil, page_token: nil, q: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/messages', options)
+          path = '{userId}/messages'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::ListMessagesResponse::Representation
           command.response_class = Google::Apis::GmailV1::ListMessagesResponse
           command.params['userId'] = user_id unless user_id.nil?
@@ -1018,7 +1039,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def modify_message(user_id, id, modify_message_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/messages/{id}/modify', options)
+          path = '{userId}/messages/{id}/modify'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::GmailV1::ModifyMessageRequest::Representation
           command.request_object = modify_message_request_object
           command.response_representation = Google::Apis::GmailV1::Message::Representation
@@ -1062,10 +1084,11 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def send_user_message(user_id, message_object = nil, fields: nil, quota_user: nil, user_ip: nil, upload_source: nil, content_type: nil, options: nil, &block)
+          path = '{userId}/messages/send'
           if upload_source.nil?
-            command =  make_simple_command(:post, '{userId}/messages/send', options)
+            command =  make_simple_command(:post, path, options)
           else
-            command = make_upload_command(:post, '{userId}/messages/send', options)
+            command = make_upload_command(:post, path, options)
             command.upload_source = upload_source
             command.upload_content_type = content_type
           end
@@ -1108,7 +1131,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def trash_user_message(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/messages/{id}/trash', options)
+          path = '{userId}/messages/{id}/trash'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::GmailV1::Message::Representation
           command.response_class = Google::Apis::GmailV1::Message
           command.params['userId'] = user_id unless user_id.nil?
@@ -1147,7 +1171,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def untrash_user_message(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/messages/{id}/untrash', options)
+          path = '{userId}/messages/{id}/untrash'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::GmailV1::Message::Representation
           command.response_class = Google::Apis::GmailV1::Message
           command.params['userId'] = user_id unless user_id.nil?
@@ -1188,7 +1213,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user_message_attachment(user_id, message_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/messages/{messageId}/attachments/{id}', options)
+          path = '{userId}/messages/{messageId}/attachments/{id}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::MessagePartBody::Representation
           command.response_class = Google::Apis::GmailV1::MessagePartBody
           command.params['userId'] = user_id unless user_id.nil?
@@ -1229,7 +1255,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_user_thread(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, '{userId}/threads/{id}', options)
+          path = '{userId}/threads/{id}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userId'] = user_id unless user_id.nil?
           command.params['id'] = id unless id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -1270,7 +1297,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user_thread(user_id, id, format: nil, metadata_headers: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/threads/{id}', options)
+          path = '{userId}/threads/{id}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::Thread::Representation
           command.response_class = Google::Apis::GmailV1::Thread
           command.params['userId'] = user_id unless user_id.nil?
@@ -1321,7 +1349,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_user_threads(user_id, include_spam_trash: nil, label_ids: nil, max_results: nil, page_token: nil, q: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{userId}/threads', options)
+          path = '{userId}/threads'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GmailV1::ListThreadsResponse::Representation
           command.response_class = Google::Apis::GmailV1::ListThreadsResponse
           command.params['userId'] = user_id unless user_id.nil?
@@ -1366,7 +1395,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def modify_thread(user_id, id, modify_thread_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/threads/{id}/modify', options)
+          path = '{userId}/threads/{id}/modify'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::GmailV1::ModifyThreadRequest::Representation
           command.request_object = modify_thread_request_object
           command.response_representation = Google::Apis::GmailV1::Thread::Representation
@@ -1407,7 +1437,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def trash_user_thread(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/threads/{id}/trash', options)
+          path = '{userId}/threads/{id}/trash'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::GmailV1::Thread::Representation
           command.response_class = Google::Apis::GmailV1::Thread
           command.params['userId'] = user_id unless user_id.nil?
@@ -1446,7 +1477,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def untrash_user_thread(user_id, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{userId}/threads/{id}/untrash', options)
+          path = '{userId}/threads/{id}/untrash'
+          command =  make_simple_command(:post, path, options)
           command.response_representation = Google::Apis::GmailV1::Thread::Representation
           command.response_class = Google::Apis::GmailV1::Thread
           command.params['userId'] = user_id unless user_id.nil?

@@ -18,20 +18,17 @@ require 'google/apis/storage_v1/representations.rb'
 
 module Google
   module Apis
-    # Cloud Storage JSON API
+    # Cloud Storage API
     #
     # Lets you store and retrieve potentially-large, immutable data objects.
     #
     # @see https://developers.google.com/storage/docs/json_api/
     module StorageV1
       VERSION = 'V1'
-      REVISION = '20151113'
+      REVISION = '20150710'
 
       # View and manage your data across Google Cloud Platform services
       AUTH_CLOUD_PLATFORM = 'https://www.googleapis.com/auth/cloud-platform'
-
-      # View your data across Google Cloud Platform services
-      AUTH_CLOUD_PLATFORM_READ_ONLY = 'https://www.googleapis.com/auth/cloud-platform.read-only'
 
       # Manage your data and permissions in Google Cloud Storage
       AUTH_DEVSTORAGE_FULL_CONTROL = 'https://www.googleapis.com/auth/devstorage.full_control'

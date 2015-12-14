@@ -58,10 +58,6 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
-      class ServerConfig
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      end
-      
       class ListClustersResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -160,14 +156,6 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           collection :operations, as: 'operations', class: Google::Apis::ContainerV1::Operation, decorator: Google::Apis::ContainerV1::Operation::Representation
       
-        end
-      end
-      
-      class ServerConfig
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :default_cluster_version, as: 'defaultClusterVersion'
-          collection :valid_node_versions, as: 'validNodeVersions'
         end
       end
     end

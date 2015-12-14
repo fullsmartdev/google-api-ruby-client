@@ -81,7 +81,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_asp(user_key, code_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'users/{userKey}/asps/{codeId}', options)
+          path = 'users/{userKey}/asps/{codeId}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userKey'] = user_key unless user_key.nil?
           command.params['codeId'] = code_id unless code_id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -118,7 +119,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_asp(user_key, code_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}/asps/{codeId}', options)
+          path = 'users/{userKey}/asps/{codeId}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Asp::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Asp
           command.params['userKey'] = user_key unless user_key.nil?
@@ -155,7 +157,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_asps(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}/asps', options)
+          path = 'users/{userKey}/asps'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Asps::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Asps
           command.params['userKey'] = user_key unless user_key.nil?
@@ -189,7 +192,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def stop_channel(channel_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '/admin/directory_v1/channels/stop', options)
+          path = '/admin/directory_v1/channels/stop'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Channel::Representation
           command.request_object = channel_object
           command.query['fields'] = fields unless fields.nil?
@@ -227,7 +231,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_chrome_os_device(customer_id, device_id, projection: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/devices/chromeos/{deviceId}', options)
+          path = 'customer/{customerId}/devices/chromeos/{deviceId}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::ChromeOsDevice::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::ChromeOsDevice
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -278,7 +283,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_chrome_os_devices(customer_id, max_results: nil, order_by: nil, page_token: nil, projection: nil, query: nil, sort_order: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/devices/chromeos', options)
+          path = 'customer/{customerId}/devices/chromeos'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::ChromeOsDevices::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::ChromeOsDevices
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -324,7 +330,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_chrome_os_device(customer_id, device_id, chrome_os_device_object = nil, projection: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'customer/{customerId}/devices/chromeos/{deviceId}', options)
+          path = 'customer/{customerId}/devices/chromeos/{deviceId}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::ChromeOsDevice::Representation
           command.request_object = chrome_os_device_object
           command.response_representation = Google::Apis::AdminDirectoryV1::ChromeOsDevice::Representation
@@ -368,7 +375,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_chrome_os_device(customer_id, device_id, chrome_os_device_object = nil, projection: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'customer/{customerId}/devices/chromeos/{deviceId}', options)
+          path = 'customer/{customerId}/devices/chromeos/{deviceId}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::ChromeOsDevice::Representation
           command.request_object = chrome_os_device_object
           command.response_representation = Google::Apis::AdminDirectoryV1::ChromeOsDevice::Representation
@@ -376,414 +384,6 @@ module Google
           command.params['customerId'] = customer_id unless customer_id.nil?
           command.params['deviceId'] = device_id unless device_id.nil?
           command.query['projection'] = projection unless projection.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrives a customer.
-        # @param [String] customer_key
-        #   Id of the customer to be retrieved
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Customer] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Customer]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_customer(customer_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customers/{customerKey}', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::Customer::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Customer
-          command.params['customerKey'] = customer_key unless customer_key.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Updates a customer. This method supports patch semantics.
-        # @param [String] customer_key
-        #   Id of the customer to be updated
-        # @param [Google::Apis::AdminDirectoryV1::Customer] customer_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Customer] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Customer]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def patch_customer(customer_key, customer_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'customers/{customerKey}', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::Customer::Representation
-          command.request_object = customer_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::Customer::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Customer
-          command.params['customerKey'] = customer_key unless customer_key.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Updates a customer.
-        # @param [String] customer_key
-        #   Id of the customer to be updated
-        # @param [Google::Apis::AdminDirectoryV1::Customer] customer_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Customer] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Customer]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def update_customer(customer_key, customer_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'customers/{customerKey}', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::Customer::Representation
-          command.request_object = customer_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::Customer::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Customer
-          command.params['customerKey'] = customer_key unless customer_key.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Deletes a Domain Alias of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [String] domain_alias_name
-        #   Name of domain alias to be retrieved.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [NilClass] No result returned for this method
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [void]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def delete_domain_alias(customer, domain_alias_name, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customer}/domainaliases/{domainAliasName}', options)
-          command.params['customer'] = customer unless customer.nil?
-          command.params['domainAliasName'] = domain_alias_name unless domain_alias_name.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrieves a domain alias of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [String] domain_alias_name
-        #   Name of domain alias to be retrieved.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::DomainAlias] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::DomainAlias]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_domain_alias(customer, domain_alias_name, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/domainaliases/{domainAliasName}', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::DomainAlias::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::DomainAlias
-          command.params['customer'] = customer unless customer.nil?
-          command.params['domainAliasName'] = domain_alias_name unless domain_alias_name.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Inserts a Domain alias of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [Google::Apis::AdminDirectoryV1::DomainAlias] domain_alias_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::DomainAlias] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::DomainAlias]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def insert_domain_alias(customer, domain_alias_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'customer/{customer}/domainaliases', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::DomainAlias::Representation
-          command.request_object = domain_alias_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::DomainAlias::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::DomainAlias
-          command.params['customer'] = customer unless customer.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Lists the domain aliases of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [String] parent_domain_name
-        #   Name of the parent domain for which domain aliases are to be fetched.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::DomainAliases] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::DomainAliases]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_domain_aliases(customer, parent_domain_name: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/domainaliases', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::DomainAliases::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::DomainAliases
-          command.params['customer'] = customer unless customer.nil?
-          command.query['parentDomainName'] = parent_domain_name unless parent_domain_name.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Deletes a domain of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [String] domain_name
-        #   Name of domain to be deleted
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [NilClass] No result returned for this method
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [void]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def delete_domain(customer, domain_name, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customer}/domains/{domainName}', options)
-          command.params['customer'] = customer unless customer.nil?
-          command.params['domainName'] = domain_name unless domain_name.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrives a domain of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [String] domain_name
-        #   Name of domain to be retrieved
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Domains] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Domains]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_domain(customer, domain_name, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/domains/{domainName}', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::Domains::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Domains
-          command.params['customer'] = customer unless customer.nil?
-          command.params['domainName'] = domain_name unless domain_name.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Inserts a domain of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [Google::Apis::AdminDirectoryV1::Domains] domains_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Domains] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Domains]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def insert_domain(customer, domains_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'customer/{customer}/domains', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::Domains::Representation
-          command.request_object = domains_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::Domains::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Domains
-          command.params['customer'] = customer unless customer.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Lists the domains of the customer.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Domains2] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Domains2]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_domains(customer, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/domains', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::Domains2::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Domains2
-          command.params['customer'] = customer unless customer.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?
@@ -815,7 +415,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_group(group_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'groups/{groupKey}', options)
+          path = 'groups/{groupKey}'
+          command =  make_simple_command(:delete, path, options)
           command.params['groupKey'] = group_key unless group_key.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -848,7 +449,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_group(group_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'groups/{groupKey}', options)
+          path = 'groups/{groupKey}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Group::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Group
           command.params['groupKey'] = group_key unless group_key.nil?
@@ -882,7 +484,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_group(group_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'groups', options)
+          path = 'groups'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Group::Representation
           command.request_object = group_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Group::Representation
@@ -929,7 +532,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_groups(customer: nil, domain: nil, max_results: nil, page_token: nil, user_key: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'groups', options)
+          path = 'groups'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Groups::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Groups
           command.query['customer'] = customer unless customer.nil?
@@ -970,7 +574,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_group(group_key, group_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'groups/{groupKey}', options)
+          path = 'groups/{groupKey}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Group::Representation
           command.request_object = group_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Group::Representation
@@ -1009,7 +614,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_group(group_key, group_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'groups/{groupKey}', options)
+          path = 'groups/{groupKey}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Group::Representation
           command.request_object = group_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Group::Representation
@@ -1048,7 +654,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_group_alias(group_key, group_alias, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'groups/{groupKey}/aliases/{alias}', options)
+          path = 'groups/{groupKey}/aliases/{alias}'
+          command =  make_simple_command(:delete, path, options)
           command.params['groupKey'] = group_key unless group_key.nil?
           command.params['alias'] = group_alias unless group_alias.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -1083,7 +690,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_group_alias(group_key, alias_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'groups/{groupKey}/aliases', options)
+          path = 'groups/{groupKey}/aliases'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Alias::Representation
           command.request_object = alias_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Alias::Representation
@@ -1120,7 +728,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_group_aliases(group_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'groups/{groupKey}/aliases', options)
+          path = 'groups/{groupKey}/aliases'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Aliases::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Aliases
           command.params['groupKey'] = group_key unless group_key.nil?
@@ -1157,7 +766,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_member(group_key, member_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'groups/{groupKey}/members/{memberKey}', options)
+          path = 'groups/{groupKey}/members/{memberKey}'
+          command =  make_simple_command(:delete, path, options)
           command.params['groupKey'] = group_key unless group_key.nil?
           command.params['memberKey'] = member_key unless member_key.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -1193,7 +803,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_member(group_key, member_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'groups/{groupKey}/members/{memberKey}', options)
+          path = 'groups/{groupKey}/members/{memberKey}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Member::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Member
           command.params['groupKey'] = group_key unless group_key.nil?
@@ -1230,7 +841,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_member(group_key, member_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'groups/{groupKey}/members', options)
+          path = 'groups/{groupKey}/members'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Member::Representation
           command.request_object = member_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Member::Representation
@@ -1273,7 +885,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_members(group_key, max_results: nil, page_token: nil, roles: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'groups/{groupKey}/members', options)
+          path = 'groups/{groupKey}/members'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Members::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Members
           command.params['groupKey'] = group_key unless group_key.nil?
@@ -1317,7 +930,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_member(group_key, member_key, member_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'groups/{groupKey}/members/{memberKey}', options)
+          path = 'groups/{groupKey}/members/{memberKey}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Member::Representation
           command.request_object = member_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Member::Representation
@@ -1360,7 +974,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_member(group_key, member_key, member_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'groups/{groupKey}/members/{memberKey}', options)
+          path = 'groups/{groupKey}/members/{memberKey}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Member::Representation
           command.request_object = member_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Member::Representation
@@ -1401,7 +1016,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def action_mobile_device(customer_id, resource_id, mobile_device_action_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'customer/{customerId}/devices/mobile/{resourceId}/action', options)
+          path = 'customer/{customerId}/devices/mobile/{resourceId}/action'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::MobileDeviceAction::Representation
           command.request_object = mobile_device_action_object
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -1439,7 +1055,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_mobile_device(customer_id, resource_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customerId}/devices/mobile/{resourceId}', options)
+          path = 'customer/{customerId}/devices/mobile/{resourceId}'
+          command =  make_simple_command(:delete, path, options)
           command.params['customerId'] = customer_id unless customer_id.nil?
           command.params['resourceId'] = resource_id unless resource_id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -1477,7 +1094,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_mobile_device(customer_id, resource_id, projection: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/devices/mobile/{resourceId}', options)
+          path = 'customer/{customerId}/devices/mobile/{resourceId}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::MobileDevice::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::MobileDevice
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -1528,7 +1146,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_mobile_devices(customer_id, max_results: nil, order_by: nil, page_token: nil, projection: nil, query: nil, sort_order: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/devices/mobile', options)
+          path = 'customer/{customerId}/devices/mobile'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::MobileDevices::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::MobileDevices
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -1572,7 +1191,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_notification(customer, notification_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customer}/notifications/{notificationId}', options)
+          path = 'customer/{customer}/notifications/{notificationId}'
+          command =  make_simple_command(:delete, path, options)
           command.params['customer'] = customer unless customer.nil?
           command.params['notificationId'] = notification_id unless notification_id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -1609,7 +1229,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_notification(customer, notification_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/notifications/{notificationId}', options)
+          path = 'customer/{customer}/notifications/{notificationId}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Notification::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Notification
           command.params['customer'] = customer unless customer.nil?
@@ -1652,7 +1273,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_notifications(customer, language: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/notifications', options)
+          path = 'customer/{customer}/notifications'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Notifications::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Notifications
           command.params['customer'] = customer unless customer.nil?
@@ -1693,7 +1315,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_notification(customer, notification_id, notification_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'customer/{customer}/notifications/{notificationId}', options)
+          path = 'customer/{customer}/notifications/{notificationId}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Notification::Representation
           command.request_object = notification_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Notification::Representation
@@ -1734,7 +1357,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_notification(customer, notification_id, notification_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'customer/{customer}/notifications/{notificationId}', options)
+          path = 'customer/{customer}/notifications/{notificationId}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Notification::Representation
           command.request_object = notification_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Notification::Representation
@@ -1774,7 +1398,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_org_unit(customer_id, org_unit_path, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customerId}/orgunits{/orgUnitPath*}', options)
+          path = 'customer/{customerId}/orgunits{/orgUnitPath*}'
+          command =  make_simple_command(:delete, path, options)
           command.params['customerId'] = customer_id unless customer_id.nil?
           command.params['orgUnitPath'] = org_unit_path unless org_unit_path.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -1810,7 +1435,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_org_unit(customer_id, org_unit_path, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/orgunits{/orgUnitPath*}', options)
+          path = 'customer/{customerId}/orgunits{/orgUnitPath*}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::OrgUnit::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::OrgUnit
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -1847,7 +1473,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_org_unit(customer_id, org_unit_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'customer/{customerId}/orgunits', options)
+          path = 'customer/{customerId}/orgunits'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::OrgUnit::Representation
           command.request_object = org_unit_object
           command.response_representation = Google::Apis::AdminDirectoryV1::OrgUnit::Representation
@@ -1888,7 +1515,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_org_units(customer_id, org_unit_path: nil, type: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/orgunits', options)
+          path = 'customer/{customerId}/orgunits'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::OrgUnits::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::OrgUnits
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -1928,7 +1556,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_org_unit(customer_id, org_unit_path, org_unit_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'customer/{customerId}/orgunits{/orgUnitPath*}', options)
+          path = 'customer/{customerId}/orgunits{/orgUnitPath*}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::OrgUnit::Representation
           command.request_object = org_unit_object
           command.response_representation = Google::Apis::AdminDirectoryV1::OrgUnit::Representation
@@ -1969,444 +1598,14 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_org_unit(customer_id, org_unit_path, org_unit_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'customer/{customerId}/orgunits{/orgUnitPath*}', options)
+          path = 'customer/{customerId}/orgunits{/orgUnitPath*}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::OrgUnit::Representation
           command.request_object = org_unit_object
           command.response_representation = Google::Apis::AdminDirectoryV1::OrgUnit::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::OrgUnit
           command.params['customerId'] = customer_id unless customer_id.nil?
           command.params['orgUnitPath'] = org_unit_path unless org_unit_path.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrieves a paginated list of all privileges for a customer.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Privileges] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Privileges]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_privileges(customer, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/roles/ALL/privileges', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::Privileges::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Privileges
-          command.params['customer'] = customer unless customer.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Deletes a role assignment.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [String] role_assignment_id
-        #   Immutable ID of the role assignment.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [NilClass] No result returned for this method
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [void]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def delete_role_assignment(customer, role_assignment_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customer}/roleassignments/{roleAssignmentId}', options)
-          command.params['customer'] = customer unless customer.nil?
-          command.params['roleAssignmentId'] = role_assignment_id unless role_assignment_id.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrieve a role assignment.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [String] role_assignment_id
-        #   Immutable ID of the role assignment.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::RoleAssignment] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::RoleAssignment]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_role_assignment(customer, role_assignment_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/roleassignments/{roleAssignmentId}', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::RoleAssignment::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::RoleAssignment
-          command.params['customer'] = customer unless customer.nil?
-          command.params['roleAssignmentId'] = role_assignment_id unless role_assignment_id.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Creates a role assignment.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [Google::Apis::AdminDirectoryV1::RoleAssignment] role_assignment_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::RoleAssignment] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::RoleAssignment]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def insert_role_assignment(customer, role_assignment_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'customer/{customer}/roleassignments', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::RoleAssignment::Representation
-          command.request_object = role_assignment_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::RoleAssignment::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::RoleAssignment
-          command.params['customer'] = customer unless customer.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrieves a paginated list of all roleAssignments.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [Fixnum] max_results
-        #   Maximum number of results to return.
-        # @param [String] page_token
-        #   Token to specify the next page in the list.
-        # @param [String] role_id
-        #   Immutable ID of a role. If included in the request, returns only role
-        #   assignments containing this role ID.
-        # @param [String] user_key
-        #   The user's primary email address, alias email address, or unique user ID. If
-        #   included in the request, returns role assignments only for this user.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::RoleAssignments] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::RoleAssignments]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_role_assignments(customer, max_results: nil, page_token: nil, role_id: nil, user_key: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/roleassignments', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::RoleAssignments::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::RoleAssignments
-          command.params['customer'] = customer unless customer.nil?
-          command.query['maxResults'] = max_results unless max_results.nil?
-          command.query['pageToken'] = page_token unless page_token.nil?
-          command.query['roleId'] = role_id unless role_id.nil?
-          command.query['userKey'] = user_key unless user_key.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Deletes a role.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [String] role_id
-        #   Immutable ID of the role.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [NilClass] No result returned for this method
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [void]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def delete_role(customer, role_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customer}/roles/{roleId}', options)
-          command.params['customer'] = customer unless customer.nil?
-          command.params['roleId'] = role_id unless role_id.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrieves a role.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [String] role_id
-        #   Immutable ID of the role.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Role] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Role]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_role(customer, role_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/roles/{roleId}', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::Role::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Role
-          command.params['customer'] = customer unless customer.nil?
-          command.params['roleId'] = role_id unless role_id.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Creates a role.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [Google::Apis::AdminDirectoryV1::Role] role_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Role] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Role]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def insert_role(customer, role_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'customer/{customer}/roles', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::Role::Representation
-          command.request_object = role_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::Role::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Role
-          command.params['customer'] = customer unless customer.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Retrieves a paginated list of all the roles in a domain.
-        # @param [String] customer
-        #   Immutable id of the Google Apps account.
-        # @param [Fixnum] max_results
-        #   Maximum number of results to return.
-        # @param [String] page_token
-        #   Token to specify the next page in the list.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Roles] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Roles]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_roles(customer, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customer}/roles', options)
-          command.response_representation = Google::Apis::AdminDirectoryV1::Roles::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Roles
-          command.params['customer'] = customer unless customer.nil?
-          command.query['maxResults'] = max_results unless max_results.nil?
-          command.query['pageToken'] = page_token unless page_token.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Updates a role. This method supports patch semantics.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [String] role_id
-        #   Immutable ID of the role.
-        # @param [Google::Apis::AdminDirectoryV1::Role] role_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Role] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Role]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def patch_role(customer, role_id, role_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'customer/{customer}/roles/{roleId}', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::Role::Representation
-          command.request_object = role_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::Role::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Role
-          command.params['customer'] = customer unless customer.nil?
-          command.params['roleId'] = role_id unless role_id.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['userIp'] = user_ip unless user_ip.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Updates a role.
-        # @param [String] customer
-        #   Immutable ID of the Google Apps account.
-        # @param [String] role_id
-        #   Immutable ID of the role.
-        # @param [Google::Apis::AdminDirectoryV1::Role] role_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        #   Overrides userIp if both are provided.
-        # @param [String] user_ip
-        #   IP address of the site where the request originates. Use this if you want to
-        #   enforce per-user limits.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::AdminDirectoryV1::Role] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::AdminDirectoryV1::Role]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def update_role(customer, role_id, role_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'customer/{customer}/roles/{roleId}', options)
-          command.request_representation = Google::Apis::AdminDirectoryV1::Role::Representation
-          command.request_object = role_object
-          command.response_representation = Google::Apis::AdminDirectoryV1::Role::Representation
-          command.response_class = Google::Apis::AdminDirectoryV1::Role
-          command.params['customer'] = customer unless customer.nil?
-          command.params['roleId'] = role_id unless role_id.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['userIp'] = user_ip unless user_ip.nil?
@@ -2440,7 +1639,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_schema(customer_id, schema_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'customer/{customerId}/schemas/{schemaKey}', options)
+          path = 'customer/{customerId}/schemas/{schemaKey}'
+          command =  make_simple_command(:delete, path, options)
           command.params['customerId'] = customer_id unless customer_id.nil?
           command.params['schemaKey'] = schema_key unless schema_key.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -2476,7 +1676,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_schema(customer_id, schema_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/schemas/{schemaKey}', options)
+          path = 'customer/{customerId}/schemas/{schemaKey}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Schema::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Schema
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -2513,7 +1714,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_schema(customer_id, schema_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'customer/{customerId}/schemas', options)
+          path = 'customer/{customerId}/schemas'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Schema::Representation
           command.request_object = schema_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Schema::Representation
@@ -2550,7 +1752,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_schemas(customer_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'customer/{customerId}/schemas', options)
+          path = 'customer/{customerId}/schemas'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Schemas::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Schemas
           command.params['customerId'] = customer_id unless customer_id.nil?
@@ -2588,7 +1791,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_schema(customer_id, schema_key, schema_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'customer/{customerId}/schemas/{schemaKey}', options)
+          path = 'customer/{customerId}/schemas/{schemaKey}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Schema::Representation
           command.request_object = schema_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Schema::Representation
@@ -2629,7 +1833,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_schema(customer_id, schema_key, schema_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'customer/{customerId}/schemas/{schemaKey}', options)
+          path = 'customer/{customerId}/schemas/{schemaKey}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Schema::Representation
           command.request_object = schema_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Schema::Representation
@@ -2670,7 +1875,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_token(user_key, client_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'users/{userKey}/tokens/{clientId}', options)
+          path = 'users/{userKey}/tokens/{clientId}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userKey'] = user_key unless user_key.nil?
           command.params['clientId'] = client_id unless client_id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -2707,7 +1913,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_token(user_key, client_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}/tokens/{clientId}', options)
+          path = 'users/{userKey}/tokens/{clientId}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Token::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Token
           command.params['userKey'] = user_key unless user_key.nil?
@@ -2744,7 +1951,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_tokens(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}/tokens', options)
+          path = 'users/{userKey}/tokens'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Tokens::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Tokens
           command.params['userKey'] = user_key unless user_key.nil?
@@ -2779,7 +1987,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_user(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'users/{userKey}', options)
+          path = 'users/{userKey}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userKey'] = user_key unless user_key.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -2819,7 +2028,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user(user_key, custom_field_mask: nil, projection: nil, view_type: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}', options)
+          path = 'users/{userKey}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::User::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::User
           command.params['userKey'] = user_key unless user_key.nil?
@@ -2856,7 +2066,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_user(user_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users', options)
+          path = 'users'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::User::Representation
           command.request_object = user_object
           command.response_representation = Google::Apis::AdminDirectoryV1::User::Representation
@@ -2918,7 +2129,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_users(custom_field_mask: nil, customer: nil, domain: nil, event: nil, max_results: nil, order_by: nil, page_token: nil, projection: nil, query: nil, show_deleted: nil, sort_order: nil, view_type: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users', options)
+          path = 'users'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Users::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Users
           command.query['customFieldMask'] = custom_field_mask unless custom_field_mask.nil?
@@ -2964,8 +2176,9 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def make_user_admin(user_key, user_make_admin_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users/{userKey}/makeAdmin', options)
+        def make_admin_user(user_key, user_make_admin_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          path = 'users/{userKey}/makeAdmin'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::UserMakeAdmin::Representation
           command.request_object = user_make_admin_object
           command.params['userKey'] = user_key unless user_key.nil?
@@ -3002,7 +2215,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_user(user_key, user_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'users/{userKey}', options)
+          path = 'users/{userKey}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::User::Representation
           command.request_object = user_object
           command.response_representation = Google::Apis::AdminDirectoryV1::User::Representation
@@ -3040,7 +2254,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def undelete_user(user_key, user_undelete_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users/{userKey}/undelete', options)
+          path = 'users/{userKey}/undelete'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::UserUndelete::Representation
           command.request_object = user_undelete_object
           command.params['userKey'] = user_key unless user_key.nil?
@@ -3077,7 +2292,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_user(user_key, user_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'users/{userKey}', options)
+          path = 'users/{userKey}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::User::Representation
           command.request_object = user_object
           command.response_representation = Google::Apis::AdminDirectoryV1::User::Representation
@@ -3141,7 +2357,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def watch_user(channel_object = nil, custom_field_mask: nil, customer: nil, domain: nil, event: nil, max_results: nil, order_by: nil, page_token: nil, projection: nil, query: nil, show_deleted: nil, sort_order: nil, view_type: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users/watch', options)
+          path = 'users/watch'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Channel::Representation
           command.request_object = channel_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Channel::Representation
@@ -3191,7 +2408,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_user_alias(user_key, user_alias, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'users/{userKey}/aliases/{alias}', options)
+          path = 'users/{userKey}/aliases/{alias}'
+          command =  make_simple_command(:delete, path, options)
           command.params['userKey'] = user_key unless user_key.nil?
           command.params['alias'] = user_alias unless user_alias.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -3226,7 +2444,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_user_alias(user_key, alias_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users/{userKey}/aliases', options)
+          path = 'users/{userKey}/aliases'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Alias::Representation
           command.request_object = alias_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Alias::Representation
@@ -3265,7 +2484,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_user_aliases(user_key, event: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}/aliases', options)
+          path = 'users/{userKey}/aliases'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::Aliases::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::Aliases
           command.params['userKey'] = user_key unless user_key.nil?
@@ -3304,7 +2524,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def watch_user_alias(user_key, channel_object = nil, event: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users/{userKey}/aliases/watch', options)
+          path = 'users/{userKey}/aliases/watch'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::Channel::Representation
           command.request_object = channel_object
           command.response_representation = Google::Apis::AdminDirectoryV1::Channel::Representation
@@ -3342,7 +2563,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_user_photo(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'users/{userKey}/photos/thumbnail', options)
+          path = 'users/{userKey}/photos/thumbnail'
+          command =  make_simple_command(:delete, path, options)
           command.params['userKey'] = user_key unless user_key.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -3375,7 +2597,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_user_photo(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}/photos/thumbnail', options)
+          path = 'users/{userKey}/photos/thumbnail'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::UserPhoto::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::UserPhoto
           command.params['userKey'] = user_key unless user_key.nil?
@@ -3411,7 +2634,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_user_photo(user_key, user_photo_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'users/{userKey}/photos/thumbnail', options)
+          path = 'users/{userKey}/photos/thumbnail'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::UserPhoto::Representation
           command.request_object = user_photo_object
           command.response_representation = Google::Apis::AdminDirectoryV1::UserPhoto::Representation
@@ -3449,7 +2673,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_user_photo(user_key, user_photo_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'users/{userKey}/photos/thumbnail', options)
+          path = 'users/{userKey}/photos/thumbnail'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::AdminDirectoryV1::UserPhoto::Representation
           command.request_object = user_photo_object
           command.response_representation = Google::Apis::AdminDirectoryV1::UserPhoto::Representation
@@ -3486,7 +2711,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def generate_verification_code(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users/{userKey}/verificationCodes/generate', options)
+          path = 'users/{userKey}/verificationCodes/generate'
+          command =  make_simple_command(:post, path, options)
           command.params['userKey'] = user_key unless user_key.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -3519,7 +2745,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def invalidate_verification_code(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'users/{userKey}/verificationCodes/invalidate', options)
+          path = 'users/{userKey}/verificationCodes/invalidate'
+          command =  make_simple_command(:post, path, options)
           command.params['userKey'] = user_key unless user_key.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -3554,7 +2781,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_verification_codes(user_key, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'users/{userKey}/verificationCodes', options)
+          path = 'users/{userKey}/verificationCodes'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::AdminDirectoryV1::VerificationCodes::Representation
           command.response_class = Google::Apis::AdminDirectoryV1::VerificationCodes
           command.params['userKey'] = user_key unless user_key.nil?

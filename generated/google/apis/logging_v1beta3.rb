@@ -20,28 +20,16 @@ module Google
   module Apis
     # Google Cloud Logging API
     #
-    # The Google Cloud Logging API lets you write log entries and manage your logs,
-    # log sinks and logs-based metrics.
+    # Google Cloud Logging API lets you create logs, ingest log entries, and manage
+    # log sinks.
     #
-    # @see https://cloud.google.com/logging/docs/
+    # @see 
     module LoggingV1beta3
       VERSION = 'V1beta3'
-      REVISION = '20151117'
+      REVISION = '20150326'
 
       # View and manage your data across Google Cloud Platform services
       AUTH_CLOUD_PLATFORM = 'https://www.googleapis.com/auth/cloud-platform'
-
-      # View your data across Google Cloud Platform services
-      AUTH_CLOUD_PLATFORM_READ_ONLY = 'https://www.googleapis.com/auth/cloud-platform.read-only'
-
-      # Administrate log data for your projects
-      AUTH_LOGGING_ADMIN = 'https://www.googleapis.com/auth/logging.admin'
-
-      # View log data for your projects
-      AUTH_LOGGING_READ = 'https://www.googleapis.com/auth/logging.read'
-
-      # Submit log data for your projects
-      AUTH_LOGGING_WRITE = 'https://www.googleapis.com/auth/logging.write'
     end
   end
 end

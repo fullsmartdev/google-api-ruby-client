@@ -109,9 +109,6 @@ module Google
         # - "34" for VEF
         # - "35" for COP
         # - "36" for GTQ
-        # - "37" for PLN
-        # - "39" for INR
-        # - "40" for THB
         # Corresponds to the JSON property `currencyId`
         # @return [String]
         attr_accessor :currency_id
@@ -2383,14 +2380,14 @@ module Google
         attr_accessor :click_tags
       
         # Industry standard ID assigned to creative for reach and frequency. Applicable
-        # to the following creative types: all INSTREAM_VIDEO and all VPAID.
+        # to the following creative types: INSTREAM_VIDEO and all VPAID.
         # Corresponds to the JSON property `commercialId`
         # @return [String]
         attr_accessor :commercial_id
       
         # List of companion creatives assigned to an in-Stream videocreative. Acceptable
         # values include IDs of existing flash and image creatives. Applicable to the
-        # following creative types: all INSTREAM_VIDEO and all VPAID.
+        # following creative types: INSTREAM_VIDEO and all VPAID.
         # Corresponds to the JSON property `companionCreatives`
         # @return [Array<String>]
         attr_accessor :companion_creatives
@@ -2420,9 +2417,8 @@ module Google
         attr_accessor :convert_flash_to_html5
         alias_method :convert_flash_to_html5?, :convert_flash_to_html5
       
-        # List of counter events configured for the creative. For ENHANCED_IMAGE
-        # creatives, these are read-only and auto-generated from clickTags. Applicable
-        # to the following creative types: ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.
+        # List of counter events configured for the creative. Applicable to the
+        # following creative types: all RICH_MEDIA, and all VPAID.
         # Corresponds to the JSON property `counterCustomEvents`
         # @return [Array<Google::Apis::DfareportingV2_1::CreativeCustomEvent>]
         attr_accessor :counter_custom_events
@@ -2448,11 +2444,8 @@ module Google
         # @return [Array<String>]
         attr_accessor :custom_key_values
       
-        # List of exit events configured for the creative. For ENHANCED_BANNER and
-        # ENHANCED_IMAGE creatives, these are read-only and auto-generated from
-        # clickTags, For ENHANCED_BANNER, an event is also created from the
-        # backupImageReportingLabel. Applicable to the following creative types:
-        # ENHANCED_BANNER, ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.
+        # List of exit events configured for the creative. Applicable to the following
+        # creative types: all RICH_MEDIA, and all VPAID.
         # Corresponds to the JSON property `exitCustomEvents`
         # @return [Array<Google::Apis::DfareportingV2_1::CreativeCustomEvent>]
         attr_accessor :exit_custom_events
@@ -2518,12 +2511,9 @@ module Google
         # @return [String]
         attr_accessor :override_css
       
-        # URL of hosted image or hosted video or another ad tag. For
-        # INSTREAM_VIDEO_REDIRECT creatives this is the in-stream video redirect URL.
-        # The standard for a VAST (Video Ad Serving Template) ad response allows for a
-        # redirect link to another VAST 2.0 or 3.0 call. This is a required field when
+        # URL of hosted image or another ad tag. This is a required field when
         # applicable. Applicable to the following creative types: INTERNAL_REDIRECT,
-        # INTERSTITIAL_INTERNAL_REDIRECT, REDIRECT, and INSTREAM_VIDEO_REDIRECT
+        # INTERSTITIAL_INTERNAL_REDIRECT, and REDIRECT
         # Corresponds to the JSON property `redirectUrl`
         # @return [String]
         attr_accessor :redirect_url
@@ -2559,7 +2549,7 @@ module Google
         attr_accessor :size
       
         # Whether the user can choose to skip the creative. Applicable to the following
-        # creative types: all INSTREAM_VIDEO and all VPAID.
+        # creative types: INSTREAM_VIDEO.
         # Corresponds to the JSON property `skippable`
         # @return [Boolean]
         attr_accessor :skippable
@@ -2613,14 +2603,13 @@ module Google
         attr_accessor :third_party_rich_media_impressions_url
       
         # Third-party URLs for tracking in-stream video creative events. Applicable to
-        # the following creative types: all INSTREAM_VIDEO and all VPAID.
+        # the following creative types: INSTREAM_VIDEO and all VPAID.
         # Corresponds to the JSON property `thirdPartyUrls`
         # @return [Array<Google::Apis::DfareportingV2_1::ThirdPartyTrackingUrl>]
         attr_accessor :third_party_urls
       
-        # List of timer events configured for the creative. For ENHANCED_IMAGE creatives,
-        # these are read-only and auto-generated from clickTags. Applicable to the
-        # following creative types: ENHANCED_IMAGE, all RICH_MEDIA, and all VPAID.
+        # List of timer events configured for the creative. Applicable to the following
+        # creative types: all RICH_MEDIA, and all VPAID.
         # Corresponds to the JSON property `timerCustomEvents`
         # @return [Array<Google::Apis::DfareportingV2_1::CreativeCustomEvent>]
         attr_accessor :timer_custom_events
@@ -2648,7 +2637,7 @@ module Google
         # @return [Fixnum]
         attr_accessor :version
       
-        # Description of the video ad. Applicable to the following creative types: all
+        # Description of the video ad. Applicable to the following creative types:
         # INSTREAM_VIDEO and all VPAID.
         # Corresponds to the JSON property `videoDescription`
         # @return [String]
@@ -3341,8 +3330,7 @@ module Google
         # @return [String]
         attr_accessor :target_type
       
-        # Video reporting ID, used to differentiate multiple videos in a single creative.
-        # This is a read-only field.
+        # Reporting ID, used to differentiate multiple videos in a single creative.
         # Corresponds to the JSON property `videoReportingId`
         # @return [String]
         attr_accessor :video_reporting_id
@@ -4346,9 +4334,6 @@ module Google
         # - "34" for VEF
         # - "35" for COP
         # - "36" for GTQ
-        # - "37" for PLN
-        # - "39" for INR
-        # - "40" for THB
         # Corresponds to the JSON property `currencyId`
         # @return [String]
         attr_accessor :currency_id

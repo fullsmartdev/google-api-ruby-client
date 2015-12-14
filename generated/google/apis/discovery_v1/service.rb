@@ -80,7 +80,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_rest_api(api, version, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'apis/{api}/{version}/rest', options)
+          path = 'apis/{api}/{version}/rest'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DiscoveryV1::RestDescription::Representation
           command.response_class = Google::Apis::DiscoveryV1::RestDescription
           command.params['api'] = api unless api.nil?
@@ -118,7 +119,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_apis(name: nil, preferred: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'apis', options)
+          path = 'apis'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DiscoveryV1::DirectoryList::Representation
           command.response_class = Google::Apis::DiscoveryV1::DirectoryList
           command.query['name'] = name unless name.nil?

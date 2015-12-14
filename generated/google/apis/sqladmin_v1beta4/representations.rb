@@ -56,10 +56,6 @@ module Google
       
       class DatabaseInstance
         class Representation < Google::Apis::Core::JsonRepresentation; end
-        
-        class FailoverReplica
-          class Representation < Google::Apis::Core::JsonRepresentation; end
-        end
       end
       
       class ListDatabasesResponse
@@ -76,10 +72,6 @@ module Google
         class SqlExportOptions
           class Representation < Google::Apis::Core::JsonRepresentation; end
         end
-      end
-      
-      class FailoverContext
-        class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
       class Flag
@@ -106,10 +98,6 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
-      class InstancesFailoverRequest
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      end
-      
       class ImportInstancesRequest
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
@@ -131,10 +119,6 @@ module Google
       end
       
       class LocationPreference
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      end
-      
-      class MaintenanceWindow
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
@@ -179,10 +163,6 @@ module Google
       end
       
       class SslCertDetail
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      end
-      
-      class SslCertsCreateEphemeralRequest
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
@@ -313,8 +293,6 @@ module Google
           property :current_disk_size, as: 'currentDiskSize'
           property :database_version, as: 'databaseVersion'
           property :etag, as: 'etag'
-          property :failover_replica, as: 'failoverReplica', class: Google::Apis::SqladminV1beta4::DatabaseInstance::FailoverReplica, decorator: Google::Apis::SqladminV1beta4::DatabaseInstance::FailoverReplica::Representation
-      
           property :instance_type, as: 'instanceType'
           collection :ip_addresses, as: 'ipAddresses', class: Google::Apis::SqladminV1beta4::IpMapping, decorator: Google::Apis::SqladminV1beta4::IpMapping::Representation
       
@@ -337,14 +315,6 @@ module Google
           property :settings, as: 'settings', class: Google::Apis::SqladminV1beta4::Settings, decorator: Google::Apis::SqladminV1beta4::Settings::Representation
       
           property :state, as: 'state'
-        end
-        
-        class FailoverReplica
-          # @private
-          class Representation < Google::Apis::Core::JsonRepresentation
-            property :available, as: 'available'
-            property :name, as: 'name'
-          end
         end
       end
       
@@ -380,17 +350,8 @@ module Google
         class SqlExportOptions
           # @private
           class Representation < Google::Apis::Core::JsonRepresentation
-            property :schema_only, as: 'schemaOnly'
             collection :tables, as: 'tables'
           end
-        end
-      end
-      
-      class FailoverContext
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :kind, as: 'kind'
-          property :settings_version, as: 'settingsVersion'
         end
       end
       
@@ -403,7 +364,6 @@ module Google
           property :max_value, as: 'maxValue'
           property :min_value, as: 'minValue'
           property :name, as: 'name'
-          property :requires_restart, as: 'requiresRestart'
           property :type, as: 'type'
         end
       end
@@ -449,14 +409,6 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :export_context, as: 'exportContext', class: Google::Apis::SqladminV1beta4::ExportContext, decorator: Google::Apis::SqladminV1beta4::ExportContext::Representation
-      
-        end
-      end
-      
-      class InstancesFailoverRequest
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :failover_context, as: 'failoverContext', class: Google::Apis::SqladminV1beta4::FailoverContext, decorator: Google::Apis::SqladminV1beta4::FailoverContext::Representation
       
         end
       end
@@ -512,16 +464,6 @@ module Google
           property :follow_gae_application, as: 'followGaeApplication'
           property :kind, as: 'kind'
           property :zone, as: 'zone'
-        end
-      end
-      
-      class MaintenanceWindow
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :day, as: 'day'
-          property :hour, as: 'hour'
-          property :kind, as: 'kind'
-          property :update_track, as: 'updateTrack'
         end
       end
       
@@ -608,7 +550,6 @@ module Google
       class ReplicaConfiguration
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :failover_target, as: 'failoverTarget'
           property :kind, as: 'kind'
           property :mysql_replica_configuration, as: 'mysqlReplicaConfiguration', class: Google::Apis::SqladminV1beta4::MySqlReplicaConfiguration, decorator: Google::Apis::SqladminV1beta4::MySqlReplicaConfiguration::Representation
       
@@ -632,8 +573,6 @@ module Google
           property :backup_configuration, as: 'backupConfiguration', class: Google::Apis::SqladminV1beta4::BackupConfiguration, decorator: Google::Apis::SqladminV1beta4::BackupConfiguration::Representation
       
           property :crash_safe_replication_enabled, as: 'crashSafeReplicationEnabled'
-          property :data_disk_size_gb, as: 'dataDiskSizeGb'
-          property :data_disk_type, as: 'dataDiskType'
           collection :database_flags, as: 'databaseFlags', class: Google::Apis::SqladminV1beta4::DatabaseFlags, decorator: Google::Apis::SqladminV1beta4::DatabaseFlags::Representation
       
           property :database_replication_enabled, as: 'databaseReplicationEnabled'
@@ -641,8 +580,6 @@ module Google
       
           property :kind, as: 'kind'
           property :location_preference, as: 'locationPreference', class: Google::Apis::SqladminV1beta4::LocationPreference, decorator: Google::Apis::SqladminV1beta4::LocationPreference::Representation
-      
-          property :maintenance_window, as: 'maintenanceWindow', class: Google::Apis::SqladminV1beta4::MaintenanceWindow, decorator: Google::Apis::SqladminV1beta4::MaintenanceWindow::Representation
       
           property :pricing_plan, as: 'pricingPlan'
           property :replication_type, as: 'replicationType'
@@ -674,13 +611,6 @@ module Google
           property :cert_info, as: 'certInfo', class: Google::Apis::SqladminV1beta4::SslCert, decorator: Google::Apis::SqladminV1beta4::SslCert::Representation
       
           property :cert_private_key, as: 'certPrivateKey'
-        end
-      end
-      
-      class SslCertsCreateEphemeralRequest
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :public_key, as: 'public_key'
         end
       end
       

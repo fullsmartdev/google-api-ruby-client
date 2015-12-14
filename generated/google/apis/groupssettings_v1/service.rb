@@ -77,7 +77,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_group(group_unique_id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{groupUniqueId}', options)
+          path = '{groupUniqueId}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::GroupssettingsV1::Groups::Representation
           command.response_class = Google::Apis::GroupssettingsV1::Groups
           command.params['groupUniqueId'] = group_unique_id unless group_unique_id.nil?
@@ -113,7 +114,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_group(group_unique_id, groups_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, '{groupUniqueId}', options)
+          path = '{groupUniqueId}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::GroupssettingsV1::Groups::Representation
           command.request_object = groups_object
           command.response_representation = Google::Apis::GroupssettingsV1::Groups::Representation
@@ -151,7 +153,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_group(group_unique_id, groups_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, '{groupUniqueId}', options)
+          path = '{groupUniqueId}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::GroupssettingsV1::Groups::Representation
           command.request_object = groups_object
           command.response_representation = Google::Apis::GroupssettingsV1::Groups::Representation

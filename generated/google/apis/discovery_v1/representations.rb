@@ -232,7 +232,6 @@ module Google
           property :service_path, as: 'servicePath'
           property :title, as: 'title'
           property :version, as: 'version'
-          property :version_module, as: 'version_module'
         end
         
         class Auth
