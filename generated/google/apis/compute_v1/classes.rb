@@ -78,13 +78,14 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -110,7 +111,7 @@ module Google
         # @return [String]
         attr_accessor :region
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -167,12 +168,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -195,7 +200,8 @@ module Google
       class AddressList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -211,12 +217,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -265,17 +275,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::AddressesScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -295,7 +307,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -337,9 +355,9 @@ module Google
         alias_method :boot?, :boot
       
         # Specifies a unique device name of your choice that is reflected into the /dev/
-        # tree of a Linux operating system running within the instance. This name can be
-        # used to reference the device for mounting, resizing, and so on, from within
-        # the instance.
+        # disk/by-id/google-* tree of a Linux operating system running within the
+        # instance. This name can be used to reference the device for mounting, resizing,
+        # and so on, from within the instance.
         # If not specified, the server chooses a default device name to apply to this
         # disk, in the form persistent-disks-x, where x is a number assigned by Google
         # Compute Engine. This field is only applicable for persistent disks.
@@ -364,7 +382,9 @@ module Google
         # @return [Google::Apis::ComputeV1::AttachedDiskInitializeParams]
         attr_accessor :initialize_params
       
-        # 
+        # Specifies the disk interface to use for attaching this disk, either SCSI or
+        # NVME. The default is SCSI. For performance characteristics of SCSI over NVMe,
+        # see Local SSD performance.
         # Corresponds to the JSON property `interface`
         # @return [String]
         attr_accessor :interface
@@ -488,18 +508,19 @@ module Google
         # @return [Google::Apis::ComputeV1::AutoscalingPolicy]
         attr_accessor :autoscaling_policy
       
-        # Creation timestamp in RFC3339 text format (output only).
+        # [Output Only] Creation timestamp in RFC3339 text format.
         # Corresponds to the JSON property `creationTimestamp`
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -509,13 +530,17 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # Name of the resource; provided by the client when the resource is created. The
-        # name must be 1-63 characters long, and comply with RFC1035.
+        # Name of the resource. Provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
       
-        # Server defined URL for the resource (output only).
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -526,7 +551,7 @@ module Google
         # @return [String]
         attr_accessor :target
       
-        # URL of the zone where the instance group resides (output only).
+        # [Output Only] URL of the zone where the instance group resides.
         # Corresponds to the JSON property `zone`
         # @return [String]
         attr_accessor :zone
@@ -553,7 +578,8 @@ module Google
       class AutoscalerAggregatedList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -568,12 +594,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -596,7 +626,8 @@ module Google
       class AutoscalerList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -611,12 +642,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -665,17 +700,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::AutoscalersScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -695,7 +732,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -877,8 +920,8 @@ module Google
         # @return [Float]
         attr_accessor :capacity_scaler
       
-        # An optional textual description of the resource. Provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -929,8 +972,8 @@ module Google
         end
       end
       
-      # A BackendService resource. This resource defines a group of backend VMs
-      # together with their serving capacity.
+      # A BackendService resource. This resource defines a group of backend virtual
+      # machines together with their serving capacity.
       class BackendService
         include Google::Apis::Core::Hashable
       
@@ -944,8 +987,8 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource. Provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -958,14 +1001,15 @@ module Google
         # @return [String]
         attr_accessor :fingerprint
       
-        # The list of URLs to the HttpHealthCheck resource for health checking this
-        # BackendService. Currently at most one health check can be specified, and a
-        # health check is required.
+        # The list of URLs to the HttpHealthCheck or HttpsHealthCheck resource for
+        # health checking this BackendService. Currently at most one health check can be
+        # specified, and a health check is required.
         # Corresponds to the JSON property `healthChecks`
         # @return [Array<String>]
         attr_accessor :health_checks
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1003,7 +1047,7 @@ module Google
         # @return [String]
         attr_accessor :protocol
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1066,7 +1110,8 @@ module Google
       class BackendServiceList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1082,7 +1127,11 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
@@ -1167,13 +1216,14 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1329,7 +1379,8 @@ module Google
       class DiskAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1345,12 +1396,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1373,7 +1428,8 @@ module Google
       class DiskList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1388,12 +1444,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1454,7 +1514,7 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # [Output Only] Server defined default disk size in GB.
+        # [Output Only] Server-defined default disk size in GB.
         # Corresponds to the JSON property `defaultDiskSizeGb`
         # @return [String]
         attr_accessor :default_disk_size_gb
@@ -1464,12 +1524,13 @@ module Google
         # @return [Google::Apis::ComputeV1::DeprecationStatus]
         attr_accessor :deprecated
       
-        # [Output Only] An optional textual description of the resource.
+        # [Output Only] An optional description of this resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1484,7 +1545,7 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1523,7 +1584,8 @@ module Google
       class DiskTypeAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1538,12 +1600,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1566,7 +1632,8 @@ module Google
       class DiskTypeList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1581,12 +1648,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1635,17 +1706,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::DiskTypesScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -1665,7 +1738,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -1718,17 +1797,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::DisksScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -1748,7 +1829,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -1786,13 +1873,14 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1826,7 +1914,7 @@ module Google
         # @return [String]
         attr_accessor :network
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1912,7 +2000,8 @@ module Google
       class FirewallList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -1928,12 +2017,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -1953,8 +2046,8 @@ module Google
       end
       
       # A ForwardingRule resource. A ForwardingRule resource specifies which pool of
-      # target VMs to forward a packet to if it matches the given [IPAddress,
-      # IPProtocol, portRange] tuple.
+      # target virtual machines to forward a packet to if it matches the given [
+      # IPAddress, IPProtocol, portRange] tuple.
       class ForwardingRule
         include Google::Apis::Core::Hashable
       
@@ -1967,7 +2060,7 @@ module Google
         # @return [String]
         attr_accessor :ip_address
       
-        # The IP protocol to which this rule applies, valid options are TCP, UDP, ESP,
+        # The IP protocol to which this rule applies. Valid options are TCP, UDP, ESP,
         # AH or SCTP.
         # Corresponds to the JSON property `IPProtocol`
         # @return [String]
@@ -1978,18 +2071,20 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # Type of the resource.
+        # [Output Only] Type of the resource. Always compute#forwardingRule for
+        # Forwarding Rule resources.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
@@ -2004,10 +2099,9 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # Applicable only when `IPProtocol` is TCP, UDP, or SCTP, only packets addressed
-        # to ports in the specified range will be forwarded to target. If portRange is
-        # left empty (default value), all ports are forwarded. Forwarding rules with the
-        # same `[IPAddress, IPProtocol]` pair must have disjoint port ranges.
+        # Applicable only when IPProtocol is TCP, UDP, or SCTP, only packets addressed
+        # to ports in the specified range will be forwarded to target. Forwarding rules
+        # with the same [IPAddress, IPProtocol] pair must have disjoint port ranges.
         # Corresponds to the JSON property `portRange`
         # @return [String]
         attr_accessor :port_range
@@ -2055,7 +2149,8 @@ module Google
       class ForwardingRuleAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -2070,12 +2165,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2113,12 +2212,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2167,17 +2270,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::ForwardingRulesScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -2197,7 +2302,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -2281,19 +2392,20 @@ module Google
       class HostRule
         include Google::Apis::Core::Hashable
       
-        # An optional textual description.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # The list of host patterns to match. They must be valid hostnames except that
-        # they may start with *. or *-. The * acts like a glob and will match any string
-        # of atoms (separated by .s and -s) to the left.
+        # The list of host patterns to match. They must be valid hostnames, except *
+        # will match any string of ([a-z0-9-.]*). In that case, * must be the first
+        # character and must be followed in the pattern by either - or ..
         # Corresponds to the JSON property `hosts`
         # @return [Array<String>]
         attr_accessor :hosts
       
-        # The name of the PathMatcher to match the path portion of the URL, if the this
+        # The name of the PathMatcher to use to match the path portion of the URL if the
         # hostRule matches the URL's host portion.
         # Corresponds to the JSON property `pathMatcher`
         # @return [String]
@@ -2312,7 +2424,7 @@ module Google
       end
       
       # An HttpHealthCheck resource. This resource defines a template for how
-      # individual VMs should be checked for health, via HTTP.
+      # individual instances should be checked for health, via HTTP.
       class HttpHealthCheck
         include Google::Apis::Core::Hashable
       
@@ -2321,18 +2433,18 @@ module Google
         # @return [Fixnum]
         attr_accessor :check_interval_sec
       
-        # Creation timestamp in RFC3339 text format (output only).
+        # [Output Only] Creation timestamp in RFC3339 text format.
         # Corresponds to the JSON property `creationTimestamp`
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # A so-far unhealthy VM will be marked healthy after this many consecutive
+        # A so-far unhealthy instance will be marked healthy after this many consecutive
         # successes. The default value is 2.
         # Corresponds to the JSON property `healthyThreshold`
         # @return [Fixnum]
@@ -2345,7 +2457,8 @@ module Google
         # @return [String]
         attr_accessor :host
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -2355,8 +2468,12 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # Name of the resource; provided by the client when the resource is created. The
-        # name must be 1-63 characters long, and comply with RFC1035.
+        # Name of the resource. Provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
@@ -2371,7 +2488,7 @@ module Google
         # @return [String]
         attr_accessor :request_path
       
-        # Server defined URL for the resource (output only).
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2383,7 +2500,7 @@ module Google
         # @return [Fixnum]
         attr_accessor :timeout_sec
       
-        # A so-far healthy VM will be marked unhealthy after this many consecutive
+        # A so-far healthy instance will be marked unhealthy after this many consecutive
         # failures. The default value is 2.
         # Corresponds to the JSON property `unhealthyThreshold`
         # @return [Fixnum]
@@ -2415,7 +2532,7 @@ module Google
       class HttpHealthCheckList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] Unique identifier for the resource. Defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -2430,12 +2547,169 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
+        # Corresponds to the JSON property `selfLink`
+        # @return [String]
+        attr_accessor :self_link
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @id = args[:id] unless args[:id].nil?
+          @items = args[:items] unless args[:items].nil?
+          @kind = args[:kind] unless args[:kind].nil?
+          @next_page_token = args[:next_page_token] unless args[:next_page_token].nil?
+          @self_link = args[:self_link] unless args[:self_link].nil?
+        end
+      end
+      
+      # An HttpsHealthCheck resource. This resource defines a template for how
+      # individual instances should be checked for health, via HTTPS.
+      class HttpsHealthCheck
+        include Google::Apis::Core::Hashable
+      
+        # How often (in seconds) to send a health check. The default value is 5 seconds.
+        # Corresponds to the JSON property `checkIntervalSec`
+        # @return [Fixnum]
+        attr_accessor :check_interval_sec
+      
+        # [Output Only] Creation timestamp in RFC3339 text format.
+        # Corresponds to the JSON property `creationTimestamp`
+        # @return [String]
+        attr_accessor :creation_timestamp
+      
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
+        # Corresponds to the JSON property `description`
+        # @return [String]
+        attr_accessor :description
+      
+        # A so-far unhealthy instance will be marked healthy after this many consecutive
+        # successes. The default value is 2.
+        # Corresponds to the JSON property `healthyThreshold`
+        # @return [Fixnum]
+        attr_accessor :healthy_threshold
+      
+        # The value of the host header in the HTTPS health check request. If left empty (
+        # default value), the public IP on behalf of which this health check is
+        # performed will be used.
+        # Corresponds to the JSON property `host`
+        # @return [String]
+        attr_accessor :host
+      
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
+        # Corresponds to the JSON property `id`
+        # @return [String]
+        attr_accessor :id
+      
+        # Type of the resource.
+        # Corresponds to the JSON property `kind`
+        # @return [String]
+        attr_accessor :kind
+      
+        # Name of the resource. Provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # The TCP port number for the HTTPS health check request. The default value is
+        # 443.
+        # Corresponds to the JSON property `port`
+        # @return [Fixnum]
+        attr_accessor :port
+      
+        # The request path of the HTTPS health check request. The default value is "/".
+        # Corresponds to the JSON property `requestPath`
+        # @return [String]
+        attr_accessor :request_path
+      
+        # [Output Only] Server-defined URL for the resource.
+        # Corresponds to the JSON property `selfLink`
+        # @return [String]
+        attr_accessor :self_link
+      
+        # How long (in seconds) to wait before claiming failure. The default value is 5
+        # seconds. It is invalid for timeoutSec to have a greater value than
+        # checkIntervalSec.
+        # Corresponds to the JSON property `timeoutSec`
+        # @return [Fixnum]
+        attr_accessor :timeout_sec
+      
+        # A so-far healthy instance will be marked unhealthy after this many consecutive
+        # failures. The default value is 2.
+        # Corresponds to the JSON property `unhealthyThreshold`
+        # @return [Fixnum]
+        attr_accessor :unhealthy_threshold
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @check_interval_sec = args[:check_interval_sec] unless args[:check_interval_sec].nil?
+          @creation_timestamp = args[:creation_timestamp] unless args[:creation_timestamp].nil?
+          @description = args[:description] unless args[:description].nil?
+          @healthy_threshold = args[:healthy_threshold] unless args[:healthy_threshold].nil?
+          @host = args[:host] unless args[:host].nil?
+          @id = args[:id] unless args[:id].nil?
+          @kind = args[:kind] unless args[:kind].nil?
+          @name = args[:name] unless args[:name].nil?
+          @port = args[:port] unless args[:port].nil?
+          @request_path = args[:request_path] unless args[:request_path].nil?
+          @self_link = args[:self_link] unless args[:self_link].nil?
+          @timeout_sec = args[:timeout_sec] unless args[:timeout_sec].nil?
+          @unhealthy_threshold = args[:unhealthy_threshold] unless args[:unhealthy_threshold].nil?
+        end
+      end
+      
+      # Contains a list of HttpsHealthCheck resources.
+      class HttpsHealthCheckList
+        include Google::Apis::Core::Hashable
+      
+        # [Output Only] Unique identifier for the resource; defined by the server.
+        # Corresponds to the JSON property `id`
+        # @return [String]
+        attr_accessor :id
+      
+        # A list of HttpsHealthCheck resources.
+        # Corresponds to the JSON property `items`
+        # @return [Array<Google::Apis::ComputeV1::HttpsHealthCheck>]
+        attr_accessor :items
+      
+        # Type of resource.
+        # Corresponds to the JSON property `kind`
+        # @return [String]
+        attr_accessor :kind
+      
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2473,8 +2747,8 @@ module Google
         # @return [Google::Apis::ComputeV1::DeprecationStatus]
         attr_accessor :deprecated
       
-        # Textual description of the resource; provided by the client when the resource
-        # is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -2484,7 +2758,8 @@ module Google
         # @return [String]
         attr_accessor :disk_size_gb
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -2514,7 +2789,7 @@ module Google
         # @return [Google::Apis::ComputeV1::Image::RawDisk]
         attr_accessor :raw_disk
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2614,12 +2889,13 @@ module Google
       class ImageList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # A list of Image resources.
+        # [Output Only] A list of Image resources.
         # Corresponds to the JSON property `items`
         # @return [Array<Google::Apis::ComputeV1::Image>]
         attr_accessor :items
@@ -2629,12 +2905,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2687,7 +2967,8 @@ module Google
         # @return [Array<Google::Apis::ComputeV1::AttachedDisk>]
         attr_accessor :disks
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] Unique identifier for the resource. This identifier is defined
+        # by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -2697,10 +2978,19 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # Full or partial URL of the machine type resource to use for this instance.
-        # This is provided by the client when the instance is created. For example, the
-        # following is a valid partial url:
-        # zones/zone/machineTypes/machine-type
+        # Full or partial URL of the machine type resource to use for this instance, in
+        # the format: zones/zone/machineTypes/ machine-type. This is provided by the
+        # client when the instance is created. For example, the following is a valid
+        # partial url to a predefined machine type:
+        # zones/us-central1-f/machineTypes/n1-standard-1
+        # To create a custom machine type, provide a URL to a machine type in the
+        # following format, where CPUS is 1 or an even number up to 32 (2, 4, 6, ... 24,
+        # etc), and MEMORY is the total memory for this instance. Memory must be a
+        # multiple of 256 MB and must be supplied in MB (e.g. 5 GB of memory is 5120 MB):
+        # zones/zone/machineTypes/custom-CPUS-MEMORY
+        # For example: zones/us-central1-f/machineTypes/custom-4-5120
+        # For a full list of restrictions, read the Specifications for custom machine
+        # types.
         # Corresponds to the JSON property `machineType`
         # @return [String]
         attr_accessor :machine_type
@@ -2797,7 +3087,8 @@ module Google
       class InstanceAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -2847,19 +3138,20 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional text description for the instance group.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] The fingerprint of the named ports information. The system uses
-        # this fingerprint to detect conflicts when multiple users change the named
-        # ports information concurrently.
+        # [Output Only] The fingerprint of the named ports. The system uses this
+        # fingerprint to detect conflicts when multiple users change the named ports
+        # concurrently.
         # Corresponds to the JSON property `fingerprint`
         # @return [String]
         attr_accessor :fingerprint
       
-        # [Output Only] A unique identifier for this instance group. The server defines
+        # [Output Only] A unique identifier for this resource type. The server generates
         # this identifier.
         # Corresponds to the JSON property `id`
         # @return [String]
@@ -2877,21 +3169,22 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # Assigns a name to a port number. For example: `name: ?http?, port: 80` This
-        # allows the system to reference ports by the assigned name instead of a port
-        # number. Named ports can also contain multiple ports. For example: [`name: ?
-        # http?, port: 80`,`name: "http", port: 8080`] Named ports apply to all
-        # instances in this instance group.
+        # Assigns a name to a port number. For example: `name: "http", port: 80`
+        # This allows the system to reference ports by the assigned name instead of a
+        # port number. Named ports can also contain multiple ports. For example: [`name:
+        # "http", port: 80`,`name: "http", port: 8080`]
+        # Named ports apply to all instances in this instance group.
         # Corresponds to the JSON property `namedPorts`
         # @return [Array<Google::Apis::ComputeV1::NamedPort>]
         attr_accessor :named_ports
       
-        # The URL of the network to which all instances in the instance group belong.
+        # [Output Only] The URL of the network to which all instances in the instance
+        # group belong.
         # Corresponds to the JSON property `network`
         # @return [String]
         attr_accessor :network
       
-        # [Output Only] The URL for this instance group. The server defines this URL.
+        # [Output Only] The URL for this instance group. The server generates this URL.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2901,7 +3194,7 @@ module Google
         # @return [Fixnum]
         attr_accessor :size
       
-        # The URL of the zone where the instance group is located.
+        # [Output Only] The URL of the zone where the instance group is located.
         # Corresponds to the JSON property `zone`
         # @return [String]
         attr_accessor :zone
@@ -2931,7 +3224,7 @@ module Google
         include Google::Apis::Core::Hashable
       
         # [Output Only] A unique identifier for this aggregated list of instance groups.
-        # The server defines this identifier.
+        # The server generates this identifier.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -2947,13 +3240,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token that is used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] A unique identifier for this aggregated list of instance groups.
-        # The server defines this identifier.
+        # [Output Only] The URL for this resource type. The server generates this URL.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -2977,12 +3273,12 @@ module Google
         include Google::Apis::Core::Hashable
       
         # [Output Only] A unique identifier for this list of instance groups. The server
-        # defines this identifier.
+        # generates this identifier.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # A list of InstanceGroup resources.
+        # A list of instance groups.
         # Corresponds to the JSON property `items`
         # @return [Array<Google::Apis::ComputeV1::InstanceGroup>]
         attr_accessor :items
@@ -2993,12 +3289,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token that is used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] The URL for this instance group. The server defines this URL.
+        # [Output Only] The URL for this resource type. The server generates this URL.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -3018,15 +3318,9 @@ module Google
       end
       
       # InstanceGroupManagers
-      # Next available tag: 17
+      # Next available tag: 20
       class InstanceGroupManager
         include Google::Apis::Core::Hashable
-      
-        # The autohealing policy for this managed instance group. You can specify only
-        # one value.
-        # Corresponds to the JSON property `autoHealingPolicies`
-        # @return [Array<Google::Apis::ComputeV1::InstanceGroupManagerAutoHealingPolicy>]
-        attr_accessor :auto_healing_policies
       
         # The base instance name to use for instances in this group. The value must be 1-
         # 58 characters long. Instances are named by appending a hyphen and a random
@@ -3043,30 +3337,31 @@ module Google
         attr_accessor :creation_timestamp
       
         # [Output Only] The list of instance actions and the number of instances in this
-        # managed instance group that are scheduled for those actions.
+        # managed instance group that are scheduled for each of those actions.
         # Corresponds to the JSON property `currentActions`
         # @return [Google::Apis::ComputeV1::InstanceGroupManagerActionsSummary]
         attr_accessor :current_actions
       
-        # An optional text description for the managed instance group.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] The fingerprint of the target pools information, which is a hash
-        # of the contents. This field is used for optimistic locking when updating the
-        # target pool entries.
+        # [Output Only] The fingerprint of the target pools information. You can use
+        # this optional field for optimistic locking when you update the target pool
+        # entries.
         # Corresponds to the JSON property `fingerprint`
         # @return [String]
         attr_accessor :fingerprint
       
-        # [Output Only] A unique identifier for this managed instance group. The server
-        # defines this identifier.
+        # [Output Only] A unique identifier for this resource type. The server generates
+        # this identifier.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # [Output Only] The URL of the InstanceGroup resource.
+        # [Output Only] The URL of the Instance Group resource.
         # Corresponds to the JSON property `instanceGroup`
         # @return [String]
         attr_accessor :instance_group
@@ -3090,14 +3385,21 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # [Output Only] Server defined URL for this managed instance group.
+        # Named ports configured for the Instance Groups complementary to this Instance
+        # Group Manager.
+        # Corresponds to the JSON property `namedPorts`
+        # @return [Array<Google::Apis::ComputeV1::NamedPort>]
+        attr_accessor :named_ports
+      
+        # [Output Only] The URL for this managed instance group. The server defines this
+        # URL.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
       
-        # The URLs of all TargetPool resources to which new instances in the
-        # instanceGroup field are added. Updating the target pool values does not affect
-        # existing instances.
+        # The URLs for all TargetPool resources to which instances in the instanceGroup
+        # field are added. The target pools automatically apply to all of the instances
+        # in the managed instance group.
         # Corresponds to the JSON property `targetPools`
         # @return [Array<String>]
         attr_accessor :target_pools
@@ -3109,7 +3411,7 @@ module Google
         # @return [Fixnum]
         attr_accessor :target_size
       
-        # The URL of the zone where the managed instance group is located.
+        # The name of the zone where the managed instance group is located.
         # Corresponds to the JSON property `zone`
         # @return [String]
         attr_accessor :zone
@@ -3120,7 +3422,6 @@ module Google
       
         # Update properties of this object
         def update!(**args)
-          @auto_healing_policies = args[:auto_healing_policies] unless args[:auto_healing_policies].nil?
           @base_instance_name = args[:base_instance_name] unless args[:base_instance_name].nil?
           @creation_timestamp = args[:creation_timestamp] unless args[:creation_timestamp].nil?
           @current_actions = args[:current_actions] unless args[:current_actions].nil?
@@ -3131,6 +3432,7 @@ module Google
           @instance_template = args[:instance_template] unless args[:instance_template].nil?
           @kind = args[:kind] unless args[:kind].nil?
           @name = args[:name] unless args[:name].nil?
+          @named_ports = args[:named_ports] unless args[:named_ports].nil?
           @self_link = args[:self_link] unless args[:self_link].nil?
           @target_pools = args[:target_pools] unless args[:target_pools].nil?
           @target_size = args[:target_size] unless args[:target_size].nil?
@@ -3142,9 +3444,9 @@ module Google
       class InstanceGroupManagerActionsSummary
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Total number of instances in the managed instance group that are
-        # scheduled to be abandoned. Abandoning an instance removes it from the managed
-        # instance group without deleting it.
+        # [Output Only] The total number of instances in the managed instance group that
+        # are scheduled to be abandoned. Abandoning an instance removes it from the
+        # managed instance group without deleting it.
         # Corresponds to the JSON property `abandoning`
         # @return [Fixnum]
         attr_accessor :abandoning
@@ -3161,8 +3463,8 @@ module Google
         # @return [Fixnum]
         attr_accessor :deleting
       
-        # [Output Only] The number of instances in the managed instance group that
-        # currently have no scheduled actions.
+        # [Output Only] The number of instances in the managed instance group that are
+        # running and have no scheduled actions.
         # Corresponds to the JSON property `none`
         # @return [Fixnum]
         attr_accessor :none
@@ -3209,30 +3511,33 @@ module Google
         include Google::Apis::Core::Hashable
       
         # [Output Only] A unique identifier for this aggregated list of managed instance
-        # groups. The server defines this identifier.
+        # groups. The server generates this identifier.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # A map of filtered managed instance group lists.
+        # [Output Only] A map of filtered managed instance group lists.
         # Corresponds to the JSON property `items`
         # @return [Hash<String,Google::Apis::ComputeV1::InstanceGroupManagersScopedList>]
         attr_accessor :items
       
-        # [Output Only] Type of the resource. Always compute#
+        # [Output Only] The resource type, which is always compute#
         # instanceGroupManagerAggregatedList for an aggregated list of managed instance
         # groups.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token that is used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] The URL for this aggregated list of managed instance groups. The
-        # server defines this URL.
+        # [Output Only] The URL for this resource type. The server generates this URL.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -3251,63 +3556,37 @@ module Google
         end
       end
       
-      # 
-      class InstanceGroupManagerAutoHealingPolicy
-        include Google::Apis::Core::Hashable
-      
-        # The action to perform when an instance becomes unhealthy. Possible values are
-        # RECREATE or RESTART. RECREATE replaces an unhealthy instance with a new
-        # instance that is based on the instance template for this managed instance
-        # group. RESTART performs a soft restart on an instance. If the instance cannot
-        # restart softly, the instance performs a hard restart.
-        # Corresponds to the JSON property `actionType`
-        # @return [String]
-        attr_accessor :action_type
-      
-        # The URL for the HealthCheck that signals autohealing.
-        # Corresponds to the JSON property `healthCheck`
-        # @return [String]
-        attr_accessor :health_check
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @action_type = args[:action_type] unless args[:action_type].nil?
-          @health_check = args[:health_check] unless args[:health_check].nil?
-        end
-      end
-      
-      # [Output Only] A list of InstanceGroupManager resources.
+      # [Output Only] A list of managed instance groups.
       class InstanceGroupManagerList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] A unique identifier for this managed instance group. The server
-        # defines this identifier.
+        # [Output Only] A unique identifier for this resource type. The server generates
+        # this identifier.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # [Output Only] A list of managed instance group resources.
+        # [Output Only] A list of managed instance groups.
         # Corresponds to the JSON property `items`
         # @return [Array<Google::Apis::ComputeV1::InstanceGroupManager>]
         attr_accessor :items
       
-        # [Output Only] Type of the resource. Always compute#instanceGroupManagerList
-        # for a list of managed instance group resources.
+        # [Output Only] The resource type, which is always compute#
+        # instanceGroupManagerList for a list of managed instance groups.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token that is used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] The URL for this managed instance group. The server defines this
-        # URL.
+        # [Output Only] The URL for this resource type. The server generates this URL.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -3330,7 +3609,7 @@ module Google
       class InstanceGroupManagersAbandonInstancesRequest
         include Google::Apis::Core::Hashable
       
-        # The names of instances to abandon from the managed instance group.
+        # The URL for one or more instances to abandon from the managed instance group.
         # Corresponds to the JSON property `instances`
         # @return [Array<String>]
         attr_accessor :instances
@@ -3349,7 +3628,8 @@ module Google
       class InstanceGroupManagersDeleteInstancesRequest
         include Google::Apis::Core::Hashable
       
-        # The names of one or more instances to delete.
+        # The list of instances to delete from this managed instance group. Specify one
+        # or more instance URLs.
         # Corresponds to the JSON property `instances`
         # @return [Array<String>]
         attr_accessor :instances
@@ -3368,7 +3648,7 @@ module Google
       class InstanceGroupManagersListManagedInstancesResponse
         include Google::Apis::Core::Hashable
       
-        # List of managed instances. If empty - all instances are listed.
+        # [Output Only] The list of instances in the managed instance group.
         # Corresponds to the JSON property `managedInstances`
         # @return [Array<Google::Apis::ComputeV1::ManagedInstance>]
         attr_accessor :managed_instances
@@ -3387,7 +3667,7 @@ module Google
       class InstanceGroupManagersRecreateInstancesRequest
         include Google::Apis::Core::Hashable
       
-        # The names of one or more instances to recreate.
+        # The URL for one or more instances to recreate.
         # Corresponds to the JSON property `instances`
         # @return [Array<String>]
         attr_accessor :instances
@@ -3433,17 +3713,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::InstanceGroupManagersScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -3463,7 +3745,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -3511,18 +3799,19 @@ module Google
       class InstanceGroupManagersSetTargetPoolsRequest
         include Google::Apis::Core::Hashable
       
-        # The fingerprint of the target pools information, which is a hash of the
-        # contents. This field is used for optimistic locking when updating the target
-        # pool entries.
+        # The fingerprint of the target pools information. Use this optional property to
+        # prevent conflicts when multiple users change the target pools settings
+        # concurrently. Obtain the fingerprint with the instanceGroupManagers.get method.
+        # Then, include the fingerprint in your request to ensure that you do not
+        # overwrite changes that were applied from another concurrent request.
         # Corresponds to the JSON property `fingerprint`
         # @return [String]
         attr_accessor :fingerprint
       
         # The list of target pool URLs that instances in this managed instance group
-        # belong to. When the managed instance group creates new instances, the group
-        # automatically adds those instances to the target pools that are specified in
-        # this parameter. Changing the value of this parameter does not change the
-        # target pools of existing instances in this managed instance group.
+        # belong to. The managed instance group applies these target pools to all of the
+        # instances in the group. Existing instances and new instances in the group all
+        # receive these target pool settings.
         # Corresponds to the JSON property `targetPools`
         # @return [Array<String>]
         attr_accessor :target_pools
@@ -3542,7 +3831,7 @@ module Google
       class InstanceGroupsAddInstancesRequest
         include Google::Apis::Core::Hashable
       
-        # The instances to add to the instance group.
+        # The list of instances to add to the instance group.
         # Corresponds to the JSON property `instances`
         # @return [Array<Google::Apis::ComputeV1::InstanceReference>]
         attr_accessor :instances
@@ -3562,13 +3851,13 @@ module Google
         include Google::Apis::Core::Hashable
       
         # [Output Only] A unique identifier for this list of instance groups. The server
-        # defines this identifier.
+        # generates this identifier.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # A list of InstanceWithNamedPorts resources, which contains all named ports for
-        # the given instance.
+        # [Output Only] A list of instances and any named ports that are assigned to
+        # those instances.
         # Corresponds to the JSON property `items`
         # @return [Array<Google::Apis::ComputeV1::InstanceWithNamedPorts>]
         attr_accessor :items
@@ -3579,12 +3868,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token that is used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] The URL for this list of instance groups. The server defines
+        # [Output Only] The URL for this list of instance groups. The server generates
         # this URL.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
@@ -3615,15 +3908,6 @@ module Google
         # @return [String]
         attr_accessor :instance_state
       
-        # A filter for the named ports that are associated with instances in the
-        # instance group. If you specify this parameter, the generated list includes
-        # only instances that are associated with the specified named ports. If you do
-        # not specify this parameter, the generated list includes all instances
-        # regardless of their named ports.
-        # Corresponds to the JSON property `portName`
-        # @return [String]
-        attr_accessor :port_name
-      
         def initialize(**args)
            update!(**args)
         end
@@ -3631,7 +3915,6 @@ module Google
         # Update properties of this object
         def update!(**args)
           @instance_state = args[:instance_state] unless args[:instance_state].nil?
-          @port_name = args[:port_name] unless args[:port_name].nil?
         end
       end
       
@@ -3639,7 +3922,7 @@ module Google
       class InstanceGroupsRemoveInstancesRequest
         include Google::Apis::Core::Hashable
       
-        # The instances to remove from the instance group.
+        # The list of instances to remove from the instance group.
         # Corresponds to the JSON property `instances`
         # @return [Array<Google::Apis::ComputeV1::InstanceReference>]
         attr_accessor :instances
@@ -3684,17 +3967,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::InstanceGroupsScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -3714,7 +3999,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -3741,9 +4032,12 @@ module Google
       class InstanceGroupsSetNamedPortsRequest
         include Google::Apis::Core::Hashable
       
-        # The fingerprint of the named ports information, which is a hash of the
-        # contents. Use this field for optimistic locking when you update the named
-        # ports entries.
+        # The fingerprint of the named ports information for this instance group. Use
+        # this optional property to prevent conflicts when multiple users change the
+        # named ports settings concurrently. Obtain the fingerprint with the
+        # instanceGroups.get method. Then, include the fingerprint in your request to
+        # ensure that you do not overwrite changes that were applied from another
+        # concurrent request.
         # Corresponds to the JSON property `fingerprint`
         # @return [String]
         attr_accessor :fingerprint
@@ -3768,7 +4062,8 @@ module Google
       class InstanceList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -3846,11 +4141,12 @@ module Google
       class InstanceProperties
         include Google::Apis::Core::Hashable
       
-        # A boolean that specifies if instances created from this template can send
-        # packets with source IP addresses other than their own or receive packets with
-        # destination IP addresses other than their own. If you use these instances as
-        # an IP gateway or as the next-hop in a Route resource, specify true. Otherwise,
-        # specify false.
+        # Enables instances created based on this template to send packets with source
+        # IP addresses other than their own and receive packets with destination IP
+        # addresses other than their own. If these instances will be used as an IP
+        # gateway or it will be set as the next-hop in a Route resource, specify true.
+        # If unsure, leave this set to false. See the canIpForward documentation for
+        # more information.
         # Corresponds to the JSON property `canIpForward`
         # @return [Boolean]
         attr_accessor :can_ip_forward
@@ -3878,12 +4174,7 @@ module Google
         # @return [Google::Apis::ComputeV1::Metadata]
         attr_accessor :metadata
       
-        # An array of network access configurations for this interface. This specifies
-        # how this interface is configured to interact with other network services, such
-        # as connecting to the internet. Currently, ONE_TO_ONE_NAT is the only supported
-        # access configuration. If you do not specify any access configurations, the
-        # instances that are created from this template will have no external internet
-        # access.
+        # An array of network access configurations for this interface.
         # Corresponds to the JSON property `networkInterfaces`
         # @return [Array<Google::Apis::ComputeV1::NetworkInterface>]
         attr_accessor :network_interfaces
@@ -3927,7 +4218,7 @@ module Google
       class InstanceReference
         include Google::Apis::Core::Hashable
       
-        # 
+        # The URL for a specific instance.
         # Corresponds to the JSON property `instance`
         # @return [String]
         attr_accessor :instance
@@ -3952,7 +4243,8 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional text description for the instance template.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -3969,8 +4261,12 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # The name of the instance template. The name must be 1-63 characters long, and
-        # comply with RFC1035.
+        # Name of the resource; provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
@@ -4011,7 +4307,7 @@ module Google
         # @return [String]
         attr_accessor :id
       
-        # A list of InstanceTemplate resources.
+        # [Output Only] list of InstanceTemplate resources.
         # Corresponds to the JSON property `items`
         # @return [Array<Google::Apis::ComputeV1::InstanceTemplate>]
         attr_accessor :items
@@ -4022,7 +4318,11 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token that is used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
@@ -4051,17 +4351,17 @@ module Google
       class InstanceWithNamedPorts
         include Google::Apis::Core::Hashable
       
-        # The URL of the instance.
+        # [Output Only] The URL of the instance.
         # Corresponds to the JSON property `instance`
         # @return [String]
         attr_accessor :instance
       
-        # The named ports that belong to this instance group.
+        # [Output Only] The named ports that belong to this instance group.
         # Corresponds to the JSON property `namedPorts`
         # @return [Array<Google::Apis::ComputeV1::NamedPort>]
         attr_accessor :named_ports
       
-        # The status of the instance.
+        # [Output Only] The status of the instance.
         # Corresponds to the JSON property `status`
         # @return [String]
         attr_accessor :status
@@ -4108,17 +4408,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::InstancesScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -4138,7 +4440,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -4165,8 +4473,8 @@ module Google
       class License
         include Google::Apis::Core::Hashable
       
-        # If true, the customer will be charged license fee for running software that
-        # contains this license on an instance.
+        # [Output Only] If true, the customer will be charged license fee for running
+        # software that contains this license on an instance.
         # Corresponds to the JSON property `chargesUseFee`
         # @return [Boolean]
         attr_accessor :charges_use_fee
@@ -4177,13 +4485,13 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # Name of the resource. The name must be 1-63 characters long, and comply with
-        # RCF1035.
+        # [Output Only] Name of the resource. The name is 1-63 characters long and
+        # complies with RFC1035.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -4220,12 +4528,13 @@ module Google
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] The tumber of CPUs exposed to the instance.
+        # [Output Only] The number of virtual CPUs that are available to the instance.
         # Corresponds to the JSON property `guestCpus`
         # @return [Fixnum]
         attr_accessor :guest_cpus
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -4236,7 +4545,8 @@ module Google
         # @return [Fixnum]
         attr_accessor :image_space_gb
       
-        # Type of the resource.
+        # [Output Only] The type of the resource. Always compute#machineType for machine
+        # types.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
@@ -4267,7 +4577,7 @@ module Google
         # @return [Array<Google::Apis::ComputeV1::MachineType::ScratchDisk>]
         attr_accessor :scratch_disks
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -4324,7 +4634,8 @@ module Google
       class MachineTypeAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -4340,12 +4651,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -4368,7 +4683,8 @@ module Google
       class MachineTypeList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -4384,12 +4700,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -4438,17 +4758,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::MachineTypesScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -4468,7 +4790,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -4495,28 +4823,44 @@ module Google
       class ManagedInstance
         include Google::Apis::Core::Hashable
       
-        # The current action that the managed instance group has scheduled for the
-        # instance.
+        # [Output Only] The current action that the managed instance group has scheduled
+        # for the instance. Possible values:
+        # - NONE The instance is running, and the managed instance group does not have
+        # any scheduled actions for this instance.
+        # - CREATING The managed instance group is creating this instance.
+        # - RECREATING The managed instance group is recreating this instance.
+        # - DELETING The managed instance group is permanently deleting this instance.
+        # - ABANDONING The managed instance group is abandoning this instance. The
+        # instance will be removed from the instance group and from any target pools
+        # that are associated with this group.
+        # - RESTARTING The managed instance group is restarting the instance.
+        # - REFRESHING The managed instance group is applying configuration changes to
+        # the instance without stopping it. For example, the group can update the target
+        # pool list for an instance without stopping that instance.
         # Corresponds to the JSON property `currentAction`
         # @return [String]
         attr_accessor :current_action
       
-        # The unique identifier for this resource (empty when instance does not exist).
+        # [Output only] The unique identifier for this resource. This field is empty
+        # when instance does not exist.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # The URL of the instance (set even though instance does not exist yet).
+        # [Output Only] The URL of the instance. The URL can exist even if the instance
+        # has not yet been created.
         # Corresponds to the JSON property `instance`
         # @return [String]
         attr_accessor :instance
       
-        # The status of the instance (empty when instance does not exist).
+        # [Output Only] The status of the instance. This field is empty when the
+        # instance does not exist.
         # Corresponds to the JSON property `instanceStatus`
         # @return [String]
         attr_accessor :instance_status
       
-        # Information about the last attempt to create or delete the instance.
+        # [Output Only] Information about the last attempt to create or delete the
+        # instance.
         # Corresponds to the JSON property `lastAttempt`
         # @return [Google::Apis::ComputeV1::ManagedInstanceLastAttempt]
         attr_accessor :last_attempt
@@ -4539,7 +4883,8 @@ module Google
       class ManagedInstanceLastAttempt
         include Google::Apis::Core::Hashable
       
-        # Encountered errors during the last attempt to create or delete the instance.
+        # [Output Only] Encountered errors during the last attempt to create or delete
+        # the instance.
         # Corresponds to the JSON property `errors`
         # @return [Google::Apis::ComputeV1::ManagedInstanceLastAttempt::Errors]
         attr_accessor :errors
@@ -4553,7 +4898,8 @@ module Google
           @errors = args[:errors] unless args[:errors].nil?
         end
         
-        # Encountered errors during the last attempt to create or delete the instance.
+        # [Output Only] Encountered errors during the last attempt to create or delete
+        # the instance.
         class Errors
           include Google::Apis::Core::Hashable
         
@@ -4672,11 +5018,12 @@ module Google
         end
       end
       
-      # The named port information. For example: .
+      # The named port. For example: .
       class NamedPort
         include Google::Apis::Core::Hashable
       
-        # The name for this NamedPort.
+        # The name for this named port. The name must be 1-63 characters long, and
+        # comply with RFC1035.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
@@ -4713,8 +5060,8 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource. Provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -4726,7 +5073,8 @@ module Google
         # @return [String]
         attr_accessor :gateway_i_pv4
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -4746,7 +5094,7 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -4822,7 +5170,8 @@ module Google
       class NetworkList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -4838,12 +5187,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource .
+        # [Output Only] Server-defined URL for this resource .
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -4866,8 +5219,7 @@ module Google
       class Operation
         include Google::Apis::Core::Hashable
       
-        # [Output Only] An optional identifier specified by the client when the mutation
-        # was initiated. Must be unique for all Operation resources in the project.
+        # [Output Only] A unique client ID generated by the server.
         # Corresponds to the JSON property `clientOperationId`
         # @return [String]
         attr_accessor :client_operation_id
@@ -4877,8 +5229,14 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # [Output Only] The time that this operation was completed. This is in RFC3339
-        # text format.
+        # [Output Only] A textual description of the operation, which is set when the
+        # operation is created.
+        # Corresponds to the JSON property `description`
+        # @return [String]
+        attr_accessor :description
+      
+        # [Output Only] The time that this operation was completed. This value is in
+        # RFC3339 text format.
         # Corresponds to the JSON property `endTime`
         # @return [String]
         attr_accessor :end_time
@@ -4896,23 +5254,24 @@ module Google
         attr_accessor :http_error_message
       
         # [Output Only] If the operation fails, this field contains the HTTP error
-        # message that was returned, such as 404.
+        # message that was returned. For example, a 404 means the resource was not found.
         # Corresponds to the JSON property `httpErrorStatusCode`
         # @return [Fixnum]
         attr_accessor :http_error_status_code
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # [Output Only] The time that this operation was requested. This is in RFC3339
-        # text format.
+        # [Output Only] The time that this operation was requested. This value is in
+        # RFC3339 text format.
         # Corresponds to the JSON property `insertTime`
         # @return [String]
         attr_accessor :insert_time
       
-        # [Output Only] Type of the resource. Always compute#Operation for Operation
+        # [Output Only] Type of the resource. Always compute#operation for Operation
         # resources.
         # Corresponds to the JSON property `kind`
         # @return [String]
@@ -4923,7 +5282,7 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # [Output Only] Type of the operation, such as insert, update, and delete.
+        # [Output Only] The type of operation, which can be insert, update, or delete.
         # Corresponds to the JSON property `operationType`
         # @return [String]
         attr_accessor :operation_type
@@ -4942,19 +5301,19 @@ module Google
         # @return [String]
         attr_accessor :region
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
       
-        # [Output Only] The time that this operation was started by the server. This is
-        # in RFC3339 text format.
+        # [Output Only] The time that this operation was started by the server. This
+        # value is in RFC3339 text format.
         # Corresponds to the JSON property `startTime`
         # @return [String]
         attr_accessor :start_time
       
-        # [Output Only] Status of the operation. Can be one of the following: PENDING,
-        # RUNNING, or DONE.
+        # [Output Only] The status of the operation, which can be one of the following:
+        # PENDING, RUNNING, or DONE.
         # Corresponds to the JSON property `status`
         # @return [String]
         attr_accessor :status
@@ -4965,13 +5324,13 @@ module Google
         # @return [String]
         attr_accessor :status_message
       
-        # [Output Only] Unique target ID which identifies a particular incarnation of
-        # the target.
+        # [Output Only] The unique target ID, which identifies a specific incarnation of
+        # the target resource.
         # Corresponds to the JSON property `targetId`
         # @return [String]
         attr_accessor :target_id
       
-        # [Output Only] URL of the resource the operation is mutating.
+        # [Output Only] The URL of the resource that the operation is modifying.
         # Corresponds to the JSON property `targetLink`
         # @return [String]
         attr_accessor :target_link
@@ -5000,6 +5359,7 @@ module Google
         def update!(**args)
           @client_operation_id = args[:client_operation_id] unless args[:client_operation_id].nil?
           @creation_timestamp = args[:creation_timestamp] unless args[:creation_timestamp].nil?
+          @description = args[:description] unless args[:description].nil?
           @end_time = args[:end_time] unless args[:end_time].nil?
           @error = args[:error] unless args[:error].nil?
           @http_error_message = args[:http_error_message] unless args[:http_error_message].nil?
@@ -5078,17 +5438,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::Operation::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -5108,7 +5470,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -5135,7 +5503,8 @@ module Google
       class OperationAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -5151,12 +5520,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -5179,7 +5552,8 @@ module Google
       class OperationList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -5195,12 +5569,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncate.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -5249,17 +5627,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::OperationsScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -5279,7 +5659,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -5303,18 +5689,19 @@ module Google
       end
       
       # A matcher for the path portion of the URL. The BackendService from the longest-
-      # matched rule will serve the URL. If no rule was matched, the default_service
+      # matched rule will serve the URL. If no rule was matched, the default service
       # will be used.
       class PathMatcher
         include Google::Apis::Core::Hashable
       
-        # The URL to the BackendService resource. This will be used if none of the '
-        # pathRules' defined by this PathMatcher is met by the URL's path portion.
+        # The URL to the BackendService resource. This will be used if none of the
+        # pathRules defined by this PathMatcher is met by the URL's path portion.
         # Corresponds to the JSON property `defaultService`
         # @return [String]
         attr_accessor :default_service
       
-        # An optional textual description of the resource.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -5391,7 +5778,14 @@ module Google
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # Restricted features enabled for use on this project.
+        # Corresponds to the JSON property `enabledFeatures`
+        # @return [Array<String>]
+        attr_accessor :enabled_features
+      
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server. This is not the project ID, and is just a unique ID
+        # used by Compute Engine to identify resources.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -5401,7 +5795,8 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # Name of the resource.
+        # The project ID. For example: my-example-project. Use the project ID to make
+        # requests to Compute Engine.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
@@ -5411,7 +5806,7 @@ module Google
         # @return [Array<Google::Apis::ComputeV1::Quota>]
         attr_accessor :quotas
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -5431,6 +5826,7 @@ module Google
           @common_instance_metadata = args[:common_instance_metadata] unless args[:common_instance_metadata].nil?
           @creation_timestamp = args[:creation_timestamp] unless args[:creation_timestamp].nil?
           @description = args[:description] unless args[:description].nil?
+          @enabled_features = args[:enabled_features] unless args[:enabled_features].nil?
           @id = args[:id] unless args[:id].nil?
           @kind = args[:kind] unless args[:kind].nil?
           @name = args[:name] unless args[:name].nil?
@@ -5490,7 +5886,8 @@ module Google
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server .
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -5510,7 +5907,7 @@ module Google
         # @return [Array<Google::Apis::ComputeV1::Quota>]
         attr_accessor :quotas
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -5549,7 +5946,8 @@ module Google
       class RegionList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -5564,12 +5962,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -5608,17 +6010,18 @@ module Google
       end
       
       # The route resource. A Route is a rule that specifies how certain packets
-      # should be handled by the virtual network. Routes are associated with VMs by
-      # tag and the set of Routes for a particular VM is called its routing table. For
-      # each packet leaving a VM, the system searches that VM's routing table for a
-      # single best matching Route. Routes match packets by destination IP address,
-      # preferring smaller or more specific ranges over larger ones. If there is a tie,
-      # the system selects the Route with the smallest priority value. If there is
-      # still a tie, it uses the layer three and four packet headers to select just
-      # one of the remaining matching Routes. The packet is then forwarded as
-      # specified by the nextHop field of the winning Route -- either to another VM
-      # destination, a VM gateway or a GCE operated gateway. Packets that do not match
-      # any Route in the sending VM's routing table are dropped.
+      # should be handled by the virtual network. Routes are associated with instances
+      # by tag and the set of Routes for a particular instance is called its routing
+      # table. For each packet leaving a instance, the system searches that instance's
+      # routing table for a single best matching Route. Routes match packets by
+      # destination IP address, preferring smaller or more specific ranges over larger
+      # ones. If there is a tie, the system selects the Route with the smallest
+      # priority value. If there is still a tie, it uses the layer three and four
+      # packet headers to select just one of the remaining matching Routes. The packet
+      # is then forwarded as specified by the nextHop field of the winning Route --
+      # either to another instance destination, a instance gateway or a Google Compute
+      # Engien-operated gateway. Packets that do not match any Route in the sending
+      # instance's routing table are dropped.
       class Route
         include Google::Apis::Core::Hashable
       
@@ -5627,8 +6030,8 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource. Provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -5638,7 +6041,8 @@ module Google
         # @return [String]
         attr_accessor :dest_range
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -5743,17 +6147,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::Route::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -5773,7 +6179,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -5815,12 +6227,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -5844,19 +6260,23 @@ module Google
         include Google::Apis::Core::Hashable
       
         # Specifies whether the instance should be automatically restarted if it is
-        # terminated by Compute Engine (not terminated by a user).
+        # terminated by Compute Engine (not terminated by a user). You can only set the
+        # automatic restart option for standard instances. Preemptible instances cannot
+        # be automatically restarted.
         # Corresponds to the JSON property `automaticRestart`
         # @return [Boolean]
         attr_accessor :automatic_restart
         alias_method :automatic_restart?, :automatic_restart
       
-        # Defines the maintenance behavior for this instance. The default behavior is
-        # MIGRATE. For more information, see Setting maintenance behavior.
+        # Defines the maintenance behavior for this instance. For standard instances,
+        # the default behavior is MIGRATE. For preemptible instances, the default and
+        # only possible behavior is TERMINATE. For more information, see Setting
+        # maintenance behavior.
         # Corresponds to the JSON property `onHostMaintenance`
         # @return [String]
         attr_accessor :on_host_maintenance
       
-        # Whether the Instance is preemptible.
+        # Whether the instance is preemptible.
         # Corresponds to the JSON property `preemptible`
         # @return [Boolean]
         attr_accessor :preemptible
@@ -5940,8 +6360,8 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -5951,7 +6371,8 @@ module Google
         # @return [String]
         attr_accessor :disk_size_gb
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6038,7 +6459,8 @@ module Google
       class SnapshotList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6053,12 +6475,137 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
+        # Corresponds to the JSON property `selfLink`
+        # @return [String]
+        attr_accessor :self_link
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @id = args[:id] unless args[:id].nil?
+          @items = args[:items] unless args[:items].nil?
+          @kind = args[:kind] unless args[:kind].nil?
+          @next_page_token = args[:next_page_token] unless args[:next_page_token].nil?
+          @self_link = args[:self_link] unless args[:self_link].nil?
+        end
+      end
+      
+      # An SslCertificate resource. This resource provides a mechanism to upload an
+      # SSL key and certificate to global HTTPS loadbalancer to serve secure
+      # connections.
+      class SslCertificate
+        include Google::Apis::Core::Hashable
+      
+        # A local certificate file. The certificate must be in PEM format. The
+        # certificate chain must be no greater than 5 certs long. The chain must include
+        # at least one intermediate cert.
+        # Corresponds to the JSON property `certificate`
+        # @return [String]
+        attr_accessor :certificate
+      
+        # [Output Only] Creation timestamp in RFC3339 text format.
+        # Corresponds to the JSON property `creationTimestamp`
+        # @return [String]
+        attr_accessor :creation_timestamp
+      
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
+        # Corresponds to the JSON property `description`
+        # @return [String]
+        attr_accessor :description
+      
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
+        # Corresponds to the JSON property `id`
+        # @return [String]
+        attr_accessor :id
+      
+        # [Output Only] Type of the resource. Always compute#sslCertificate for SSL
+        # certificates.
+        # Corresponds to the JSON property `kind`
+        # @return [String]
+        attr_accessor :kind
+      
+        # Name of the resource. Provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # A write-only private key in PEM format. Only insert RPCs will include this
+        # field.
+        # Corresponds to the JSON property `privateKey`
+        # @return [String]
+        attr_accessor :private_key
+      
+        # [Output only] Server-defined URL for the resource.
+        # Corresponds to the JSON property `selfLink`
+        # @return [String]
+        attr_accessor :self_link
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @certificate = args[:certificate] unless args[:certificate].nil?
+          @creation_timestamp = args[:creation_timestamp] unless args[:creation_timestamp].nil?
+          @description = args[:description] unless args[:description].nil?
+          @id = args[:id] unless args[:id].nil?
+          @kind = args[:kind] unless args[:kind].nil?
+          @name = args[:name] unless args[:name].nil?
+          @private_key = args[:private_key] unless args[:private_key].nil?
+          @self_link = args[:self_link] unless args[:self_link].nil?
+        end
+      end
+      
+      # Contains a list of SslCertificate resources.
+      class SslCertificateList
+        include Google::Apis::Core::Hashable
+      
+        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # Corresponds to the JSON property `id`
+        # @return [String]
+        attr_accessor :id
+      
+        # A list of SslCertificate resources.
+        # Corresponds to the JSON property `items`
+        # @return [Array<Google::Apis::ComputeV1::SslCertificate>]
+        attr_accessor :items
+      
+        # Type of resource.
+        # Corresponds to the JSON property `kind`
+        # @return [String]
+        attr_accessor :kind
+      
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -6117,19 +6664,20 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # [Output Only] Type of resource. Always compute#Operation for Operation
-        # resources.
+        # [Output Only] Type of resource. Always compute#targetHttpProxy for target HTTP
+        # proxies.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
@@ -6144,7 +6692,7 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -6175,7 +6723,8 @@ module Google
       class TargetHttpProxyList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6191,7 +6740,11 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
@@ -6215,23 +6768,163 @@ module Google
         end
       end
       
-      # A TargetInstance resource. This resource defines an endpoint VM that
-      # terminates traffic of certain protocols.
-      class TargetInstance
+      # 
+      class TargetHttpsProxiesSetSslCertificatesRequest
         include Google::Apis::Core::Hashable
       
-        # Creation timestamp in RFC3339 text format (output only).
+        # New set of URLs to SslCertificate resources to associate with this
+        # TargetHttpProxy. Currently exactly one ssl certificate must be specified.
+        # Corresponds to the JSON property `sslCertificates`
+        # @return [Array<String>]
+        attr_accessor :ssl_certificates
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @ssl_certificates = args[:ssl_certificates] unless args[:ssl_certificates].nil?
+        end
+      end
+      
+      # A TargetHttpsProxy resource. This resource defines an HTTPS proxy.
+      class TargetHttpsProxy
+        include Google::Apis::Core::Hashable
+      
+        # [Output Only] Creation timestamp in RFC3339 text format.
         # Corresponds to the JSON property `creationTimestamp`
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
+        # Corresponds to the JSON property `id`
+        # @return [String]
+        attr_accessor :id
+      
+        # [Output Only] Type of the resource. Always compute#targetHttpsProxy for target
+        # HTTPS proxies.
+        # Corresponds to the JSON property `kind`
+        # @return [String]
+        attr_accessor :kind
+      
+        # Name of the resource. Provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
+        # Corresponds to the JSON property `name`
+        # @return [String]
+        attr_accessor :name
+      
+        # [Output Only] Server-defined URL for the resource.
+        # Corresponds to the JSON property `selfLink`
+        # @return [String]
+        attr_accessor :self_link
+      
+        # URLs to SslCertificate resources that are used to authenticate connections to
+        # Backends. Currently exactly one SSL certificate must be specified.
+        # Corresponds to the JSON property `sslCertificates`
+        # @return [Array<String>]
+        attr_accessor :ssl_certificates
+      
+        # URL to the UrlMap resource that defines the mapping from URL to the
+        # BackendService.
+        # Corresponds to the JSON property `urlMap`
+        # @return [String]
+        attr_accessor :url_map
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @creation_timestamp = args[:creation_timestamp] unless args[:creation_timestamp].nil?
+          @description = args[:description] unless args[:description].nil?
+          @id = args[:id] unless args[:id].nil?
+          @kind = args[:kind] unless args[:kind].nil?
+          @name = args[:name] unless args[:name].nil?
+          @self_link = args[:self_link] unless args[:self_link].nil?
+          @ssl_certificates = args[:ssl_certificates] unless args[:ssl_certificates].nil?
+          @url_map = args[:url_map] unless args[:url_map].nil?
+        end
+      end
+      
+      # Contains a list of TargetHttpsProxy resources.
+      class TargetHttpsProxyList
+        include Google::Apis::Core::Hashable
+      
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
+        # Corresponds to the JSON property `id`
+        # @return [String]
+        attr_accessor :id
+      
+        # A list of TargetHttpsProxy resources.
+        # Corresponds to the JSON property `items`
+        # @return [Array<Google::Apis::ComputeV1::TargetHttpsProxy>]
+        attr_accessor :items
+      
+        # Type of resource.
+        # Corresponds to the JSON property `kind`
+        # @return [String]
+        attr_accessor :kind
+      
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
+        # Corresponds to the JSON property `nextPageToken`
+        # @return [String]
+        attr_accessor :next_page_token
+      
+        # [Output Only] Server-defined URL for this resource.
+        # Corresponds to the JSON property `selfLink`
+        # @return [String]
+        attr_accessor :self_link
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @id = args[:id] unless args[:id].nil?
+          @items = args[:items] unless args[:items].nil?
+          @kind = args[:kind] unless args[:kind].nil?
+          @next_page_token = args[:next_page_token] unless args[:next_page_token].nil?
+          @self_link = args[:self_link] unless args[:self_link].nil?
+        end
+      end
+      
+      # A TargetInstance resource. This resource defines an endpoint instance that
+      # terminates traffic of certain protocols.
+      class TargetInstance
+        include Google::Apis::Core::Hashable
+      
+        # [Output Only] Creation timestamp in RFC3339 text format.
+        # Corresponds to the JSON property `creationTimestamp`
+        # @return [String]
+        attr_accessor :creation_timestamp
+      
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
+        # Corresponds to the JSON property `description`
+        # @return [String]
+        attr_accessor :description
+      
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6241,29 +6934,34 @@ module Google
         # @return [String]
         attr_accessor :instance
       
-        # Type of the resource.
+        # [Output Only] The type of the resource. Always compute#targetInstance for
+        # target instances.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
       
-        # Name of the resource; provided by the client when the resource is created. The
-        # name must be 1-63 characters long, and comply with RFC1035.
+        # Name of the resource. Provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
       
-        # NAT option controlling how IPs are NAT'ed to the VM. Currently only NO_NAT (
-        # default value) is supported.
+        # NAT option controlling how IPs are NAT'ed to the instance. Currently only
+        # NO_NAT (default value) is supported.
         # Corresponds to the JSON property `natPolicy`
         # @return [String]
         attr_accessor :nat_policy
       
-        # Server defined URL for the resource (output only).
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
       
-        # URL of the zone where the target instance resides (output only).
+        # [Output Only] URL of the zone where the target instance resides.
         # Corresponds to the JSON property `zone`
         # @return [String]
         attr_accessor :zone
@@ -6290,7 +6988,7 @@ module Google
       class TargetInstanceAggregatedList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] Unique identifier for the resource; defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6305,12 +7003,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -6333,7 +7035,8 @@ module Google
       class TargetInstanceList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6348,12 +7051,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -6402,17 +7109,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::TargetInstancesScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -6432,7 +7141,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -6455,33 +7170,34 @@ module Google
         end
       end
       
-      # A TargetPool resource. This resource defines a pool of VMs, associated
+      # A TargetPool resource. This resource defines a pool of instances, associated
       # HttpHealthCheck resources, and the fallback TargetPool.
       class TargetPool
         include Google::Apis::Core::Hashable
       
         # This field is applicable only when the containing target pool is serving a
-        # forwarding rule as the primary pool, and its 'failoverRatio' field is properly
+        # forwarding rule as the primary pool, and its failoverRatio field is properly
         # set to a value between [0, 1].
-        # 'backupPool' and 'failoverRatio' together define the fallback behavior of the
-        # primary target pool: if the ratio of the healthy VMs in the primary pool is at
-        # or below 'failoverRatio', traffic arriving at the load-balanced IP will be
+        # backupPool and failoverRatio together define the fallback behavior of the
+        # primary target pool: if the ratio of the healthy instances in the primary pool
+        # is at or below failoverRatio, traffic arriving at the load-balanced IP will be
         # directed to the backup pool.
-        # In case where 'failoverRatio' and 'backupPool' are not set, or all the VMs in
-        # the backup pool are unhealthy, the traffic will be directed back to the
+        # In case where failoverRatio and backupPool are not set, or all the instances
+        # in the backup pool are unhealthy, the traffic will be directed back to the
         # primary pool in the "force" mode, where traffic will be spread to the healthy
-        # VMs with the best effort, or to all VMs when no VM is healthy.
+        # instances with the best effort, or to all instances when no instance is
+        # healthy.
         # Corresponds to the JSON property `backupPool`
         # @return [String]
         attr_accessor :backup_pool
       
-        # Creation timestamp in RFC3339 text format (output only).
+        # [Output Only] Creation timestamp in RFC3339 text format.
         # Corresponds to the JSON property `creationTimestamp`
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource; provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -6489,63 +7205,68 @@ module Google
         # This field is applicable only when the containing target pool is serving a
         # forwarding rule as the primary pool (i.e., not as a backup pool to some other
         # target pool). The value of the field must be in [0, 1].
-        # If set, 'backupPool' must also be set. They together define the fallback
-        # behavior of the primary target pool: if the ratio of the healthy VMs in the
-        # primary pool is at or below this number, traffic arriving at the load-balanced
-        # IP will be directed to the backup pool.
-        # In case where 'failoverRatio' is not set or all the VMs in the backup pool are
-        # unhealthy, the traffic will be directed back to the primary pool in the "force"
-        # mode, where traffic will be spread to the healthy VMs with the best effort,
-        # or to all VMs when no VM is healthy.
+        # If set, backupPool must also be set. They together define the fallback
+        # behavior of the primary target pool: if the ratio of the healthy instances in
+        # the primary pool is at or below this number, traffic arriving at the load-
+        # balanced IP will be directed to the backup pool.
+        # In case where failoverRatio is not set or all the instances in the backup pool
+        # are unhealthy, the traffic will be directed back to the primary pool in the "
+        # force" mode, where traffic will be spread to the healthy instances with the
+        # best effort, or to all instances when no instance is healthy.
         # Corresponds to the JSON property `failoverRatio`
         # @return [Float]
         attr_accessor :failover_ratio
       
-        # A list of URLs to the HttpHealthCheck resource. A member VM in this pool is
-        # considered healthy if and only if all specified health checks pass. An empty
-        # list means all member VMs will be considered healthy at all times.
+        # A list of URLs to the HttpHealthCheck resource. A member instance in this pool
+        # is considered healthy if and only if all specified health checks pass. An
+        # empty list means all member instances will be considered healthy at all times.
         # Corresponds to the JSON property `healthChecks`
         # @return [Array<String>]
         attr_accessor :health_checks
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # A list of resource URLs to the member VMs serving this pool. They must live in
-        # zones contained in the same region as this pool.
+        # A list of resource URLs to the member virtual machines serving this pool. They
+        # must live in zones contained in the same region as this pool.
         # Corresponds to the JSON property `instances`
         # @return [Array<String>]
         attr_accessor :instances
       
-        # Type of the resource.
+        # [Output Only] Type of the resource. Always compute#targetPool for target pools.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
       
-        # Name of the resource; provided by the client when the resource is created. The
-        # name must be 1-63 characters long, and comply with RFC1035.
+        # Name of the resource. Provided by the client when the resource is created. The
+        # name must be 1-63 characters long, and comply with RFC1035. Specifically, the
+        # name must be 1-63 characters long and match the regular expression [a-z]([-a-
+        # z0-9]*[a-z0-9])? which means the first character must be a lowercase letter,
+        # and all following characters must be a dash, lowercase letter, or digit,
+        # except the last character, which cannot be a dash.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
       
-        # URL of the region where the target pool resides (output only).
+        # [Output Only] URL of the region where the target pool resides.
         # Corresponds to the JSON property `region`
         # @return [String]
         attr_accessor :region
       
-        # Server defined URL for the resource (output only).
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
       
-        # Sesssion affinity option, must be one of the following values: 'NONE':
-        # Connections from the same client IP may go to any VM in the pool; 'CLIENT_IP':
-        # Connections from the same client IP will go to the same VM in the pool while
-        # that VM remains healthy. 'CLIENT_IP_PROTO': Connections from the same client
-        # IP with the same IP protocol will go to the same VM in the pool while that VM
-        # remains healthy.
+        # Sesssion affinity option, must be one of the following values:
+        # NONE: Connections from the same client IP may go to any instance in the pool.
+        # CLIENT_IP: Connections from the same client IP will go to the same instance in
+        # the pool while that instance remains healthy.
+        # CLIENT_IP_PROTO: Connections from the same client IP with the same IP protocol
+        # will go to the same instance in the pool while that instance remains healthy.
         # Corresponds to the JSON property `sessionAffinity`
         # @return [String]
         attr_accessor :session_affinity
@@ -6575,7 +7296,7 @@ module Google
       class TargetPoolAggregatedList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] Unique identifier for the resource. Defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6590,12 +7311,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -6643,7 +7368,7 @@ module Google
       class TargetPoolList
         include Google::Apis::Core::Hashable
       
-        # Unique identifier for the resource; defined by the server (output only).
+        # [Output Only] Unique identifier for the resource. Defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6658,12 +7383,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # A token used to continue a truncated list request (output only).
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -6788,17 +7517,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::TargetPoolsScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -6818,7 +7549,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -6869,8 +7606,8 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource. Provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -6882,7 +7619,8 @@ module Google
         # @return [Array<String>]
         attr_accessor :forwarding_rules
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6954,7 +7692,8 @@ module Google
       class TargetVpnGatewayAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -6970,7 +7709,11 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
@@ -6998,7 +7741,8 @@ module Google
       class TargetVpnGatewayList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -7014,7 +7758,11 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
@@ -7068,17 +7816,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::TargetVpnGatewaysScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -7098,7 +7848,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -7174,8 +7930,8 @@ module Google
         # @return [String]
         attr_accessor :default_service
       
-        # An optional textual description of the resource. Provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -7193,12 +7949,13 @@ module Google
         # @return [Array<Google::Apis::ComputeV1::HostRule>]
         attr_accessor :host_rules
       
-        # [Output Only] Unique identifier for the resource. Set by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # Type of the resource.
+        # [Output Only] Type of the resource. Always compute#urlMaps for url maps.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
@@ -7218,7 +7975,7 @@ module Google
         # @return [Array<Google::Apis::ComputeV1::PathMatcher>]
         attr_accessor :path_matchers
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -7268,12 +8025,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -7471,8 +8232,8 @@ module Google
         # @return [String]
         attr_accessor :creation_timestamp
       
-        # An optional textual description of the resource. Provided by the client when
-        # the resource is created.
+        # An optional description of this resource. Provide this property when you
+        # create the resource.
         # Corresponds to the JSON property `description`
         # @return [String]
         attr_accessor :description
@@ -7482,7 +8243,8 @@ module Google
         # @return [String]
         attr_accessor :detailed_status
       
-        # [Output Only] Unique identifier for the resource. Defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -7518,7 +8280,7 @@ module Google
         # @return [String]
         attr_accessor :region
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -7572,7 +8334,8 @@ module Google
       class VpnTunnelAggregatedList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -7587,12 +8350,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # [Output Only] Server defined URL for this resource.
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -7615,7 +8382,8 @@ module Google
       class VpnTunnelList
         include Google::Apis::Core::Hashable
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
@@ -7630,7 +8398,11 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
@@ -7684,17 +8456,19 @@ module Google
         class Warning
           include Google::Apis::Core::Hashable
         
-          # [Output Only] The warning type identifier for this warning.
+          # [Output Only] A warning code, if applicable. For example, Compute Engine
+          # returns NO_RESULTS_ON_PAGE if there are no results in the response.
           # Corresponds to the JSON property `code`
           # @return [String]
           attr_accessor :code
         
-          # [Output Only] Metadata for this warning in key: value format.
+          # [Output Only] Metadata about this warning in key: value format. For example:
+          # "data": [ ` "key": "scope", "value": "zones/us-east1-d" `
           # Corresponds to the JSON property `data`
           # @return [Array<Google::Apis::ComputeV1::VpnTunnelsScopedList::Warning::Datum>]
           attr_accessor :data
         
-          # [Output Only] Optional human-readable details for this warning.
+          # [Output Only] A human-readable description of the warning code.
           # Corresponds to the JSON property `message`
           # @return [String]
           attr_accessor :message
@@ -7714,7 +8488,13 @@ module Google
           class Datum
             include Google::Apis::Core::Hashable
           
-            # [Output Only] A key for the warning data.
+            # [Output Only] A key that provides more detail on the warning being returned.
+            # For example, for warnings where there are no results in a list request for a
+            # particular zone, this key might be scope and the key value might be the zone
+            # name. Other examples might be a key indicating a deprecated resource, and a
+            # suggested replacement, or a warning about invalid network settings (for
+            # example, if an instance attempts to perform IP forwarding but is not enabled
+            # for IP forwarding).
             # Corresponds to the JSON property `key`
             # @return [String]
             attr_accessor :key
@@ -7756,12 +8536,13 @@ module Google
         # @return [String]
         attr_accessor :description
       
-        # [Output Only] Unique identifier for the resource; defined by the server.
+        # [Output Only] The unique identifier for the resource. This identifier is
+        # defined by the server.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # [Output Only] Type of the resource. Always kind#zone for zones.
+        # [Output Only] Type of the resource. Always compute#zone for zones.
         # Corresponds to the JSON property `kind`
         # @return [String]
         attr_accessor :kind
@@ -7783,7 +8564,7 @@ module Google
         # @return [String]
         attr_accessor :region
       
-        # [Output Only] Server defined URL for the resource.
+        # [Output Only] Server-defined URL for the resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link
@@ -7868,12 +8649,16 @@ module Google
         # @return [String]
         attr_accessor :kind
       
-        # [Output Only] A token used to continue a truncated list request.
+        # [Output Only] This token allows you to get the next page of results for list
+        # requests. If the number of results is larger than maxResults, use the
+        # nextPageToken as a value for the query parameter pageToken in the next list
+        # request. Subsequent list requests will have their own nextPageToken to
+        # continue paging through the results.
         # Corresponds to the JSON property `nextPageToken`
         # @return [String]
         attr_accessor :next_page_token
       
-        # Server defined URL for this resource (output only).
+        # [Output Only] Server-defined URL for this resource.
         # Corresponds to the JSON property `selfLink`
         # @return [String]
         attr_accessor :self_link

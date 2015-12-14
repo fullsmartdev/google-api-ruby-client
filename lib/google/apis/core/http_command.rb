@@ -19,6 +19,7 @@ require 'google/apis/errors'
 require 'retriable'
 require 'hurley'
 require 'hurley/addressable'
+require 'hurley_patches'
 require 'google/apis/core/logging'
 require 'pp'
 
@@ -143,7 +144,7 @@ module Google
         def prepare!
           header.update(options.header) if options && options.header
           self.url = url.expand(params) if url.is_a?(Addressable::Template)
-          url.query_values = query.merge(url.query_values || {})
+          url.query_values = query
         end
 
         # Release any resources used by this command
