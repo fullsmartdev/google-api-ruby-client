@@ -120,10 +120,11 @@ module Google
         # @return [String]
         attr_accessor :click_id
       
-        # For offline conversions, this is an ID that advertisers are required to
-        # provide. Advertisers can specify any ID that is meaningful to them. For online
-        # conversions, DS copies the dsConversionId or floodlightOrderId into this
-        # property depending on the advertiser's Floodlight instructions.
+        # For offline conversions, this is an ID provided by advertisers. Advertisers
+        # can use this property to specify an ID that is meaningful to them. If an
+        # advertiser doesn't specify a conversionId, DoubleClick Search generates one.
+        # For online conversions, DS copies the dsConversionId or floodlightOrderId into
+        # this property depending on the advertiser's Floodlight instructions.
         # Corresponds to the JSON property `conversionId`
         # @return [String]
         attr_accessor :conversion_id
@@ -531,19 +532,10 @@ module Google
         attr_accessor :header_text
       
         # The platform that is used to provide data for the custom dimension. Acceptable
-        # values are "floodlight".
+        # values are "Floodlight".
         # Corresponds to the JSON property `platformSource`
         # @return [String]
         attr_accessor :platform_source
-      
-        # Returns metrics only for a specific type of product activity. Accepted values
-        # are:
-        # - "sold": returns metrics only for products that were sold
-        # - "advertised": returns metrics only for products that were advertised in a
-        # Shopping campaign, and that might or might not have been sold
-        # Corresponds to the JSON property `productReportPerspective`
-        # @return [String]
-        attr_accessor :product_report_perspective
       
         # Name of a saved column to include in the report. The report must be scoped at
         # advertiser or lower, and this saved column must already be created in the
@@ -572,7 +564,6 @@ module Google
           @group_by_column = args[:group_by_column] unless args[:group_by_column].nil?
           @header_text = args[:header_text] unless args[:header_text].nil?
           @platform_source = args[:platform_source] unless args[:platform_source].nil?
-          @product_report_perspective = args[:product_report_perspective] unless args[:product_report_perspective].nil?
           @saved_column_name = args[:saved_column_name] unless args[:saved_column_name].nil?
           @start_date = args[:start_date] unless args[:start_date].nil?
         end

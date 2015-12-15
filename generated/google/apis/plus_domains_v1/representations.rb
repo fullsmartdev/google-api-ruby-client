@@ -32,23 +32,11 @@ module Google
         class Actor
           class Representation < Google::Apis::Core::JsonRepresentation; end
           
-          class ClientSpecificActorInfo
-            class Representation < Google::Apis::Core::JsonRepresentation; end
-            
-            class YoutubeActorInfo
-              class Representation < Google::Apis::Core::JsonRepresentation; end
-            end
-          end
-          
           class Image
             class Representation < Google::Apis::Core::JsonRepresentation; end
           end
           
           class Name
-            class Representation < Google::Apis::Core::JsonRepresentation; end
-          end
-          
-          class Verification
             class Representation < Google::Apis::Core::JsonRepresentation; end
           end
         end
@@ -59,19 +47,7 @@ module Google
           class Actor
             class Representation < Google::Apis::Core::JsonRepresentation; end
             
-            class ClientSpecificActorInfo
-              class Representation < Google::Apis::Core::JsonRepresentation; end
-              
-              class YoutubeActorInfo
-                class Representation < Google::Apis::Core::JsonRepresentation; end
-              end
-            end
-            
             class Image
-              class Representation < Google::Apis::Core::JsonRepresentation; end
-            end
-            
-            class Verification
               class Representation < Google::Apis::Core::JsonRepresentation; end
             end
           end
@@ -156,19 +132,7 @@ module Google
         class Actor
           class Representation < Google::Apis::Core::JsonRepresentation; end
           
-          class ClientSpecificActorInfo
-            class Representation < Google::Apis::Core::JsonRepresentation; end
-            
-            class YoutubeActorInfo
-              class Representation < Google::Apis::Core::JsonRepresentation; end
-            end
-          end
-          
           class Image
-            class Representation < Google::Apis::Core::JsonRepresentation; end
-          end
-          
-          class Verification
             class Representation < Google::Apis::Core::JsonRepresentation; end
           end
         end
@@ -316,8 +280,6 @@ module Google
         class Actor
           # @private
           class Representation < Google::Apis::Core::JsonRepresentation
-            property :client_specific_actor_info, as: 'clientSpecificActorInfo', class: Google::Apis::PlusDomainsV1::Activity::Actor::ClientSpecificActorInfo, decorator: Google::Apis::PlusDomainsV1::Activity::Actor::ClientSpecificActorInfo::Representation
-        
             property :display_name, as: 'displayName'
             property :id, as: 'id'
             property :image, as: 'image', class: Google::Apis::PlusDomainsV1::Activity::Actor::Image, decorator: Google::Apis::PlusDomainsV1::Activity::Actor::Image::Representation
@@ -325,23 +287,6 @@ module Google
             property :name, as: 'name', class: Google::Apis::PlusDomainsV1::Activity::Actor::Name, decorator: Google::Apis::PlusDomainsV1::Activity::Actor::Name::Representation
         
             property :url, as: 'url'
-            property :verification, as: 'verification', class: Google::Apis::PlusDomainsV1::Activity::Actor::Verification, decorator: Google::Apis::PlusDomainsV1::Activity::Actor::Verification::Representation
-        
-          end
-          
-          class ClientSpecificActorInfo
-            # @private
-            class Representation < Google::Apis::Core::JsonRepresentation
-              property :youtube_actor_info, as: 'youtubeActorInfo', class: Google::Apis::PlusDomainsV1::Activity::Actor::ClientSpecificActorInfo::YoutubeActorInfo, decorator: Google::Apis::PlusDomainsV1::Activity::Actor::ClientSpecificActorInfo::YoutubeActorInfo::Representation
-          
-            end
-            
-            class YoutubeActorInfo
-              # @private
-              class Representation < Google::Apis::Core::JsonRepresentation
-                property :channel_id, as: 'channelId'
-              end
-            end
           end
           
           class Image
@@ -356,13 +301,6 @@ module Google
             class Representation < Google::Apis::Core::JsonRepresentation
               property :family_name, as: 'familyName'
               property :given_name, as: 'givenName'
-            end
-          end
-          
-          class Verification
-            # @private
-            class Representation < Google::Apis::Core::JsonRepresentation
-              property :ad_hoc_verified, as: 'adHocVerified'
             end
           end
         end
@@ -392,43 +330,17 @@ module Google
           class Actor
             # @private
             class Representation < Google::Apis::Core::JsonRepresentation
-              property :client_specific_actor_info, as: 'clientSpecificActorInfo', class: Google::Apis::PlusDomainsV1::Activity::Object::Actor::ClientSpecificActorInfo, decorator: Google::Apis::PlusDomainsV1::Activity::Object::Actor::ClientSpecificActorInfo::Representation
-          
               property :display_name, as: 'displayName'
               property :id, as: 'id'
               property :image, as: 'image', class: Google::Apis::PlusDomainsV1::Activity::Object::Actor::Image, decorator: Google::Apis::PlusDomainsV1::Activity::Object::Actor::Image::Representation
           
               property :url, as: 'url'
-              property :verification, as: 'verification', class: Google::Apis::PlusDomainsV1::Activity::Object::Actor::Verification, decorator: Google::Apis::PlusDomainsV1::Activity::Object::Actor::Verification::Representation
-          
-            end
-            
-            class ClientSpecificActorInfo
-              # @private
-              class Representation < Google::Apis::Core::JsonRepresentation
-                property :youtube_actor_info, as: 'youtubeActorInfo', class: Google::Apis::PlusDomainsV1::Activity::Object::Actor::ClientSpecificActorInfo::YoutubeActorInfo, decorator: Google::Apis::PlusDomainsV1::Activity::Object::Actor::ClientSpecificActorInfo::YoutubeActorInfo::Representation
-            
-              end
-              
-              class YoutubeActorInfo
-                # @private
-                class Representation < Google::Apis::Core::JsonRepresentation
-                  property :channel_id, as: 'channelId'
-                end
-              end
             end
             
             class Image
               # @private
               class Representation < Google::Apis::Core::JsonRepresentation
                 property :url, as: 'url'
-              end
-            end
-            
-            class Verification
-              # @private
-              class Representation < Google::Apis::Core::JsonRepresentation
-                property :ad_hoc_verified, as: 'adHocVerified'
               end
             end
           end
@@ -655,43 +567,17 @@ module Google
         class Actor
           # @private
           class Representation < Google::Apis::Core::JsonRepresentation
-            property :client_specific_actor_info, as: 'clientSpecificActorInfo', class: Google::Apis::PlusDomainsV1::Comment::Actor::ClientSpecificActorInfo, decorator: Google::Apis::PlusDomainsV1::Comment::Actor::ClientSpecificActorInfo::Representation
-        
             property :display_name, as: 'displayName'
             property :id, as: 'id'
             property :image, as: 'image', class: Google::Apis::PlusDomainsV1::Comment::Actor::Image, decorator: Google::Apis::PlusDomainsV1::Comment::Actor::Image::Representation
         
             property :url, as: 'url'
-            property :verification, as: 'verification', class: Google::Apis::PlusDomainsV1::Comment::Actor::Verification, decorator: Google::Apis::PlusDomainsV1::Comment::Actor::Verification::Representation
-        
-          end
-          
-          class ClientSpecificActorInfo
-            # @private
-            class Representation < Google::Apis::Core::JsonRepresentation
-              property :youtube_actor_info, as: 'youtubeActorInfo', class: Google::Apis::PlusDomainsV1::Comment::Actor::ClientSpecificActorInfo::YoutubeActorInfo, decorator: Google::Apis::PlusDomainsV1::Comment::Actor::ClientSpecificActorInfo::YoutubeActorInfo::Representation
-          
-            end
-            
-            class YoutubeActorInfo
-              # @private
-              class Representation < Google::Apis::Core::JsonRepresentation
-                property :channel_id, as: 'channelId'
-              end
-            end
           end
           
           class Image
             # @private
             class Representation < Google::Apis::Core::JsonRepresentation
               property :url, as: 'url'
-            end
-          end
-          
-          class Verification
-            # @private
-            class Representation < Google::Apis::Core::JsonRepresentation
-              property :ad_hoc_verified, as: 'adHocVerified'
             end
           end
         end

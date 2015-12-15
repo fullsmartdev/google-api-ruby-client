@@ -643,8 +643,8 @@ module Google
         # @return [String]
         attr_accessor :status
       
-        # Subscription period, specified in ISO 8601 format. Acceptable values are "P1W"
-        # (one week), "P1M" (one month) and "P1Y" (one year).
+        # The period of the subscription (if any), i.e. period at which payments must
+        # happen. Defined as ISO 8601 duration, i.e. "P1M" for 1 month period.
         # Corresponds to the JSON property `subscriptionPeriod`
         # @return [String]
         attr_accessor :subscription_period

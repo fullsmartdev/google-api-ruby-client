@@ -20,7 +20,7 @@ require 'google/apis/errors'
 module Google
   module Apis
     module DeploymentmanagerV2beta2
-      # Google Cloud Deployment Manager API
+      # Google Cloud Deployment Manager API V2
       #
       # The Deployment Manager API allows users to declaratively configure, deploy and
       #  run complex solutions on the Google Cloud Platform.
@@ -80,7 +80,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_deployment(project, deployment, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, '{project}/global/deployments/{deployment}', options)
+          path = '{project}/global/deployments/{deployment}'
+          command =  make_simple_command(:delete, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Operation::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::Operation
           command.params['project'] = project unless project.nil?
@@ -118,7 +119,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_deployment(project, deployment, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/deployments/{deployment}', options)
+          path = '{project}/global/deployments/{deployment}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Deployment::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::Deployment
           command.params['project'] = project unless project.nil?
@@ -156,7 +158,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_deployment(project, deployment_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/global/deployments', options)
+          path = '{project}/global/deployments'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::DeploymentmanagerV2beta2::Deployment::Representation
           command.request_object = deployment_object
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Operation::Representation
@@ -211,7 +214,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_deployments(project, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/deployments', options)
+          path = '{project}/global/deployments'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::ListDeploymentsResponse::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::ListDeploymentsResponse
           command.params['project'] = project unless project.nil?
@@ -259,7 +263,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_deployment(project, deployment, deployment_object = nil, create_policy: nil, delete_policy: nil, update_policy: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, '{project}/global/deployments/{deployment}', options)
+          path = '{project}/global/deployments/{deployment}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::DeploymentmanagerV2beta2::Deployment::Representation
           command.request_object = deployment_object
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Operation::Representation
@@ -310,7 +315,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_deployment(project, deployment, deployment_object = nil, create_policy: nil, delete_policy: nil, update_policy: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, '{project}/global/deployments/{deployment}', options)
+          path = '{project}/global/deployments/{deployment}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::DeploymentmanagerV2beta2::Deployment::Representation
           command.request_object = deployment_object
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Operation::Representation
@@ -355,7 +361,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_manifest(project, deployment, manifest, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/deployments/{deployment}/manifests/{manifest}', options)
+          path = '{project}/global/deployments/{deployment}/manifests/{manifest}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Manifest::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::Manifest
           command.params['project'] = project unless project.nil?
@@ -412,7 +419,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_manifests(project, deployment, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/deployments/{deployment}/manifests', options)
+          path = '{project}/global/deployments/{deployment}/manifests'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::ListManifestsResponse::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::ListManifestsResponse
           command.params['project'] = project unless project.nil?
@@ -453,7 +461,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_operation(project, operation, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/operations/{operation}', options)
+          path = '{project}/global/operations/{operation}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Operation::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::Operation
           command.params['project'] = project unless project.nil?
@@ -507,7 +516,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_operations(project, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/operations', options)
+          path = '{project}/global/operations'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::ListOperationsResponse::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::ListOperationsResponse
           command.params['project'] = project unless project.nil?
@@ -549,7 +559,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_resource(project, deployment, resource, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/deployments/{deployment}/resources/{resource}', options)
+          path = '{project}/global/deployments/{deployment}/resources/{resource}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::Resource::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::Resource
           command.params['project'] = project unless project.nil?
@@ -606,7 +617,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_resources(project, deployment, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/deployments/{deployment}/resources', options)
+          path = '{project}/global/deployments/{deployment}/resources'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::ListResourcesResponse::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::ListResourcesResponse
           command.params['project'] = project unless project.nil?
@@ -663,7 +675,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_types(project, filter: nil, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/global/types', options)
+          path = '{project}/global/types'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::DeploymentmanagerV2beta2::ListTypesResponse::Representation
           command.response_class = Google::Apis::DeploymentmanagerV2beta2::ListTypesResponse
           command.params['project'] = project unless project.nil?

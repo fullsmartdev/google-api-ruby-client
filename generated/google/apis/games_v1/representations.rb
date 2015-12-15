@@ -78,10 +78,6 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
-      class ApplicationVerifyResponse
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      end
-      
       class Category
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
@@ -575,14 +571,6 @@ module Google
         end
       end
       
-      class ApplicationVerifyResponse
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :kind, as: 'kind'
-          property :player_id, as: 'player_id'
-        end
-      end
-      
       class Category
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -924,8 +912,6 @@ module Google
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
           property :avatar_image_url, as: 'avatarImageUrl'
-          property :banner_url_landscape, as: 'bannerUrlLandscape'
-          property :banner_url_portrait, as: 'bannerUrlPortrait'
           property :display_name, as: 'displayName'
           property :experience_info, as: 'experienceInfo', class: Google::Apis::GamesV1::PlayerExperienceInfo, decorator: Google::Apis::GamesV1::PlayerExperienceInfo::Representation
       

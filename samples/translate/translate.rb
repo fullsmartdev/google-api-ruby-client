@@ -12,8 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-
+require 'tempfile'
+require 'googleauth'
 require 'google/apis/translate_v2'
+
+Google::Apis.logger.level = Logger::DEBUG
 
 Translate = Google::Apis::TranslateV2
 
@@ -22,3 +25,4 @@ translate.key = ARGV[0] || 'YOUR_API_KEY'
 
 result = translate.list_translations(source: 'en', target: 'es', q: 'Hello world!')
 puts result.translations.first.translated_text
+

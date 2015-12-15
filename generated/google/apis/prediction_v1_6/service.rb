@@ -81,7 +81,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def predict_hosted_model(project, hosted_model_name, input_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/hostedmodels/{hostedModelName}/predict', options)
+          path = '{project}/hostedmodels/{hostedModelName}/predict'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::PredictionV1_6::Input::Representation
           command.request_object = input_object
           command.response_representation = Google::Apis::PredictionV1_6::Output::Representation
@@ -121,7 +122,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def analyze_trained_model(project, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/trainedmodels/{id}/analyze', options)
+          path = '{project}/trainedmodels/{id}/analyze'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::PredictionV1_6::Analyze::Representation
           command.response_class = Google::Apis::PredictionV1_6::Analyze
           command.params['project'] = project unless project.nil?
@@ -159,7 +161,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_trained_model(project, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, '{project}/trainedmodels/{id}', options)
+          path = '{project}/trainedmodels/{id}'
+          command =  make_simple_command(:delete, path, options)
           command.params['project'] = project unless project.nil?
           command.params['id'] = id unless id.nil?
           command.query['fields'] = fields unless fields.nil?
@@ -195,7 +198,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_trained_model(project, id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/trainedmodels/{id}', options)
+          path = '{project}/trainedmodels/{id}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::PredictionV1_6::Insert2::Representation
           command.response_class = Google::Apis::PredictionV1_6::Insert2
           command.params['project'] = project unless project.nil?
@@ -232,7 +236,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_trained_model(project, insert_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/trainedmodels', options)
+          path = '{project}/trainedmodels'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::PredictionV1_6::Insert::Representation
           command.request_object = insert_object
           command.response_representation = Google::Apis::PredictionV1_6::Insert2::Representation
@@ -273,7 +278,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_trained_models(project, max_results: nil, page_token: nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, '{project}/trainedmodels/list', options)
+          path = '{project}/trainedmodels/list'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::PredictionV1_6::List::Representation
           command.response_class = Google::Apis::PredictionV1_6::List
           command.params['project'] = project unless project.nil?
@@ -313,7 +319,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def predict_trained_model(project, id, input_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, '{project}/trainedmodels/{id}/predict', options)
+          path = '{project}/trainedmodels/{id}/predict'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::PredictionV1_6::Input::Representation
           command.request_object = input_object
           command.response_representation = Google::Apis::PredictionV1_6::Output::Representation
@@ -354,7 +361,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_trained_model(project, id, update_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, '{project}/trainedmodels/{id}', options)
+          path = '{project}/trainedmodels/{id}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::PredictionV1_6::Update::Representation
           command.request_object = update_object
           command.response_representation = Google::Apis::PredictionV1_6::Insert2::Representation

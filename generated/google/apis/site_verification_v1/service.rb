@@ -77,7 +77,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def delete_web_resource(id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:delete, 'webResource/{id}', options)
+          path = 'webResource/{id}'
+          command =  make_simple_command(:delete, path, options)
           command.params['id'] = id unless id.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -110,7 +111,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def get_web_resource(id, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'webResource/{id}', options)
+          path = 'webResource/{id}'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource::Representation
           command.response_class = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource
           command.params['id'] = id unless id.nil?
@@ -143,8 +145,9 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_web_resource_token(get_web_resource_token_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'token', options)
+        def get_token_web_resource(get_web_resource_token_request_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
+          path = 'token'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::SiteVerificationV1::GetWebResourceTokenRequest::Representation
           command.request_object = get_web_resource_token_request_object
           command.response_representation = Google::Apis::SiteVerificationV1::GetWebResourceTokenResponse::Representation
@@ -181,7 +184,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def insert_web_resource(verification_method, site_verification_web_resource_resource_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'webResource', options)
+          path = 'webResource'
+          command =  make_simple_command(:post, path, options)
           command.request_representation = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource::Representation
           command.request_object = site_verification_web_resource_resource_object
           command.response_representation = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource::Representation
@@ -216,7 +220,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def list_web_resources(fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'webResource', options)
+          path = 'webResource'
+          command =  make_simple_command(:get, path, options)
           command.response_representation = Google::Apis::SiteVerificationV1::ListWebResourceResponse::Representation
           command.response_class = Google::Apis::SiteVerificationV1::ListWebResourceResponse
           command.query['fields'] = fields unless fields.nil?
@@ -252,7 +257,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def patch_web_resource(id, site_verification_web_resource_resource_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:patch, 'webResource/{id}', options)
+          path = 'webResource/{id}'
+          command =  make_simple_command(:patch, path, options)
           command.request_representation = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource::Representation
           command.request_object = site_verification_web_resource_resource_object
           command.response_representation = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource::Representation
@@ -290,7 +296,8 @@ module Google
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def update_web_resource(id, site_verification_web_resource_resource_object = nil, fields: nil, quota_user: nil, user_ip: nil, options: nil, &block)
-          command =  make_simple_command(:put, 'webResource/{id}', options)
+          path = 'webResource/{id}'
+          command =  make_simple_command(:put, path, options)
           command.request_representation = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource::Representation
           command.request_object = site_verification_web_resource_resource_object
           command.response_representation = Google::Apis::SiteVerificationV1::SiteVerificationWebResourceResource::Representation

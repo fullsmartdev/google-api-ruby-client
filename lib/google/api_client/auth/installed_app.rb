@@ -33,7 +33,6 @@ module Google
     #    drive = Drive::DriveService.new
     #    drive.authorization = authorization
     #
-    # @deprecated Use google-auth-library-ruby instead
     class InstalledAppFlow
 
       RESPONSE_BODY = <<-HTML

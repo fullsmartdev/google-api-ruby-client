@@ -62,10 +62,6 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
-      class GetProjectConfigResponse
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      end
-      
       class ResetPasswordRequest
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
@@ -83,10 +79,6 @@ module Google
       end
       
       class VerifyPasswordRequest
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      end
-      
-      class IdpConfig
         class Representation < Google::Apis::Core::JsonRepresentation; end
       end
       
@@ -139,7 +131,6 @@ module Google
           property :kind, as: 'kind'
           property :provider_id, as: 'providerId'
           property :registered, as: 'registered'
-          property :session_id, as: 'sessionId'
         end
       end
       
@@ -172,7 +163,6 @@ module Google
       class GetOobConfirmationCodeResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :email, as: 'email'
           property :kind, as: 'kind'
           property :oob_code, as: 'oobCode'
         end
@@ -227,17 +217,6 @@ module Google
         end
       end
       
-      class GetProjectConfigResponse
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :allow_password_user, as: 'allowPasswordUser'
-          property :api_key, as: 'apiKey'
-          collection :idp_config, as: 'idpConfig', class: Google::Apis::IdentitytoolkitV3::IdpConfig, decorator: Google::Apis::IdentitytoolkitV3::IdpConfig::Representation
-      
-          property :project_id, as: 'projectId'
-        end
-      end
-      
       class ResetPasswordRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
@@ -287,7 +266,6 @@ module Google
           property :post_body, as: 'postBody'
           property :request_uri, as: 'requestUri'
           property :return_refresh_token, as: 'returnRefreshToken'
-          property :session_id, as: 'sessionId'
         end
       end
       
@@ -299,16 +277,6 @@ module Google
           property :email, as: 'email'
           property :password, as: 'password'
           property :pending_id_token, as: 'pendingIdToken'
-        end
-      end
-      
-      class IdpConfig
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :client_id, as: 'clientId'
-          property :enabled, as: 'enabled'
-          property :experiment_percent, as: 'experimentPercent'
-          property :provider, as: 'provider'
         end
       end
       
@@ -341,7 +309,6 @@ module Google
           property :email, as: 'email'
           property :id_token, as: 'idToken'
           property :kind, as: 'kind'
-          property :new_email, as: 'newEmail'
           collection :provider_user_info, as: 'providerUserInfo', class: Google::Apis::IdentitytoolkitV3::SetAccountInfoResponse::ProviderUserInfo, decorator: Google::Apis::IdentitytoolkitV3::SetAccountInfoResponse::ProviderUserInfo::Representation
       
         end
@@ -424,7 +391,6 @@ module Google
           property :last_name, as: 'lastName'
           property :local_id, as: 'localId'
           property :need_confirmation, as: 'needConfirmation'
-          property :need_email, as: 'needEmail'
           property :nick_name, as: 'nickName'
           property :oauth_access_token, as: 'oauthAccessToken'
           property :oauth_authorization_code, as: 'oauthAuthorizationCode'
@@ -447,9 +413,6 @@ module Google
           property :id_token, as: 'idToken'
           property :kind, as: 'kind'
           property :local_id, as: 'localId'
-          property :oauth_access_token, as: 'oauthAccessToken'
-          property :oauth_authorization_code, as: 'oauthAuthorizationCode'
-          property :oauth_expire_in, as: 'oauthExpireIn'
           property :photo_url, as: 'photoUrl'
           property :registered, as: 'registered'
         end

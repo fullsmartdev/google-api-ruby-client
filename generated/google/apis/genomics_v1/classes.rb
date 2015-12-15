@@ -49,9 +49,7 @@ module Google
         end
       end
       
-      # A Dataset is a collection of genomic data. For more genomics resource
-      # definitions, see [Fundamentals of Google Genomics](https://cloud.google.com/
-      # genomics/fundamentals-of-google-genomics)
+      # A Dataset is a collection of genomic data.
       class Dataset
         include Google::Apis::Core::Hashable
       
@@ -118,177 +116,6 @@ module Google
         end
       end
       
-      # Request message for `SetIamPolicy` method.
-      class SetIamPolicyRequest
-        include Google::Apis::Core::Hashable
-      
-        # Defines an Identity and Access Management (IAM) policy. It is used to specify
-        # access control policies for Cloud Platform resources. A `Policy` consists of a
-        # list of `bindings`. A `Binding` binds a list of `members` to a `role`, where
-        # the members can be user accounts, Google groups, Google domains, and service
-        # accounts. A `role` is a named list of permissions defined by IAM. **Example** `
-        # "bindings": [ ` "role": "roles/owner", "members": [ "user:mike@example.com", "
-        # group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@
-        # appspot.gserviceaccount.com"] `, ` "role": "roles/viewer", "members": ["user:
-        # sean@example.com"] ` ] ` For a description of IAM and its features, see the [
-        # IAM developer's guide](https://cloud.google.com/iam).
-        # Corresponds to the JSON property `policy`
-        # @return [Google::Apis::GenomicsV1::Policy]
-        attr_accessor :policy
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @policy = args[:policy] unless args[:policy].nil?
-        end
-      end
-      
-      # Defines an Identity and Access Management (IAM) policy. It is used to specify
-      # access control policies for Cloud Platform resources. A `Policy` consists of a
-      # list of `bindings`. A `Binding` binds a list of `members` to a `role`, where
-      # the members can be user accounts, Google groups, Google domains, and service
-      # accounts. A `role` is a named list of permissions defined by IAM. **Example** `
-      # "bindings": [ ` "role": "roles/owner", "members": [ "user:mike@example.com", "
-      # group:admins@example.com", "domain:google.com", "serviceAccount:my-other-app@
-      # appspot.gserviceaccount.com"] `, ` "role": "roles/viewer", "members": ["user:
-      # sean@example.com"] ` ] ` For a description of IAM and its features, see the [
-      # IAM developer's guide](https://cloud.google.com/iam).
-      class Policy
-        include Google::Apis::Core::Hashable
-      
-        # Version of the `Policy`. The default version is 0. 0 =
-        # resourcemanager_projects only support legacy roles. 1 = supports non-legacy
-        # roles 2 = supports AuditConfig
-        # Corresponds to the JSON property `version`
-        # @return [Fixnum]
-        attr_accessor :version
-      
-        # Associates a list of `members` to a `role`. Multiple `bindings` must not be
-        # specified for the same `role`. `bindings` with no members will result in an
-        # error.
-        # Corresponds to the JSON property `bindings`
-        # @return [Array<Google::Apis::GenomicsV1::Binding>]
-        attr_accessor :bindings
-      
-        # The etag is used for optimistic concurrency control as a way to help prevent
-        # simultaneous updates of a policy from overwriting each other. It is strongly
-        # suggested that systems make use of the etag in the read-modify-write cycle to
-        # perform policy updates in order to avoid race conditions: Etags are returned
-        # in the response to GetIamPolicy, and systems are expected to put that etag in
-        # the request to SetIamPolicy to ensure that their change will be applied to the
-        # same version of the policy. If no etag is provided in the call to SetIamPolicy,
-        # then the existing policy is overwritten blindly.
-        # Corresponds to the JSON property `etag`
-        # @return [String]
-        attr_accessor :etag
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @version = args[:version] unless args[:version].nil?
-          @bindings = args[:bindings] unless args[:bindings].nil?
-          @etag = args[:etag] unless args[:etag].nil?
-        end
-      end
-      
-      # Associates `members` with a `role`.
-      class Binding
-        include Google::Apis::Core::Hashable
-      
-        # Role that is assigned to `members`. For example, `roles/viewer`, `roles/editor`
-        # , or `roles/owner`. Required
-        # Corresponds to the JSON property `role`
-        # @return [String]
-        attr_accessor :role
-      
-        # Specifies the identities requesting access for a Cloud Platform resource. `
-        # members` can have the following formats: * `allUsers`: A special identifier
-        # that represents anyone who is on the internet; with or without a Google
-        # account. * `allAuthenticatedUsers`: A special identifier that represents
-        # anyone who is authenticated with a Google account or a service account. * `
-        # user:`emailid``: An email address that represents a specific Google account.
-        # For example, `alice@gmail.com` or `joe@example.com`. * `serviceAccount:`
-        # emailid``: An email address that represents a service account. For example, `
-        # my-other-app@appspot.gserviceaccount.com`. * `group:`emailid``: An email
-        # address that represents a Google group. For example, `admins@example.com`. * `
-        # domain:`domain``: A Google Apps domain name that represents all the users of
-        # that domain. For example, `google.com` or `example.com`.
-        # Corresponds to the JSON property `members`
-        # @return [Array<String>]
-        attr_accessor :members
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @role = args[:role] unless args[:role].nil?
-          @members = args[:members] unless args[:members].nil?
-        end
-      end
-      
-      # Request message for `GetIamPolicy` method.
-      class GetIamPolicyRequest
-        include Google::Apis::Core::Hashable
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-        end
-      end
-      
-      # Request message for `TestIamPermissions` method.
-      class TestIamPermissionsRequest
-        include Google::Apis::Core::Hashable
-      
-        # REQUIRED: The set of permissions to check for the 'resource'. Permissions with
-        # wildcards (such as '*' or 'storage.*') are not allowed. Allowed permissions
-        # are: * `genomics.datasets.create` * `genomics.datasets.delete` * `genomics.
-        # datasets.get` * `genomics.datasets.list` * `genomics.datasets.update` * `
-        # genomics.datasets.getIamPolicy` * `genomics.datasets.setIamPolicy`
-        # Corresponds to the JSON property `permissions`
-        # @return [Array<String>]
-        attr_accessor :permissions
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @permissions = args[:permissions] unless args[:permissions].nil?
-        end
-      end
-      
-      # Response message for `TestIamPermissions` method.
-      class TestIamPermissionsResponse
-        include Google::Apis::Core::Hashable
-      
-        # A subset of `TestPermissionsRequest.permissions` that the caller is allowed.
-        # Corresponds to the JSON property `permissions`
-        # @return [Array<String>]
-        attr_accessor :permissions
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @permissions = args[:permissions] unless args[:permissions].nil?
-        end
-      end
-      
       # This resource represents a long-running operation that is the result of a
       # network API call.
       class Operation
@@ -301,13 +128,14 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # An OperationMetadata object. This will always be returned with the Operation.
+        # An [OperationMetadata][google.genomics.v1.OperationMetadata] object. This will
+        # always be returned with the [Operation][google.longrunning.Operation].
         # Corresponds to the JSON property `metadata`
         # @return [Hash<String,Object>]
         attr_accessor :metadata
       
         # If the value is `false`, it means the operation is still in progress. If true,
-        # the operation is completed, and either `error` or `response` is available.
+        # the operation is completed and the `result` is available.
         # Corresponds to the JSON property `done`
         # @return [Boolean]
         attr_accessor :done
@@ -318,40 +146,42 @@ module Google
         # gRPC](https://github.com/grpc). The error model is designed to be: - Simple to
         # use and understand for most users - Flexible enough to meet unexpected needs #
         # Overview The `Status` message contains three pieces of data: error code, error
-        # message, and error details. The error code should be an enum value of google.
-        # rpc.Code, but it may accept additional error codes if needed. The error
-        # message should be a developer-facing English message that helps developers *
-        # understand* and *resolve* the error. If a localized user-facing error message
-        # is needed, put the localized message in the error details or localize it in
-        # the client. The optional error details may contain arbitrary information about
-        # the error. There is a predefined set of error detail types in the package `
-        # google.rpc` which can be used for common error conditions. # Language mapping
-        # The `Status` message is the logical representation of the error model, but it
-        # is not necessarily the actual wire format. When the `Status` message is
-        # exposed in different client libraries and different wire protocols, it can be
-        # mapped differently. For example, it will likely be mapped to some exceptions
-        # in Java, but more likely mapped to some error codes in C. # Other uses The
-        # error model and the `Status` message can be used in a variety of environments,
-        # either with or without APIs, to provide a consistent developer experience
-        # across different environments. Example uses of this error model include: -
-        # Partial errors. If a service needs to return partial errors to the client, it
-        # may embed the `Status` in the normal response to indicate the partial errors. -
-        # Workflow errors. A typical workflow has multiple steps. Each step may have a `
-        # Status` message for error reporting purpose. - Batch operations. If a client
-        # uses batch request and batch response, the `Status` message should be used
-        # directly inside batch response, one for each error sub-response. -
-        # Asynchronous operations. If an API call embeds asynchronous operation results
-        # in its response, the status of those operations should be represented directly
-        # using the `Status` message. - Logging. If some API errors are stored in logs,
-        # the message `Status` could be used directly after any stripping needed for
-        # security/privacy reasons.
+        # message, and error details. The error code should be an enum value of [google.
+        # rpc.Code][google.rpc.Code], but it may accept additional error codes if needed.
+        # The error message should be a developer-facing English message that helps
+        # developers *understand* and *resolve* the error. If a localized user-facing
+        # error message is needed, put the localized message in the error details or
+        # localize it in the client. The optional error details may contain arbitrary
+        # information about the error. There is a predefined set of error detail types
+        # in the package `google.rpc` which can be used for common error conditions. #
+        # Language mapping The `Status` message is the logical representation of the
+        # error model, but it is not necessarily the actual wire format. When the `
+        # Status` message is exposed in different client libraries and different wire
+        # protocols, it can be mapped differently. For example, it will likely be mapped
+        # to some exceptions in Java, but more likely mapped to some error codes in C. #
+        # Other uses The error model and the `Status` message can be used in a variety
+        # of environments, either with or without APIs, to provide a consistent
+        # developer experience across different environments. Example uses of this error
+        # model include: - Partial errors. If a service needs to return partial errors
+        # to the client, it may embed the `Status` in the normal response to indicate
+        # the partial errors. - Workflow errors. A typical workflow has multiple steps.
+        # Each step may have a `Status` message for error reporting purpose. - Batch
+        # operations. If a client uses batch request and batch response, the `Status`
+        # message should be used directly inside batch response, one for each error sub-
+        # response. - Asynchronous operations. If an API call embeds asynchronous
+        # operation results in its response, the status of those operations should be
+        # represented directly using the `Status` message. - Logging. If some API errors
+        # are stored in logs, the message `Status` could be used directly after any
+        # stripping needed for security/privacy reasons.
         # Corresponds to the JSON property `error`
         # @return [Google::Apis::GenomicsV1::Status]
         attr_accessor :error
       
-        # If importing ReadGroupSets, an ImportReadGroupSetsResponse is returned. If
-        # importing Variants, an ImportVariantsResponse is returned. For exports, an
-        # empty response is returned.
+        # If importing [ReadGroupSets][google.genomics.v1.ReadGroupSet], an [
+        # ImportReadGroupSetsResponse][google.genomics.v1.ImportReadGroupSetsResponse]
+        # is returned. If importing [Variants][google.genomics.v1.Variant], an [
+        # ImportVariantsResponse][google.genomics.v1.ImportVariantsResponse] is returned.
+        # For exports, an empty response is returned.
         # Corresponds to the JSON property `response`
         # @return [Hash<String,Object>]
         attr_accessor :response
@@ -375,44 +205,45 @@ module Google
       # gRPC](https://github.com/grpc). The error model is designed to be: - Simple to
       # use and understand for most users - Flexible enough to meet unexpected needs #
       # Overview The `Status` message contains three pieces of data: error code, error
-      # message, and error details. The error code should be an enum value of google.
-      # rpc.Code, but it may accept additional error codes if needed. The error
-      # message should be a developer-facing English message that helps developers *
-      # understand* and *resolve* the error. If a localized user-facing error message
-      # is needed, put the localized message in the error details or localize it in
-      # the client. The optional error details may contain arbitrary information about
-      # the error. There is a predefined set of error detail types in the package `
-      # google.rpc` which can be used for common error conditions. # Language mapping
-      # The `Status` message is the logical representation of the error model, but it
-      # is not necessarily the actual wire format. When the `Status` message is
-      # exposed in different client libraries and different wire protocols, it can be
-      # mapped differently. For example, it will likely be mapped to some exceptions
-      # in Java, but more likely mapped to some error codes in C. # Other uses The
-      # error model and the `Status` message can be used in a variety of environments,
-      # either with or without APIs, to provide a consistent developer experience
-      # across different environments. Example uses of this error model include: -
-      # Partial errors. If a service needs to return partial errors to the client, it
-      # may embed the `Status` in the normal response to indicate the partial errors. -
-      # Workflow errors. A typical workflow has multiple steps. Each step may have a `
-      # Status` message for error reporting purpose. - Batch operations. If a client
-      # uses batch request and batch response, the `Status` message should be used
-      # directly inside batch response, one for each error sub-response. -
-      # Asynchronous operations. If an API call embeds asynchronous operation results
-      # in its response, the status of those operations should be represented directly
-      # using the `Status` message. - Logging. If some API errors are stored in logs,
-      # the message `Status` could be used directly after any stripping needed for
-      # security/privacy reasons.
+      # message, and error details. The error code should be an enum value of [google.
+      # rpc.Code][google.rpc.Code], but it may accept additional error codes if needed.
+      # The error message should be a developer-facing English message that helps
+      # developers *understand* and *resolve* the error. If a localized user-facing
+      # error message is needed, put the localized message in the error details or
+      # localize it in the client. The optional error details may contain arbitrary
+      # information about the error. There is a predefined set of error detail types
+      # in the package `google.rpc` which can be used for common error conditions. #
+      # Language mapping The `Status` message is the logical representation of the
+      # error model, but it is not necessarily the actual wire format. When the `
+      # Status` message is exposed in different client libraries and different wire
+      # protocols, it can be mapped differently. For example, it will likely be mapped
+      # to some exceptions in Java, but more likely mapped to some error codes in C. #
+      # Other uses The error model and the `Status` message can be used in a variety
+      # of environments, either with or without APIs, to provide a consistent
+      # developer experience across different environments. Example uses of this error
+      # model include: - Partial errors. If a service needs to return partial errors
+      # to the client, it may embed the `Status` in the normal response to indicate
+      # the partial errors. - Workflow errors. A typical workflow has multiple steps.
+      # Each step may have a `Status` message for error reporting purpose. - Batch
+      # operations. If a client uses batch request and batch response, the `Status`
+      # message should be used directly inside batch response, one for each error sub-
+      # response. - Asynchronous operations. If an API call embeds asynchronous
+      # operation results in its response, the status of those operations should be
+      # represented directly using the `Status` message. - Logging. If some API errors
+      # are stored in logs, the message `Status` could be used directly after any
+      # stripping needed for security/privacy reasons.
       class Status
         include Google::Apis::Core::Hashable
       
-        # The status code, which should be an enum value of google.rpc.Code.
+        # The status code, which should be an enum value of [google.rpc.Code][google.rpc.
+        # Code].
         # Corresponds to the JSON property `code`
         # @return [Fixnum]
         attr_accessor :code
       
         # A developer-facing error message, which should be in English. Any user-facing
-        # error message should be localized and sent in the google.rpc.Status.details
-        # field, or localized by the client.
+        # error message should be localized and sent in the [google.rpc.Status.details][
+        # google.rpc.Status.details] field, or localized by the client.
         # Corresponds to the JSON property `message`
         # @return [String]
         attr_accessor :message
@@ -435,7 +266,8 @@ module Google
         end
       end
       
-      # The response message for Operations.ListOperations.
+      # The response message for [Operations.ListOperations][google.longrunning.
+      # Operations.ListOperations].
       class ListOperationsResponse
         include Google::Apis::Core::Hashable
       
@@ -460,7 +292,8 @@ module Google
         end
       end
       
-      # The request message for Operations.CancelOperation.
+      # The request message for [Operations.CancelOperation][google.longrunning.
+      # Operations.CancelOperation].
       class CancelOperationRequest
         include Google::Apis::Core::Hashable
       
@@ -491,8 +324,7 @@ module Google
         # @return [String]
         attr_accessor :reference_set_id
       
-        # A list of URIs pointing at [BAM files](https://samtools.github.io/hts-specs/
-        # SAMv1.pdf) in Google Cloud Storage.
+        # A list of URIs pointing at BAM files in Google Cloud Storage.
         # Corresponds to the JSON property `sourceUris`
         # @return [Array<String>]
         attr_accessor :source_uris
@@ -520,8 +352,7 @@ module Google
       class ExportReadGroupSetRequest
         include Google::Apis::Core::Hashable
       
-        # Required. The Google Developers Console project ID that owns this export. The
-        # caller must have WRITE access to this project.
+        # Required. The Google Developers Console project ID that owns this export.
         # Corresponds to the JSON property `projectId`
         # @return [String]
         attr_accessor :project_id
@@ -575,8 +406,8 @@ module Google
         # @return [String]
         attr_accessor :page_token
       
-        # The maximum number of results to return in a single page. If unspecified,
-        # defaults to 256. The maximum value is 1024.
+        # Specifies number of results to return in a single page. If unspecified, it
+        # will default to 256. The maximum value is 1024.
         # Corresponds to the JSON property `pageSize`
         # @return [Fixnum]
         attr_accessor :page_size
@@ -625,9 +456,7 @@ module Google
       # of reads produced by a sequencer. A read group set typically models reads
       # corresponding to one sample, sequenced one way, and aligned one way. * A read
       # group set belongs to one dataset. * A read group belongs to one read group set.
-      # * A read belongs to one read group. For more genomics resource definitions,
-      # see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/
-      # fundamentals-of-google-genomics)
+      # * A read belongs to one read group.
       class ReadGroupSet
         include Google::Apis::Core::Hashable
       
@@ -636,12 +465,12 @@ module Google
         # @return [String]
         attr_accessor :id
       
-        # The dataset to which this read group set belongs.
+        # The dataset ID.
         # Corresponds to the JSON property `datasetId`
         # @return [String]
         attr_accessor :dataset_id
       
-        # The reference set to which the reads in this read group set are aligned.
+        # The reference set the reads in this read group set are aligned to.
         # Corresponds to the JSON property `referenceSetId`
         # @return [String]
         attr_accessor :reference_set_id
@@ -689,12 +518,13 @@ module Google
         include Google::Apis::Core::Hashable
       
         # The server-generated read group ID, unique for all read groups. Note: This is
-        # different than the @RG ID field in the SAM spec. For that value, see name.
+        # different than the `@RG ID` field in the SAM spec. For that value, see the `
+        # name` field.
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
       
-        # The dataset to which this read group belongs.
+        # The ID of the dataset this read group belongs to.
         # Corresponds to the JSON property `datasetId`
         # @return [String]
         attr_accessor :dataset_id
@@ -709,7 +539,9 @@ module Google
         # @return [String]
         attr_accessor :description
       
-        # A client-supplied sample identifier for the reads in this read group.
+        # The sample this read group's data was generated from. Note: This is not an
+        # actual ID within this repository, but rather an identifier for a sample which
+        # may be meaningful to some external system.
         # Corresponds to the JSON property `sampleId`
         # @return [String]
         attr_accessor :sample_id
@@ -732,7 +564,8 @@ module Google
         # @return [Array<Google::Apis::GenomicsV1::Program>]
         attr_accessor :programs
       
-        # The reference set the reads in this read group are aligned to.
+        # The reference set the reads in this read group are aligned to. Required if
+        # there are any read alignments.
         # Corresponds to the JSON property `referenceSetId`
         # @return [String]
         attr_accessor :reference_set_id
@@ -766,17 +599,16 @@ module Google
       class Experiment
         include Google::Apis::Core::Hashable
       
-        # A client-supplied library identifier; a library is a collection of DNA
-        # fragments which have been prepared for sequencing from a sample. This field is
-        # important for quality control as error or bias can be introduced during sample
-        # preparation.
+        # The library used as part of this experiment. Note: This is not an actual ID
+        # within this repository, but rather an identifier for a library which may be
+        # meaningful to some external system.
         # Corresponds to the JSON property `libraryId`
         # @return [String]
         attr_accessor :library_id
       
-        # The platform unit used as part of this experiment, for example flowcell-
-        # barcode.lane for Illumina or slide for SOLiD. Corresponds to the @RG PU field
-        # in the SAM spec.
+        # The platform unit used as part of this experiment e.g. flowcell-barcode.lane
+        # for Illumina or slide for SOLiD. Corresponds to the @RG PU field in the SAM
+        # spec.
         # Corresponds to the JSON property `platformUnit`
         # @return [String]
         attr_accessor :platform_unit
@@ -787,7 +619,7 @@ module Google
         attr_accessor :sequencing_center
       
         # The instrument model used as part of this experiment. This maps to sequencing
-        # technology in the SAM spec.
+        # technology in BAM.
         # Corresponds to the JSON property `instrumentModel`
         # @return [String]
         attr_accessor :instrument_model
@@ -820,8 +652,7 @@ module Google
         # @return [String]
         attr_accessor :id
       
-        # The display name of the program. This is typically the colloquial name of the
-        # tool used, for example 'bwa' or 'picard'.
+        # The name of the program.
         # Corresponds to the JSON property `name`
         # @return [String]
         attr_accessor :name
@@ -966,9 +797,8 @@ module Google
         # @return [Array<String>]
         attr_accessor :read_group_ids
       
-        # The reference sequence name, for example `chr1`, `1`, or `chrX`. If set to `*`,
-        # only unmapped reads are returned. If unspecified, all reads (mapped and
-        # unmapped) are returned.
+        # The reference sequence name, for example `chr1`, `1`, or `chrX`. If set to *,
+        # only unmapped reads are returned.
         # Corresponds to the JSON property `referenceName`
         # @return [String]
         attr_accessor :reference_name
@@ -992,8 +822,8 @@ module Google
         # @return [String]
         attr_accessor :page_token
       
-        # The maximum number of results to return in a single page. If unspecified,
-        # defaults to 256. The maximum value is 2048.
+        # Specifies number of results to return in a single page. If unspecified, it
+        # will default to 256. The maximum value is 2048.
         # Corresponds to the JSON property `pageSize`
         # @return [Fixnum]
         attr_accessor :page_size
@@ -1020,7 +850,7 @@ module Google
       
         # The list of matching alignments sorted by mapped genomic coordinate, if any,
         # ascending in position within the same reference. Unmapped reads, which have no
-        # position, are returned contiguously and are sorted in ascending lexicographic
+        # position, are returned last and are further sorted in ascending lexicographic
         # order by fragment name.
         # Corresponds to the JSON property `alignments`
         # @return [Array<Google::Apis::GenomicsV1::Read>]
@@ -1044,31 +874,17 @@ module Google
         end
       end
       
-      # A read alignment describes a linear alignment of a string of DNA to a
-      # reference sequence, in addition to metadata about the fragment (the molecule
-      # of DNA sequenced) and the read (the bases which were read by the sequencer). A
-      # read is equivalent to a line in a SAM file. A read belongs to exactly one read
-      # group and exactly one read group set. For more genomics resource definitions,
-      # see [Fundamentals of Google Genomics](https://cloud.google.com/genomics/
-      # fundamentals-of-google-genomics) ### Reverse-stranded reads Mapped reads (
-      # reads having a non-null `alignment`) can be aligned to either the forward or
-      # the reverse strand of their associated reference. Strandedness of a mapped
-      # read is encoded by `alignment.position.reverseStrand`. If we consider the
-      # reference to be a forward-stranded coordinate space of `[0, reference.length)`
-      # with `0` as the left-most position and `reference.length` as the right-most
-      # position, reads are always aligned left to right. That is, `alignment.position.
-      # position` always refers to the left-most reference coordinate and `alignment.
-      # cigar` describes the alignment of this read to the reference from left to
-      # right. All per-base fields such as `alignedSequence` and `alignedQuality`
-      # share this same left-to-right orientation; this is true of reads which are
-      # aligned to either strand. For reverse-stranded reads, this means that `
-      # alignedSequence` is the reverse complement of the bases that were originally
-      # reported by the sequencing machine. ### Generating a reference-aligned
-      # sequence string When interacting with mapped reads, it's often useful to
-      # produce a string representing the local alignment of the read to reference.
-      # The following pseudocode demonstrates one way of doing this: out = "" offset =
-      # 0 for c in read.alignment.cigar ` switch c.operation ` case "ALIGNMENT_MATCH",
-      # "SEQUENCE_MATCH", "SEQUENCE_MISMATCH": out += read.alignedSequence[offset:
+      # A read alignment describes a linear alignment of a string of DNA to a [
+      # reference sequence][google.genomics.v1.Reference], in addition to metadata
+      # about the fragment (the molecule of DNA sequenced) and the read (the bases
+      # which were read by the sequencer). A read is equivalent to a line in a SAM
+      # file. A read belongs to exactly one read group and exactly one [read group set]
+      # [google.genomics.v1.ReadGroupSet]. ### Generating a reference-aligned sequence
+      # string When interacting with mapped reads, it's often useful to produce a
+      # string representing the local alignment of the read to reference. The
+      # following pseudocode demonstrates one way of doing this: out = "" offset = 0
+      # for c in read.alignment.cigar ` switch c.operation ` case "ALIGNMENT_MATCH", "
+      # SEQUENCE_MATCH", "SEQUENCE_MISMATCH": out += read.alignedSequence[offset:
       # offset+c.operationLength] offset += c.operationLength break case "CLIP_SOFT", "
       # INSERT": offset += c.operationLength break case "PAD": out += repeat("*", c.
       # operationLength) break case "DELETE": out += repeat("-", c.operationLength)
@@ -1089,15 +905,14 @@ module Google
         # @return [String]
         attr_accessor :id
       
-        # The ID of the read group this read belongs to. A read belongs to exactly one
-        # read group. This is a server-generated ID which is distinct from SAM's RG tag (
-        # for that value, see ReadGroup.name).
+        # The ID of the read group this read belongs to. (Every read must belong to
+        # exactly one read group.)
         # Corresponds to the JSON property `readGroupId`
         # @return [String]
         attr_accessor :read_group_id
       
-        # The ID of the read group set this read belongs to. A read belongs to exactly
-        # one read group set.
+        # The ID of the read group set this read belongs to. (Every read must belong to
+        # exactly one read group set.)
         # Corresponds to the JSON property `readGroupSetId`
         # @return [String]
         attr_accessor :read_group_set_id
@@ -1108,13 +923,13 @@ module Google
         attr_accessor :fragment_name
       
         # The orientation and the distance between reads from the fragment are
-        # consistent with the sequencing protocol (SAM flag 0x2).
+        # consistent with the sequencing protocol (SAM flag 0x2)
         # Corresponds to the JSON property `properPlacement`
         # @return [Boolean]
         attr_accessor :proper_placement
         alias_method :proper_placement?, :proper_placement
       
-        # The fragment is a PCR or optical duplicate (SAM flag 0x400).
+        # The fragment is a PCR or optical duplicate (SAM flag 0x400)
         # Corresponds to the JSON property `duplicateFragment`
         # @return [Boolean]
         attr_accessor :duplicate_fragment
@@ -1136,8 +951,7 @@ module Google
         # @return [Fixnum]
         attr_accessor :number_reads
       
-        # Whether this read did not pass filters, such as platform or vendor quality
-        # controls (SAM flag 0x200).
+        # SAM flag 0x200
         # Corresponds to the JSON property `failedVendorQualityChecks`
         # @return [Boolean]
         attr_accessor :failed_vendor_quality_checks
@@ -1175,22 +989,22 @@ module Google
         attr_accessor :supplementary_alignment
         alias_method :supplementary_alignment?, :supplementary_alignment
       
-        # The bases of the read sequence contained in this alignment record, **without
-        # CIGAR operations applied** (equivalent to SEQ in SAM). `alignedSequence` and `
-        # alignedQuality` may be shorter than the full read sequence and quality. This
-        # will occur if the alignment is part of a chimeric alignment, or if the read
-        # was trimmed. When this occurs, the CIGAR for this read will begin/end with a
-        # hard clip operator that will indicate the length of the excised sequence.
-        # Corresponds to the JSON property `alignedSequence`
-        # @return [String]
-        attr_accessor :aligned_sequence
-      
-        # The quality of the read sequence contained in this alignment record (
-        # equivalent to QUAL in SAM). `alignedSequence` and `alignedQuality` may be
+        # The bases of the read sequence contained in this alignment record, *without
+        # CIGAR operations applied*. `alignedSequence` and `alignedQuality` may be
         # shorter than the full read sequence and quality. This will occur if the
         # alignment is part of a chimeric alignment, or if the read was trimmed. When
         # this occurs, the CIGAR for this read will begin/end with a hard clip operator
         # that will indicate the length of the excised sequence.
+        # Corresponds to the JSON property `alignedSequence`
+        # @return [String]
+        attr_accessor :aligned_sequence
+      
+        # The quality of the read sequence contained in this alignment record. `
+        # alignedSequence` and `alignedQuality` may be shorter than the full read
+        # sequence and quality. This will occur if the alignment is part of a chimeric
+        # alignment, or if the read was trimmed. When this occurs, the CIGAR for this
+        # read will begin/end with a hard clip operator that will indicate the length of
+        # the excised sequence.
         # Corresponds to the JSON property `alignedQuality`
         # @return [Array<Fixnum>]
         attr_accessor :aligned_quality
@@ -1249,8 +1063,7 @@ module Google
         attr_accessor :position
       
         # The mapping quality of this alignment. Represents how likely the read maps to
-        # this position as opposed to other locations. Specifically, this is -10 log10
-        # Pr(mapping position is wrong), rounded to the nearest integer.
+        # this position as opposed to other locations.
         # Corresponds to the JSON property `mappingQuality`
         # @return [Fixnum]
         attr_accessor :mapping_quality
@@ -1342,84 +1155,21 @@ module Google
         end
       end
       
-      # The stream reads request.
-      class StreamReadsRequest
-        include Google::Apis::Core::Hashable
-      
-        # The Google Developers Console project ID or number which will be billed for
-        # this access. The caller must have WRITE access to this project. Required.
-        # Corresponds to the JSON property `projectId`
-        # @return [String]
-        attr_accessor :project_id
-      
-        # The ID of the read group set from which to stream reads.
-        # Corresponds to the JSON property `readGroupSetId`
-        # @return [String]
-        attr_accessor :read_group_set_id
-      
-        # The reference sequence name, for example `chr1`, `1`, or `chrX`. If set to *,
-        # only unmapped reads are returned.
-        # Corresponds to the JSON property `referenceName`
-        # @return [String]
-        attr_accessor :reference_name
-      
-        # The start position of the range on the reference, 0-based inclusive. If
-        # specified, `referenceName` must also be specified.
-        # Corresponds to the JSON property `start`
-        # @return [String]
-        attr_accessor :start
-      
-        # The end position of the range on the reference, 0-based exclusive. If
-        # specified, `referenceName` must also be specified.
-        # Corresponds to the JSON property `end`
-        # @return [String]
-        attr_accessor :end
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @project_id = args[:project_id] unless args[:project_id].nil?
-          @read_group_set_id = args[:read_group_set_id] unless args[:read_group_set_id].nil?
-          @reference_name = args[:reference_name] unless args[:reference_name].nil?
-          @start = args[:start] unless args[:start].nil?
-          @end = args[:end] unless args[:end].nil?
-        end
-      end
-      
-      # 
-      class StreamReadsResponse
-        include Google::Apis::Core::Hashable
-      
-        # 
-        # Corresponds to the JSON property `alignments`
-        # @return [Array<Google::Apis::GenomicsV1::Read>]
-        attr_accessor :alignments
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @alignments = args[:alignments] unless args[:alignments].nil?
-        end
-      end
-      
       # 
       class SearchReferenceSetsRequest
         include Google::Apis::Core::Hashable
       
-        # If present, return reference sets for which the md5checksum matches exactly.
+        # If present, return references for which the `md5checksum` matches. See `
+        # ReferenceSet.md5checksum` for details.
         # Corresponds to the JSON property `md5checksums`
         # @return [Array<String>]
         attr_accessor :md5checksums
       
-        # If present, return reference sets for which a prefix of any of
-        # sourceAccessions match any of these strings. Accession numbers typically have
-        # a main number and a version, for example `NC_000001.11`.
+        # If present, return references for which the accession matches any of these
+        # strings. Best to give a version number, for example `GCF_000001405.26`. If
+        # only the main accession number is given then all records with that main
+        # accession will be returned, whichever version. Note that different versions
+        # will have different sequences.
         # Corresponds to the JSON property `accessions`
         # @return [Array<String>]
         attr_accessor :accessions
@@ -1437,8 +1187,7 @@ module Google
         # @return [String]
         attr_accessor :page_token
       
-        # The maximum number of results to return in a single page. If unspecified,
-        # defaults to 1024. The maximum value is 4096.
+        # Specifies the maximum number of results to return in a single page.
         # Corresponds to the JSON property `pageSize`
         # @return [Fixnum]
         attr_accessor :page_size
@@ -1488,9 +1237,7 @@ module Google
       # assembly for a species, such as `GRCh38` which is representative of the human
       # genome. A reference set defines a common coordinate space for comparing
       # reference-aligned experimental data. A reference set contains 1 or more
-      # references. For more genomics resource definitions, see [Fundamentals of
-      # Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-
-      # genomics)
+      # references.
       class ReferenceSet
         include Google::Apis::Core::Hashable
       
@@ -1514,11 +1261,11 @@ module Google
         # @return [String]
         attr_accessor :md5checksum
       
-        # ID from http://www.ncbi.nlm.nih.gov/taxonomy (for example, 9606 for human)
-        # indicating the species which this reference set is intended to model. Note
-        # that contained references may specify a different `ncbiTaxonId`, as assemblies
-        # may contain reference sequences which do not belong to the modeled species,
-        # for example EBV in a human reference genome.
+        # ID from http://www.ncbi.nlm.nih.gov/taxonomy (e.g. 9606->human) indicating the
+        # species which this assembly is intended to model. Note that contained
+        # references may specify a different `ncbiTaxonId`, as assemblies may contain
+        # reference sequences which do not belong to the modeled species, e.g. EBV in a
+        # human reference genome.
         # Corresponds to the JSON property `ncbiTaxonId`
         # @return [Fixnum]
         attr_accessor :ncbi_taxon_id
@@ -1565,14 +1312,17 @@ module Google
       class SearchReferencesRequest
         include Google::Apis::Core::Hashable
       
-        # If present, return references for which the md5checksum matches exactly.
+        # If present, return references for which the `md5checksum` matches. See `
+        # Reference.md5checksum` for construction details.
         # Corresponds to the JSON property `md5checksums`
         # @return [Array<String>]
         attr_accessor :md5checksums
       
-        # If present, return references for which a prefix of any of sourceAccessions
-        # match any of these strings. Accession numbers typically have a main number and
-        # a version, for example `GCF_000001405.26`.
+        # If present, return references for which the accession matches this string.
+        # Best to give a version number, for example `GCF_000001405.26`. If only the
+        # main accession number is given then all records with that main accession will
+        # be returned, whichever version. Note that different versions will have
+        # different sequences.
         # Corresponds to the JSON property `accessions`
         # @return [Array<String>]
         attr_accessor :accessions
@@ -1589,8 +1339,7 @@ module Google
         # @return [String]
         attr_accessor :page_token
       
-        # The maximum number of results to return in a single page. If unspecified,
-        # defaults to 1024. The maximum value is 4096.
+        # Specifies the maximum number of results to return in a single page.
         # Corresponds to the JSON property `pageSize`
         # @return [Fixnum]
         attr_accessor :page_size
@@ -1639,9 +1388,7 @@ module Google
       # A reference is a canonical assembled DNA sequence, intended to act as a
       # reference coordinate space for other genomic annotations. A single reference
       # might represent the human chromosome 1 or mitochandrial DNA, for instance. A
-      # reference belongs to one or more reference sets. For more genomics resource
-      # definitions, see [Fundamentals of Google Genomics](https://cloud.google.com/
-      # genomics/fundamentals-of-google-genomics)
+      # reference belongs to one or more reference sets.
       class Reference
         include Google::Apis::Core::Hashable
       
@@ -1667,8 +1414,8 @@ module Google
         # @return [String]
         attr_accessor :name
       
-        # The URI from which the sequence was obtained. Typically specifies a FASTA
-        # format file.
+        # The URI from which the sequence was obtained. Specifies a FASTA format file/
+        # string with one name, sequence pair.
         # Corresponds to the JSON property `sourceUri`
         # @return [String]
         attr_accessor :source_uri
@@ -1679,7 +1426,8 @@ module Google
         # @return [Array<String>]
         attr_accessor :source_accessions
       
-        # ID from http://www.ncbi.nlm.nih.gov/taxonomy. For example, 9606 for human.
+        # ID from http://www.ncbi.nlm.nih.gov/taxonomy (e.g. 9606->human) if not
+        # specified by the containing reference set.
         # Corresponds to the JSON property `ncbiTaxonId`
         # @return [Fixnum]
         attr_accessor :ncbi_taxon_id
@@ -1782,9 +1530,7 @@ module Google
       end
       
       # A variant set is a collection of call sets and variants. It contains summary
-      # statistics of those contents. A variant set belongs to a dataset. For more
-      # genomics resource definitions, see [Fundamentals of Google Genomics](https://
-      # cloud.google.com/genomics/fundamentals-of-google-genomics)
+      # statistics of those contents. A variant set belongs to a dataset.
       class VariantSet
         include Google::Apis::Core::Hashable
       
@@ -1797,18 +1543,6 @@ module Google
         # Corresponds to the JSON property `id`
         # @return [String]
         attr_accessor :id
-      
-        # The reference set to which the variant set is mapped. The reference set
-        # describes the alignment provenance of the variant set, while the `
-        # referenceBounds` describe the shape of the actual variant data. The reference
-        # set's reference names are a superset of those found in the `referenceBounds`.
-        # For example, given a variant set that is mapped to the GRCh38 reference set
-        # and contains a single variant on reference 'X', `referenceBounds` would
-        # contain only an entry for 'X', while the associated reference set enumerates
-        # all possible references: '1', '2', 'X', 'Y', 'MT', etc.
-        # Corresponds to the JSON property `referenceSetId`
-        # @return [String]
-        attr_accessor :reference_set_id
       
         # A list of all references used by the variants in a variant set with associated
         # coordinate upper bounds for each one.
@@ -1829,7 +1563,6 @@ module Google
         def update!(**args)
           @dataset_id = args[:dataset_id] unless args[:dataset_id].nil?
           @id = args[:id] unless args[:id].nil?
-          @reference_set_id = args[:reference_set_id] unless args[:reference_set_id].nil?
           @reference_bounds = args[:reference_bounds] unless args[:reference_bounds].nil?
           @metadata = args[:metadata] unless args[:metadata].nil?
         end
@@ -1840,7 +1573,7 @@ module Google
       class ReferenceBound
         include Google::Apis::Core::Hashable
       
-        # The name of the reference associated with this ReferenceBound.
+        # The reference the bound is associate with.
         # Corresponds to the JSON property `referenceName`
         # @return [String]
         attr_accessor :reference_name
@@ -1893,7 +1626,7 @@ module Google
         # The number of values that can be included in a field described by this
         # metadata.
         # Corresponds to the JSON property `number`
-        # @return [String]
+        # @return [Fixnum]
         attr_accessor :number
       
         # A textual description of this metadata.
@@ -1988,8 +1721,7 @@ module Google
         # @return [String]
         attr_accessor :page_token
       
-        # The maximum number of results to return in a single page. If unspecified,
-        # defaults to 1024.
+        # The maximum number of variant sets to return in a request.
         # Corresponds to the JSON property `pageSize`
         # @return [Fixnum]
         attr_accessor :page_size
@@ -2081,16 +1813,14 @@ module Google
         # @return [String]
         attr_accessor :page_token
       
-        # The maximum number of variants to return in a single page. If unspecified,
-        # defaults to 5000. The maximum value is 10000.
+        # The maximum number of variants to return. If unspecified, defaults to 5000.
         # Corresponds to the JSON property `pageSize`
         # @return [Fixnum]
         attr_accessor :page_size
       
-        # The maximum number of calls to return in a single page. Note that this limit
-        # may be exceeded; at least one variant is always returned per page, even if it
-        # has more calls than this limit. If unspecified, defaults to 5000. The maximum
-        # value is 10000.
+        # The maximum number of calls to return. However, at least one variant will
+        # always be returned, even if it has more calls than this limit. If unspecified,
+        # defaults to 5000.
         # Corresponds to the JSON property `maxCalls`
         # @return [Fixnum]
         attr_accessor :max_calls
@@ -2142,12 +1872,11 @@ module Google
       
       # A variant represents a change in DNA sequence relative to a reference sequence.
       # For example, a variant could represent a SNP or an insertion. Variants belong
-      # to a variant set. For more genomics resource definitions, see [Fundamentals of
-      # Google Genomics](https://cloud.google.com/genomics/fundamentals-of-google-
-      # genomics) Each of the calls on a variant represent a determination of genotype
-      # with respect to that variant. For example, a call might assign probability of
-      # 0.32 to the occurrence of a SNP named rs1234 in a sample named NA12345. A call
-      # belongs to a call set, which contains related calls typically from one sample.
+      # to a variant set. Each of the calls on a variant represent a determination of
+      # genotype with respect to that variant. For example, a call might assign
+      # probability of 0.32 to the occurrence of a SNP named rs1234 in a sample named
+      # NA12345. A call belongs to a call set, which contains related calls typically
+      # from one sample.
       class Variant
         include Google::Apis::Core::Hashable
       
@@ -2314,6 +2043,31 @@ module Google
         end
       end
       
+      # 
+      class MergeVariantsRequest
+        include Google::Apis::Core::Hashable
+      
+        # The destination variant set.
+        # Corresponds to the JSON property `variantSetId`
+        # @return [String]
+        attr_accessor :variant_set_id
+      
+        # The variants to be merged with existing variants.
+        # Corresponds to the JSON property `variants`
+        # @return [Array<Google::Apis::GenomicsV1::Variant>]
+        attr_accessor :variants
+      
+        def initialize(**args)
+           update!(**args)
+        end
+      
+        # Update properties of this object
+        def update!(**args)
+          @variant_set_id = args[:variant_set_id] unless args[:variant_set_id].nil?
+          @variants = args[:variants] unless args[:variants].nil?
+        end
+      end
+      
       # The call set search request.
       class SearchCallSetsRequest
         include Google::Apis::Core::Hashable
@@ -2336,8 +2090,7 @@ module Google
         # @return [String]
         attr_accessor :page_token
       
-        # The maximum number of results to return in a single page. If unspecified,
-        # defaults to 1024.
+        # The maximum number of call sets to return. If unspecified, defaults to 1000.
         # Corresponds to the JSON property `pageSize`
         # @return [Fixnum]
         attr_accessor :page_size
@@ -2383,9 +2136,7 @@ module Google
       end
       
       # A call set is a collection of variant calls, typically for one sample. It
-      # belongs to a variant set. For more genomics resource definitions, see [
-      # Fundamentals of Google Genomics](https://cloud.google.com/genomics/
-      # fundamentals-of-google-genomics)
+      # belongs to a variant set.
       class CallSet
         include Google::Apis::Core::Hashable
       
@@ -2438,78 +2189,6 @@ module Google
         end
       end
       
-      # The stream variants request.
-      class StreamVariantsRequest
-        include Google::Apis::Core::Hashable
-      
-        # The Google Developers Console project ID or number which will be billed for
-        # this access. The caller must have WRITE access to this project. Required.
-        # Corresponds to the JSON property `projectId`
-        # @return [String]
-        attr_accessor :project_id
-      
-        # The variant set ID from which to stream variants.
-        # Corresponds to the JSON property `variantSetId`
-        # @return [String]
-        attr_accessor :variant_set_id
-      
-        # Only return variant calls which belong to call sets with these IDs. Leaving
-        # this blank returns all variant calls.
-        # Corresponds to the JSON property `callSetIds`
-        # @return [Array<String>]
-        attr_accessor :call_set_ids
-      
-        # Required. Only return variants in this reference sequence.
-        # Corresponds to the JSON property `referenceName`
-        # @return [String]
-        attr_accessor :reference_name
-      
-        # The beginning of the window (0-based, inclusive) for which overlapping
-        # variants should be returned.
-        # Corresponds to the JSON property `start`
-        # @return [String]
-        attr_accessor :start
-      
-        # The end of the window (0-based, exclusive) for which overlapping variants
-        # should be returned.
-        # Corresponds to the JSON property `end`
-        # @return [String]
-        attr_accessor :end
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @project_id = args[:project_id] unless args[:project_id].nil?
-          @variant_set_id = args[:variant_set_id] unless args[:variant_set_id].nil?
-          @call_set_ids = args[:call_set_ids] unless args[:call_set_ids].nil?
-          @reference_name = args[:reference_name] unless args[:reference_name].nil?
-          @start = args[:start] unless args[:start].nil?
-          @end = args[:end] unless args[:end].nil?
-        end
-      end
-      
-      # 
-      class StreamVariantsResponse
-        include Google::Apis::Core::Hashable
-      
-        # 
-        # Corresponds to the JSON property `variants`
-        # @return [Array<Google::Apis::GenomicsV1::Variant>]
-        attr_accessor :variants
-      
-        def initialize(**args)
-           update!(**args)
-        end
-      
-        # Update properties of this object
-        def update!(**args)
-          @variants = args[:variants] unless args[:variants].nil?
-        end
-      end
-      
       # The read group set import response.
       class ImportReadGroupSetsResponse
         include Google::Apis::Core::Hashable
@@ -2533,7 +2212,7 @@ module Google
       class ImportVariantsResponse
         include Google::Apis::Core::Hashable
       
-        # IDs of the call sets created during the import.
+        # IDs of the call sets that were created.
         # Corresponds to the JSON property `callSetIds`
         # @return [Array<String>]
         attr_accessor :call_set_ids
@@ -2548,7 +2227,7 @@ module Google
         end
       end
       
-      # Metadata describing an Operation.
+      # Metadata describing an [Operation][google.longrunning.Operation].
       class OperationMetadata
         include Google::Apis::Core::Hashable
       
@@ -2588,7 +2267,7 @@ module Google
         end
       end
       
-      # An event that occurred during an Operation.
+      # An event that occurred during an [Operation][google.longrunning.Operation].
       class OperationEvent
         include Google::Apis::Core::Hashable
       

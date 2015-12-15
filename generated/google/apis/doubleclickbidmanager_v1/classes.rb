@@ -26,12 +26,6 @@ module Google
       class DownloadLineItemsRequest
         include Google::Apis::Core::Hashable
       
-        # File specification (column names, types, order) in which the line items will
-        # be returned. Default to EWF.
-        # Corresponds to the JSON property `fileSpec`
-        # @return [String]
-        attr_accessor :file_spec
-      
         # Ids of the specified filter type used to filter line items to fetch. If
         # omitted, all the line items will be returned.
         # Corresponds to the JSON property `filterIds`
@@ -54,7 +48,6 @@ module Google
       
         # Update properties of this object
         def update!(**args)
-          @file_spec = args[:file_spec] unless args[:file_spec].nil?
           @filter_ids = args[:filter_ids] unless args[:filter_ids].nil?
           @filter_type = args[:filter_type] unless args[:filter_type].nil?
           @format = args[:format] unless args[:format].nil?
@@ -65,8 +58,8 @@ module Google
       class DownloadLineItemsResponse
         include Google::Apis::Core::Hashable
       
-        # Retrieved line items in CSV format. Refer to  Entity Write File Format or
-        # Structured Data File Format for more information on file formats.
+        # Retrieved line items in CSV format. Refer to  Entity Write File Format for
+        # more information on file format.
         # Corresponds to the JSON property `lineItems`
         # @return [String]
         attr_accessor :line_items
