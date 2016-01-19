@@ -47,8 +47,7 @@ class BaseCli < Thor
     # on Windows)
     def well_known_path_for(file)
       if OS.windows?
-        dir = ENV.fetch('HOME'){ ENV['APPDATA']}
-        File.join(dir, 'google', file)
+        File.join(ENV['APPDATA'], 'google', file)
       else
         File.join(ENV['HOME'], '.config', 'google', file)
       end
