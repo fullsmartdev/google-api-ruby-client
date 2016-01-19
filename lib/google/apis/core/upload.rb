@@ -18,7 +18,6 @@ require 'google/apis/core/api_command'
 require 'google/apis/errors'
 require 'addressable/uri'
 require 'mime-types'
-require "tempfile"
 
 module Google
   module Apis
