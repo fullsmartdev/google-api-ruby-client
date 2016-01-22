@@ -26,11 +26,6 @@ module Google
       class CreateAuthUriResponse
         include Google::Apis::Core::Hashable
       
-        # all providers the user has once used to do federated login
-        # Corresponds to the JSON property `allProviders`
-        # @return [Array<String>]
-        attr_accessor :all_providers
-      
         # The URI used by the IDP to authenticate the user.
         # Corresponds to the JSON property `authUri`
         # @return [String]
@@ -75,7 +70,6 @@ module Google
       
         # Update properties of this object
         def update!(**args)
-          @all_providers = args[:all_providers] unless args[:all_providers].nil?
           @auth_uri = args[:auth_uri] unless args[:auth_uri].nil?
           @captcha_required = args[:captcha_required] unless args[:captcha_required].nil?
           @for_existing_provider = args[:for_existing_provider] unless args[:for_existing_provider].nil?
@@ -467,12 +461,6 @@ module Google
         # @return [String]
         attr_accessor :captcha_response
       
-        # GCP project number of the requesting delegated app. Currently only intended
-        # for Firebase V1 migration.
-        # Corresponds to the JSON property `delegatedProjectNumber`
-        # @return [String]
-        attr_accessor :delegated_project_number
-      
         # Whether to disable the user.
         # Corresponds to the JSON property `disableUser`
         # @return [Boolean]
@@ -544,7 +532,6 @@ module Google
         def update!(**args)
           @captcha_challenge = args[:captcha_challenge] unless args[:captcha_challenge].nil?
           @captcha_response = args[:captcha_response] unless args[:captcha_response].nil?
-          @delegated_project_number = args[:delegated_project_number] unless args[:delegated_project_number].nil?
           @disable_user = args[:disable_user] unless args[:disable_user].nil?
           @display_name = args[:display_name] unless args[:display_name].nil?
           @email = args[:email] unless args[:email].nil?
@@ -743,12 +730,6 @@ module Google
         # @return [String]
         attr_accessor :captcha_response
       
-        # GCP project number of the requesting delegated app. Currently only intended
-        # for Firebase V1 migration.
-        # Corresponds to the JSON property `delegatedProjectNumber`
-        # @return [String]
-        attr_accessor :delegated_project_number
-      
         # The email of the user.
         # Corresponds to the JSON property `email`
         # @return [String]
@@ -777,7 +758,6 @@ module Google
         def update!(**args)
           @captcha_challenge = args[:captcha_challenge] unless args[:captcha_challenge].nil?
           @captcha_response = args[:captcha_response] unless args[:captcha_response].nil?
-          @delegated_project_number = args[:delegated_project_number] unless args[:delegated_project_number].nil?
           @email = args[:email] unless args[:email].nil?
           @instance_id = args[:instance_id] unless args[:instance_id].nil?
           @password = args[:password] unless args[:password].nil?

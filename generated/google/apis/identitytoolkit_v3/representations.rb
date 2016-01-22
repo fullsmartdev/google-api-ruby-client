@@ -149,7 +149,6 @@ module Google
       class CreateAuthUriResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          collection :all_providers, as: 'allProviders'
           property :auth_uri, as: 'authUri'
           property :captcha_required, as: 'captchaRequired'
           property :for_existing_provider, as: 'forExistingProvider'
@@ -270,7 +269,6 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :captcha_challenge, as: 'captchaChallenge'
           property :captcha_response, as: 'captchaResponse'
-          property :delegated_project_number, as: 'delegatedProjectNumber'
           property :disable_user, as: 'disableUser'
           property :display_name, as: 'displayName'
           property :email, as: 'email'
@@ -339,7 +337,6 @@ module Google
         class Representation < Google::Apis::Core::JsonRepresentation
           property :captcha_challenge, as: 'captchaChallenge'
           property :captcha_response, as: 'captchaResponse'
-          property :delegated_project_number, as: 'delegatedProjectNumber'
           property :email, as: 'email'
           property :instance_id, as: 'instanceId'
           property :password, as: 'password'
