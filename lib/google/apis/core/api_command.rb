@@ -12,12 +12,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'active_support/inflector'
 require 'addressable/uri'
 require 'addressable/template'
 require 'google/apis/core/http_command'
 require 'google/apis/errors'
-require 'multi_json'
+require 'json'
 require 'retriable'
 
 module Google
@@ -113,7 +112,7 @@ module Google
         #  HTTP response body
         # @return [Hash]
         def parse_error(body)
-          hash = MultiJson.load(body)
+          hash = JSON.load(body)
           hash['error']['errors'].first
         rescue
           nil
@@ -127,7 +126,9 @@ module Google
         #   Updated header value
         def normalize_fields_param(fields)
           # TODO: Generate map of parameter names during code gen. Small possibility that camelization fails
-          fields.gsub(/:/, '').gsub(/\w+/) { |str| ActiveSupport::Inflector.camelize(str, false) }
+          fields.gsub(/:/, '').gsub(/\w+/) do |str|
+            str.gsub(/(?:^|_)([a-z])/){ Regexp.last_match.begin(0) == 0 ? $1 : $1.upcase }
+          end
         end
       end
     end
