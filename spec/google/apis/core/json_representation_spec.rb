@@ -28,8 +28,7 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
       attr_accessor :nil_value
       attr_accessor :numeric_value
       attr_accessor :string_value
-      attr_accessor :boolean_value_true
-      attr_accessor :boolean_value_false
+      attr_accessor :boolean_value
       attr_accessor :date_value
       attr_accessor :bytes_value
       attr_accessor :items
@@ -45,8 +44,7 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
       property :nil_value, as: 'nilValue'
       property :numeric_value, as: 'numericValue'
       property :string_value, as: 'stringValue'
-      property :boolean_value_true, as: 'booleanValueTrue'
-      property :boolean_value_false, as: 'booleanValueFalse'
+      property :boolean_value, as: 'booleanValue'
       property :date_value, as: 'dateValue', type: DateTime
       property :bytes_value, as: 'bytesValue', base64: true
       property :items
@@ -77,8 +75,7 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
     end
 
     it 'serializes boolean values' do
-      expect(json).to be_json_eql(%(true)).at_path('booleanValueTrue')
-      expect(json).to be_json_eql(%(false)).at_path('booleanValueFalse')
+      expect(json).to be_json_eql(%(true)).at_path('booleanValue')
     end
 
     it 'serializes date values' do
@@ -110,8 +107,7 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
       model.numeric_value = 123
       model.string_value = 'test'
       model.date_value = DateTime.new(2015, 5, 1, 12)
-      model.boolean_value_true = true
-      model.boolean_value_false = false
+      model.boolean_value = true
       model.bytes_value = 'Hello world'
       model.items = [1, 2, 3]
       model.child = child_class.new
@@ -131,8 +127,7 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
         string_value: 'test',
         numeric_value: 123,
         date_value: DateTime.new(2015, 5, 1, 12),
-        boolean_value_true: true,
-        boolean_value_false: false,
+        boolean_value: true,
         bytes_value: 'Hello world',
         items: [1, 2, 3],
         child: {
@@ -151,8 +146,7 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
       json = <<EOF
 { "stringValue": "test",
   "nilValue": null,
-  "booleanValueTrue": true,
-  "booleanValueFalse": false,
+  "booleanValue": true,
   "numericValue": 123,
   "dateValue": "2015-05-01T12:00:00+00:00",
   "bytesValue": "SGVsbG8gd29ybGQ=",
@@ -176,8 +170,7 @@ EOF
     end
 
     it 'deserializes boolean values' do
-      expect(model.boolean_value_true).to be_truthy
-      expect(model.boolean_value_false).to be_falsey
+      expect(model.boolean_value).to be_truthy
     end
 
     it 'deserializes date values' do
