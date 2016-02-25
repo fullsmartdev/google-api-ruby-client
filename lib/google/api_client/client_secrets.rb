@@ -12,7 +12,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-require 'json'
+
+require 'compat/multi_json'
 
 
 module Google
@@ -70,7 +71,7 @@ module Google
             search_path = File.expand_path(File.join(search_path, '..'))
           end
         end
-        data = File.open(filename, 'r') { |file| JSON.load(file.read) }
+        data = File.open(filename, 'r') { |file| MultiJson.load(file.read) }
         return self.new(data)
       end
 
@@ -118,7 +119,7 @@ module Google
       # @return [String]
       #   JSON
       def to_json
-        return Json.dump(to_hash)
+        return MultiJson.dump(to_hash)
       end
 
       def to_hash

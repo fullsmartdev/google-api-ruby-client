@@ -17,7 +17,7 @@ require 'addressable/uri'
 require 'addressable/template'
 require 'google/apis/core/http_command'
 require 'google/apis/errors'
-require 'json'
+require 'multi_json'
 require 'retriable'
 
 module Google
@@ -113,7 +113,7 @@ module Google
         #  HTTP response body
         # @return [Hash]
         def parse_error(body)
-          hash = JSON.load(body)
+          hash = MultiJson.load(body)
           hash['error']['errors'].first
         rescue
           nil
