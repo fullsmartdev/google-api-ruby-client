@@ -28,5 +28,4 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'httpclient', '>= 2.8.1', '< 3.0'
   spec.add_development_dependency 'thor', '~> 0.14'
   spec.add_development_dependency 'activesupport', '>= 3.2', '< 5.0'
-
 end
