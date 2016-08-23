@@ -15,6 +15,7 @@
 require 'spec_helper'
 require 'google/apis/core/batch'
 require 'google/apis/core/json_representation'
+require 'hurley/test'
 
 RSpec.describe Google::Apis::Core::BatchCommand do
   include TestHelpers
@@ -29,20 +30,19 @@ RSpec.describe Google::Apis::Core::BatchCommand do
   let(:post_with_string_command) do
     command = Google::Apis::Core::HttpCommand.new(:post, 'https://www.googleapis.com/zoo/animals/2')
     command.body = 'Hello world'
-    command.header['Content-Type'] = 'text/plain'
+    command.header[:content_type] = 'text/plain'
     command
   end
 
   let(:post_with_io_command) do
     command = Google::Apis::Core::HttpCommand.new(:post, 'https://www.googleapis.com/zoo/animals/3')
     command.body = StringIO.new('Goodbye!')
-    command.header['Content-Type'] = 'text/plain'
+    command.header[:content_type] = 'text/plain'
     command
   end
 
   before(:example) do
     allow(SecureRandom).to receive(:uuid).and_return('ffe23d1b-e8f7-47f5-8c01-2a30cf8ecb8f')
-    allow(Digest::SHA1).to receive(:hexdigest).and_return('123abc')
 
     response = <<EOF
 --batch123
@@ -83,20 +83,20 @@ EOF
     command.execute(client)
 
     expected_body = <<EOF.gsub(/\n/, "\r\n")
---123abc
-Content-Type: application/http
-Content-Id: <ffe23d1b-e8f7-47f5-8c01-2a30cf8ecb8f+0>
+--RubyApiBatchRequest
 Content-Length: 58
+Content-ID: <ffe23d1b-e8f7-47f5-8c01-2a30cf8ecb8f+0>
+Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 GET /zoo/animals/1? HTTP/1.1
 Host: www.googleapis.com
 
 
---123abc
-Content-Type: application/http
-Content-Id: <ffe23d1b-e8f7-47f5-8c01-2a30cf8ecb8f+1>
+--RubyApiBatchRequest
 Content-Length: 96
+Content-ID: <ffe23d1b-e8f7-47f5-8c01-2a30cf8ecb8f+1>
+Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 POST /zoo/animals/2? HTTP/1.1
@@ -104,10 +104,10 @@ Content-Type: text/plain
 Host: www.googleapis.com
 
 Hello world
---123abc
-Content-Type: application/http
-Content-Id: <ffe23d1b-e8f7-47f5-8c01-2a30cf8ecb8f+2>
+--RubyApiBatchRequest
 Content-Length: 93
+Content-ID: <ffe23d1b-e8f7-47f5-8c01-2a30cf8ecb8f+2>
+Content-Type: application/http
 Content-Transfer-Encoding: binary
 
 POST /zoo/animals/3? HTTP/1.1
@@ -115,7 +115,7 @@ Content-Type: text/plain
 Host: www.googleapis.com
 
 Goodbye!
---123abc--
+--RubyApiBatchRequest--
 
 EOF
     expect(a_request(:post, 'https://www.googleapis.com/batch').with(body: expected_body)).to have_been_made
