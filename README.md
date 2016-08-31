@@ -53,6 +53,12 @@ metadata = drive.insert_file(metadata, upload_source: 'test.txt', content_type: 
 # Download a file
 drive.get_file(metadata.id, download_dest: '/tmp/myfile.txt')
 ```
+### Naming conventions vs JSON representation
+
+Object properties in the ruby client use the standard ruby convention for naming -- snake_case. This differs from the underlying JSON representation which typically uses camelCase for properties. There are a few notable exceptions to this rule:
+
+* For properties that are defined as hashes with user-defined keys, no translation is performed on the key.
+* For embedded field masks in requests (for example, the Sheets API), specify the camelCase form when referencing fields.
 
 ### Media
 
@@ -306,7 +312,7 @@ A URL can also be specified:
 ## License
 
 This library is licensed under Apache 2.0. Full license text is
-available in [LICENSE](LICENSE).
+available in [LICENSE.txt](LICENSE.txt).
 
 ## Contributing
 
