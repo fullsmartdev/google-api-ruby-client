@@ -47,42 +47,37 @@ module Google
           super('https://youtubereporting.googleapis.com/', '')
         end
         
-        # Method for media download. Download is supported
-        # on the URI `/v1/media/`+name`?alt=media`.
-        # @param [String] resource_name
-        #   Name of the media that is being downloaded.  See
-        #   ReadRequest.resource_name.
+        # Creates a job and returns it.
+        # @param [Google::Apis::YoutubereportingV1::Job] job_object
+        # @param [String] on_behalf_of_content_owner
+        #   The content owner's external ID on which behalf the user is acting on. If
+        #   not set, the user is acting for himself (his own channel).
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
         #   Available to use for quota purposes for server-side applications. Can be any
         #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [IO, String] download_dest
-        #   IO stream or filename to receive content download
         # @param [Google::Apis::RequestOptions] options
         #   Request-specific options
         #
         # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::YoutubereportingV1::Media] parsed result object
+        # @yieldparam result [Google::Apis::YoutubereportingV1::Job] parsed result object
         # @yieldparam err [StandardError] error object if request failed
         #
-        # @return [Google::Apis::YoutubereportingV1::Media]
+        # @return [Google::Apis::YoutubereportingV1::Job]
         #
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def download_medium(resource_name, quota_user: nil, fields: nil, download_dest: nil, options: nil, &block)
-          if download_dest.nil?
-            command =  make_simple_command(:get, 'v1/media/{+resourceName}', options)
-          else
-            command = make_download_command(:get, 'v1/media/{+resourceName}', options)
-            command.download_dest = download_dest
-          end
-          command.response_representation = Google::Apis::YoutubereportingV1::Media::Representation
-          command.response_class = Google::Apis::YoutubereportingV1::Media
-          command.params['resourceName'] = resource_name unless resource_name.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
+        def create_job(job_object = nil, on_behalf_of_content_owner: nil, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:post, 'v1/jobs', options)
+          command.request_representation = Google::Apis::YoutubereportingV1::Job::Representation
+          command.request_object = job_object
+          command.response_representation = Google::Apis::YoutubereportingV1::Job::Representation
+          command.response_class = Google::Apis::YoutubereportingV1::Job
+          command.query['onBehalfOfContentOwner'] = on_behalf_of_content_owner unless on_behalf_of_content_owner.nil?
           command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)
         end
         
@@ -92,11 +87,11 @@ module Google
         # @param [String] on_behalf_of_content_owner
         #   The content owner's external ID on which behalf the user is acting on. If
         #   not set, the user is acting for himself (his own channel).
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
         #   Available to use for quota purposes for server-side applications. Can be any
         #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
         # @param [Google::Apis::RequestOptions] options
         #   Request-specific options
         #
@@ -109,14 +104,14 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def delete_job(job_id, on_behalf_of_content_owner: nil, quota_user: nil, fields: nil, options: nil, &block)
+        def delete_job(job_id, on_behalf_of_content_owner: nil, fields: nil, quota_user: nil, options: nil, &block)
           command =  make_simple_command(:delete, 'v1/jobs/{jobId}', options)
           command.response_representation = Google::Apis::YoutubereportingV1::Empty::Representation
           command.response_class = Google::Apis::YoutubereportingV1::Empty
           command.params['jobId'] = job_id unless job_id.nil?
           command.query['onBehalfOfContentOwner'] = on_behalf_of_content_owner unless on_behalf_of_content_owner.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)
         end
         
@@ -136,11 +131,11 @@ module Google
         # @param [String] on_behalf_of_content_owner
         #   The content owner's external ID on which behalf the user is acting on. If
         #   not set, the user is acting for himself (his own channel).
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
         #   Available to use for quota purposes for server-side applications. Can be any
         #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
         # @param [Google::Apis::RequestOptions] options
         #   Request-specific options
         #
@@ -153,7 +148,7 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_jobs(page_token: nil, include_system_managed: nil, page_size: nil, on_behalf_of_content_owner: nil, quota_user: nil, fields: nil, options: nil, &block)
+        def list_jobs(page_token: nil, include_system_managed: nil, page_size: nil, on_behalf_of_content_owner: nil, fields: nil, quota_user: nil, options: nil, &block)
           command =  make_simple_command(:get, 'v1/jobs', options)
           command.response_representation = Google::Apis::YoutubereportingV1::ListJobsResponse::Representation
           command.response_class = Google::Apis::YoutubereportingV1::ListJobsResponse
@@ -161,8 +156,8 @@ module Google
           command.query['includeSystemManaged'] = include_system_managed unless include_system_managed.nil?
           command.query['pageSize'] = page_size unless page_size.nil?
           command.query['onBehalfOfContentOwner'] = on_behalf_of_content_owner unless on_behalf_of_content_owner.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)
         end
         
@@ -172,11 +167,11 @@ module Google
         # @param [String] on_behalf_of_content_owner
         #   The content owner's external ID on which behalf the user is acting on. If
         #   not set, the user is acting for himself (his own channel).
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
         #   Available to use for quota purposes for server-side applications. Can be any
         #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
         # @param [Google::Apis::RequestOptions] options
         #   Request-specific options
         #
@@ -189,48 +184,14 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_job(job_id, on_behalf_of_content_owner: nil, quota_user: nil, fields: nil, options: nil, &block)
+        def get_job(job_id, on_behalf_of_content_owner: nil, fields: nil, quota_user: nil, options: nil, &block)
           command =  make_simple_command(:get, 'v1/jobs/{jobId}', options)
           command.response_representation = Google::Apis::YoutubereportingV1::Job::Representation
           command.response_class = Google::Apis::YoutubereportingV1::Job
           command.params['jobId'] = job_id unless job_id.nil?
           command.query['onBehalfOfContentOwner'] = on_behalf_of_content_owner unless on_behalf_of_content_owner.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['fields'] = fields unless fields.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Creates a job and returns it.
-        # @param [Google::Apis::YoutubereportingV1::Job] job_object
-        # @param [String] on_behalf_of_content_owner
-        #   The content owner's external ID on which behalf the user is acting on. If
-        #   not set, the user is acting for himself (his own channel).
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::YoutubereportingV1::Job] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::YoutubereportingV1::Job]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def create_job(job_object = nil, on_behalf_of_content_owner: nil, quota_user: nil, fields: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'v1/jobs', options)
-          command.request_representation = Google::Apis::YoutubereportingV1::Job::Representation
-          command.request_object = job_object
-          command.response_representation = Google::Apis::YoutubereportingV1::Job::Representation
-          command.response_class = Google::Apis::YoutubereportingV1::Job
-          command.query['onBehalfOfContentOwner'] = on_behalf_of_content_owner unless on_behalf_of_content_owner.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
-          command.query['fields'] = fields unless fields.nil?
           execute_or_queue_command(command, &block)
         end
         
@@ -257,11 +218,11 @@ module Google
         # @param [String] start_time_before
         #   If set, only reports whose start time is smaller than the specified
         #   date/time are returned.
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
         #   Available to use for quota purposes for server-side applications. Can be any
         #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
         # @param [Google::Apis::RequestOptions] options
         #   Request-specific options
         #
@@ -274,7 +235,7 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_job_reports(job_id, created_after: nil, start_time_at_or_after: nil, page_token: nil, page_size: nil, on_behalf_of_content_owner: nil, start_time_before: nil, quota_user: nil, fields: nil, options: nil, &block)
+        def list_job_reports(job_id, created_after: nil, start_time_at_or_after: nil, page_token: nil, page_size: nil, on_behalf_of_content_owner: nil, start_time_before: nil, fields: nil, quota_user: nil, options: nil, &block)
           command =  make_simple_command(:get, 'v1/jobs/{jobId}/reports', options)
           command.response_representation = Google::Apis::YoutubereportingV1::ListReportsResponse::Representation
           command.response_class = Google::Apis::YoutubereportingV1::ListReportsResponse
@@ -285,8 +246,8 @@ module Google
           command.query['pageSize'] = page_size unless page_size.nil?
           command.query['onBehalfOfContentOwner'] = on_behalf_of_content_owner unless on_behalf_of_content_owner.nil?
           command.query['startTimeBefore'] = start_time_before unless start_time_before.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)
         end
         
@@ -298,11 +259,11 @@ module Google
         # @param [String] on_behalf_of_content_owner
         #   The content owner's external ID on which behalf the user is acting on. If
         #   not set, the user is acting for himself (his own channel).
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
         #   Available to use for quota purposes for server-side applications. Can be any
         #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
         # @param [Google::Apis::RequestOptions] options
         #   Request-specific options
         #
@@ -315,15 +276,15 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_job_report(job_id, report_id, on_behalf_of_content_owner: nil, quota_user: nil, fields: nil, options: nil, &block)
+        def get_job_report(job_id, report_id, on_behalf_of_content_owner: nil, fields: nil, quota_user: nil, options: nil, &block)
           command =  make_simple_command(:get, 'v1/jobs/{jobId}/reports/{reportId}', options)
           command.response_representation = Google::Apis::YoutubereportingV1::Report::Representation
           command.response_class = Google::Apis::YoutubereportingV1::Report
           command.params['jobId'] = job_id unless job_id.nil?
           command.params['reportId'] = report_id unless report_id.nil?
           command.query['onBehalfOfContentOwner'] = on_behalf_of_content_owner unless on_behalf_of_content_owner.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)
         end
         
@@ -343,11 +304,11 @@ module Google
         # @param [Fixnum] page_size
         #   Requested page size. Server may return fewer report types than requested.
         #   If unspecified, server will pick an appropriate default.
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
         #   Available to use for quota purposes for server-side applications. Can be any
         #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
         # @param [Google::Apis::RequestOptions] options
         #   Request-specific options
         #
@@ -360,7 +321,7 @@ module Google
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def list_report_types(on_behalf_of_content_owner: nil, page_token: nil, include_system_managed: nil, page_size: nil, quota_user: nil, fields: nil, options: nil, &block)
+        def list_report_types(on_behalf_of_content_owner: nil, page_token: nil, include_system_managed: nil, page_size: nil, fields: nil, quota_user: nil, options: nil, &block)
           command =  make_simple_command(:get, 'v1/reportTypes', options)
           command.response_representation = Google::Apis::YoutubereportingV1::ListReportTypesResponse::Representation
           command.response_class = Google::Apis::YoutubereportingV1::ListReportTypesResponse
@@ -368,8 +329,47 @@ module Google
           command.query['pageToken'] = page_token unless page_token.nil?
           command.query['includeSystemManaged'] = include_system_managed unless include_system_managed.nil?
           command.query['pageSize'] = page_size unless page_size.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
           command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Method for media download. Download is supported
+        # on the URI `/v1/media/`+name`?alt=media`.
+        # @param [String] resource_name
+        #   Name of the media that is being downloaded.  See
+        #   ReadRequest.resource_name.
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [IO, String] download_dest
+        #   IO stream or filename to receive content download
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::YoutubereportingV1::Media] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::YoutubereportingV1::Media]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def download_medium(resource_name, fields: nil, quota_user: nil, download_dest: nil, options: nil, &block)
+          if download_dest.nil?
+            command =  make_simple_command(:get, 'v1/media/{+resourceName}', options)
+          else
+            command = make_download_command(:get, 'v1/media/{+resourceName}', options)
+            command.download_dest = download_dest
+          end
+          command.response_representation = Google::Apis::YoutubereportingV1::Media::Representation
+          command.response_class = Google::Apis::YoutubereportingV1::Media
+          command.params['resourceName'] = resource_name unless resource_name.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)
         end
 
