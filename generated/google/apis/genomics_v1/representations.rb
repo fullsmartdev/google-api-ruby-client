@@ -22,7 +22,55 @@ module Google
   module Apis
     module GenomicsV1
       
-      class TestIamPermissionsResponse
+      class SearchAnnotationSetsResponse
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class ImportVariantsRequest
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class ListCoverageBucketsResponse
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class VariantAnnotation
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class ExportVariantSetRequest
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class SearchAnnotationsRequest
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class OperationEvent
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class CodingSequence
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class SearchReferencesResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -34,7 +82,7 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class SearchReferencesResponse
+      class TestIamPermissionsResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -52,13 +100,13 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class SearchReferencesRequest
+      class LinearAlignment
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class LinearAlignment
+      class SearchReferencesRequest
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -142,13 +190,13 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class Annotation
+      class CancelOperationRequest
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class CancelOperationRequest
+      class Annotation
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -220,19 +268,19 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class ReferenceBound
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
       class BatchCreateAnnotationsResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class SearchCallSetsResponse
+      class ReferenceBound
+        class Representation < Google::Apis::Core::JsonRepresentation; end
+      
+        include Google::Apis::Core::JsonObjectSupport
+      end
+      
+      class ListOperationsResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -244,7 +292,7 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class ListOperationsResponse
+      class SearchCallSetsResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -370,13 +418,13 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class AnnotationSet
+      class Transcript
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class Transcript
+      class AnnotationSet
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -419,63 +467,87 @@ module Google
       end
       
       class SearchAnnotationSetsResponse
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class ImportVariantsRequest
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class VariantAnnotation
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class ListCoverageBucketsResponse
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class ExportVariantSetRequest
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class SearchAnnotationsRequest
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class OperationEvent
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class CodingSequence
-        class Representation < Google::Apis::Core::JsonRepresentation; end
-      
-        include Google::Apis::Core::JsonObjectSupport
-      end
-      
-      class TestIamPermissionsResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          collection :permissions, as: 'permissions'
+          collection :annotation_sets, as: 'annotationSets', class: Google::Apis::GenomicsV1::AnnotationSet, decorator: Google::Apis::GenomicsV1::AnnotationSet::Representation
+      
+          property :next_page_token, as: 'nextPageToken'
         end
       end
       
-      class GetIamPolicyRequest
+      class ImportVariantsRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          hash :info_merge_config, as: 'infoMergeConfig'
+          property :variant_set_id, as: 'variantSetId'
+          collection :source_uris, as: 'sourceUris'
+          property :normalize_reference_names, as: 'normalizeReferenceNames'
+          property :format, as: 'format'
+        end
+      end
+      
+      class ListCoverageBucketsResponse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :next_page_token, as: 'nextPageToken'
+          property :bucket_width, as: 'bucketWidth'
+          collection :coverage_buckets, as: 'coverageBuckets', class: Google::Apis::GenomicsV1::CoverageBucket, decorator: Google::Apis::GenomicsV1::CoverageBucket::Representation
+      
+        end
+      end
+      
+      class VariantAnnotation
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :effect, as: 'effect'
+          collection :transcript_ids, as: 'transcriptIds'
+          property :type, as: 'type'
+          property :alternate_bases, as: 'alternateBases'
+          property :gene_id, as: 'geneId'
+          property :clinical_significance, as: 'clinicalSignificance'
+          collection :conditions, as: 'conditions', class: Google::Apis::GenomicsV1::ClinicalCondition, decorator: Google::Apis::GenomicsV1::ClinicalCondition::Representation
+      
+        end
+      end
+      
+      class ExportVariantSetRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :format, as: 'format'
+          property :bigquery_dataset, as: 'bigqueryDataset'
+          property :bigquery_table, as: 'bigqueryTable'
+          collection :call_set_ids, as: 'callSetIds'
+          property :project_id, as: 'projectId'
+        end
+      end
+      
+      class SearchAnnotationsRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :start, as: 'start'
+          collection :annotation_set_ids, as: 'annotationSetIds'
+          property :reference_name, as: 'referenceName'
+          property :reference_id, as: 'referenceId'
+          property :end, as: 'end'
+          property :page_token, as: 'pageToken'
+          property :page_size, as: 'pageSize'
+        end
+      end
+      
+      class OperationEvent
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :start_time, as: 'startTime'
+          property :description, as: 'description'
+          property :end_time, as: 'endTime'
+        end
+      end
+      
+      class CodingSequence
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :start, as: 'start'
+          property :end, as: 'end'
         end
       end
       
@@ -488,24 +560,48 @@ module Google
         end
       end
       
+      class GetIamPolicyRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+        end
+      end
+      
+      class TestIamPermissionsResponse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :permissions, as: 'permissions'
+        end
+      end
+      
       class SearchAnnotationSetsRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :name, as: 'name'
-          property :reference_set_id, as: 'referenceSetId'
           property :page_token, as: 'pageToken'
           property :page_size, as: 'pageSize'
           collection :dataset_ids, as: 'datasetIds'
           collection :types, as: 'types'
+          property :name, as: 'name'
+          property :reference_set_id, as: 'referenceSetId'
         end
       end
       
       class SearchReadGroupSetsResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :next_page_token, as: 'nextPageToken'
           collection :read_group_sets, as: 'readGroupSets', class: Google::Apis::GenomicsV1::ReadGroupSet, decorator: Google::Apis::GenomicsV1::ReadGroupSet::Representation
       
-          property :next_page_token, as: 'nextPageToken'
+        end
+      end
+      
+      class LinearAlignment
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :mapping_quality, as: 'mappingQuality'
+          property :position, as: 'position', class: Google::Apis::GenomicsV1::Position, decorator: Google::Apis::GenomicsV1::Position::Representation
+      
+          collection :cigar, as: 'cigar', class: Google::Apis::GenomicsV1::CigarUnit, decorator: Google::Apis::GenomicsV1::CigarUnit::Representation
+      
         end
       end
       
@@ -520,24 +616,13 @@ module Google
         end
       end
       
-      class LinearAlignment
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :position, as: 'position', class: Google::Apis::GenomicsV1::Position, decorator: Google::Apis::GenomicsV1::Position::Representation
-      
-          collection :cigar, as: 'cigar', class: Google::Apis::GenomicsV1::CigarUnit, decorator: Google::Apis::GenomicsV1::CigarUnit::Representation
-      
-          property :mapping_quality, as: 'mappingQuality'
-        end
-      end
-      
       class Dataset
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :name, as: 'name'
           property :project_id, as: 'projectId'
           property :id, as: 'id'
           property :create_time, as: 'createTime'
+          property :name, as: 'name'
         end
       end
       
@@ -551,21 +636,21 @@ module Google
       class ReadGroup
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :id, as: 'id'
+          collection :programs, as: 'programs', class: Google::Apis::GenomicsV1::Program, decorator: Google::Apis::GenomicsV1::Program::Representation
+      
+          property :predicted_insert_size, as: 'predictedInsertSize'
+          property :description, as: 'description'
+          property :sample_id, as: 'sampleId'
+          property :dataset_id, as: 'datasetId'
+          property :experiment, as: 'experiment', class: Google::Apis::GenomicsV1::Experiment, decorator: Google::Apis::GenomicsV1::Experiment::Representation
+      
           property :name, as: 'name'
           property :reference_set_id, as: 'referenceSetId'
           hash :info, as: 'info', :class => Array do
         include Representable::JSON::Collection
         items
       end
-      
-          property :id, as: 'id'
-          property :predicted_insert_size, as: 'predictedInsertSize'
-          collection :programs, as: 'programs', class: Google::Apis::GenomicsV1::Program, decorator: Google::Apis::GenomicsV1::Program::Representation
-      
-          property :description, as: 'description'
-          property :sample_id, as: 'sampleId'
-          property :dataset_id, as: 'datasetId'
-          property :experiment, as: 'experiment', class: Google::Apis::GenomicsV1::Experiment, decorator: Google::Apis::GenomicsV1::Experiment::Representation
       
         end
       end
@@ -573,18 +658,18 @@ module Google
       class ReadGroupSet
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :id, as: 'id'
-          property :dataset_id, as: 'datasetId'
-          property :filename, as: 'filename'
-          collection :read_groups, as: 'readGroups', class: Google::Apis::GenomicsV1::ReadGroup, decorator: Google::Apis::GenomicsV1::ReadGroup::Representation
-      
-          property :name, as: 'name'
-          property :reference_set_id, as: 'referenceSetId'
           hash :info, as: 'info', :class => Array do
         include Representable::JSON::Collection
         items
       end
       
+          property :id, as: 'id'
+          property :dataset_id, as: 'datasetId'
+          collection :read_groups, as: 'readGroups', class: Google::Apis::GenomicsV1::ReadGroup, decorator: Google::Apis::GenomicsV1::ReadGroup::Representation
+      
+          property :filename, as: 'filename'
+          property :name, as: 'name'
+          property :reference_set_id, as: 'referenceSetId'
         end
       end
       
@@ -616,9 +701,9 @@ module Google
       class Position
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :reverse_strand, as: 'reverseStrand'
           property :position, as: 'position'
           property :reference_name, as: 'referenceName'
+          property :reverse_strand, as: 'reverseStrand'
         end
       end
       
@@ -634,20 +719,20 @@ module Google
       class SearchCallSetsRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :name, as: 'name'
-          property :page_token, as: 'pageToken'
           property :page_size, as: 'pageSize'
           collection :variant_set_ids, as: 'variantSetIds'
+          property :name, as: 'name'
+          property :page_token, as: 'pageToken'
         end
       end
       
       class ImportReadGroupSetsRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :reference_set_id, as: 'referenceSetId'
           property :partition_strategy, as: 'partitionStrategy'
           property :dataset_id, as: 'datasetId'
           collection :source_uris, as: 'sourceUris'
+          property :reference_set_id, as: 'referenceSetId'
         end
       end
       
@@ -664,13 +749,19 @@ module Google
       class SearchReadsRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          collection :read_group_set_ids, as: 'readGroupSetIds'
           collection :read_group_ids, as: 'readGroupIds'
           property :end, as: 'end'
           property :page_token, as: 'pageToken'
           property :page_size, as: 'pageSize'
           property :start, as: 'start'
           property :reference_name, as: 'referenceName'
+          collection :read_group_set_ids, as: 'readGroupSetIds'
+        end
+      end
+      
+      class CancelOperationRequest
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
         end
       end
       
@@ -692,15 +783,9 @@ module Google
           property :name, as: 'name'
           property :variant, as: 'variant', class: Google::Apis::GenomicsV1::VariantAnnotation, decorator: Google::Apis::GenomicsV1::VariantAnnotation::Representation
       
-          property :id, as: 'id'
           property :reference_id, as: 'referenceId'
+          property :id, as: 'id'
           property :reverse_strand, as: 'reverseStrand'
-        end
-      end
-      
-      class CancelOperationRequest
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
         end
       end
       
@@ -734,7 +819,6 @@ module Google
       class VariantCall
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          collection :genotype, as: 'genotype'
           property :phaseset, as: 'phaseset'
           hash :info, as: 'info', :class => Array do
         include Representable::JSON::Collection
@@ -744,33 +828,34 @@ module Google
           property :call_set_name, as: 'callSetName'
           collection :genotype_likelihood, as: 'genotypeLikelihood'
           property :call_set_id, as: 'callSetId'
+          collection :genotype, as: 'genotype'
         end
       end
       
       class SearchVariantsResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :next_page_token, as: 'nextPageToken'
           collection :variants, as: 'variants', class: Google::Apis::GenomicsV1::Variant, decorator: Google::Apis::GenomicsV1::Variant::Representation
       
-          property :next_page_token, as: 'nextPageToken'
         end
       end
       
       class ListBasesResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :sequence, as: 'sequence'
           property :offset, as: 'offset'
           property :next_page_token, as: 'nextPageToken'
-          property :sequence, as: 'sequence'
         end
       end
       
       class Status
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :message, as: 'message'
           collection :details, as: 'details'
           property :code, as: 'code'
+          property :message, as: 'message'
         end
       end
       
@@ -783,8 +868,8 @@ module Google
       class Binding
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          collection :members, as: 'members'
           property :role, as: 'role'
+          collection :members, as: 'members'
         end
       end
       
@@ -800,7 +885,6 @@ module Google
       class VariantSet
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :dataset_id, as: 'datasetId'
           property :name, as: 'name'
           property :reference_set_id, as: 'referenceSetId'
           collection :metadata, as: 'metadata', class: Google::Apis::GenomicsV1::VariantSetMetadata, decorator: Google::Apis::GenomicsV1::VariantSetMetadata::Representation
@@ -809,14 +893,7 @@ module Google
       
           property :id, as: 'id'
           property :description, as: 'description'
-        end
-      end
-      
-      class ReferenceBound
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :upper_bound, as: 'upperBound'
-          property :reference_name, as: 'referenceName'
+          property :dataset_id, as: 'datasetId'
         end
       end
       
@@ -828,35 +905,10 @@ module Google
         end
       end
       
-      class SearchCallSetsResponse
+      class ReferenceBound
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          collection :call_sets, as: 'callSets', class: Google::Apis::GenomicsV1::CallSet, decorator: Google::Apis::GenomicsV1::CallSet::Representation
-      
-          property :next_page_token, as: 'nextPageToken'
-        end
-      end
-      
-      class Variant
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          hash :info, as: 'info', :class => Array do
-        include Representable::JSON::Collection
-        items
-      end
-      
-          property :reference_bases, as: 'referenceBases'
-          collection :names, as: 'names'
-          collection :alternate_bases, as: 'alternateBases'
-          property :end, as: 'end'
-          collection :filter, as: 'filter'
-          collection :calls, as: 'calls', class: Google::Apis::GenomicsV1::VariantCall, decorator: Google::Apis::GenomicsV1::VariantCall::Representation
-      
-          property :created, as: 'created'
-          property :start, as: 'start'
-          property :quality, as: 'quality'
-          property :id, as: 'id'
-          property :variant_set_id, as: 'variantSetId'
+          property :upper_bound, as: 'upperBound'
           property :reference_name, as: 'referenceName'
         end
       end
@@ -870,9 +922,43 @@ module Google
         end
       end
       
+      class Variant
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          collection :alternate_bases, as: 'alternateBases'
+          collection :names, as: 'names'
+          property :end, as: 'end'
+          collection :filter, as: 'filter'
+          collection :calls, as: 'calls', class: Google::Apis::GenomicsV1::VariantCall, decorator: Google::Apis::GenomicsV1::VariantCall::Representation
+      
+          property :created, as: 'created'
+          property :start, as: 'start'
+          property :quality, as: 'quality'
+          property :id, as: 'id'
+          property :variant_set_id, as: 'variantSetId'
+          property :reference_name, as: 'referenceName'
+          hash :info, as: 'info', :class => Array do
+        include Representable::JSON::Collection
+        items
+      end
+      
+          property :reference_bases, as: 'referenceBases'
+        end
+      end
+      
+      class SearchCallSetsResponse
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :next_page_token, as: 'nextPageToken'
+          collection :call_sets, as: 'callSets', class: Google::Apis::GenomicsV1::CallSet, decorator: Google::Apis::GenomicsV1::CallSet::Representation
+      
+        end
+      end
+      
       class SearchVariantsRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :reference_name, as: 'referenceName'
           collection :variant_set_ids, as: 'variantSetIds'
           property :end, as: 'end'
           property :max_calls, as: 'maxCalls'
@@ -881,23 +967,22 @@ module Google
           collection :call_set_ids, as: 'callSetIds'
           property :start, as: 'start'
           property :variant_name, as: 'variantName'
-          property :reference_name, as: 'referenceName'
         end
       end
       
       class OperationMetadata
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :client_id, as: 'clientId'
-          collection :events, as: 'events', class: Google::Apis::GenomicsV1::OperationEvent, decorator: Google::Apis::GenomicsV1::OperationEvent::Representation
-      
-          property :end_time, as: 'endTime'
-          property :start_time, as: 'startTime'
           hash :request, as: 'request'
           hash :runtime_metadata, as: 'runtimeMetadata'
-          property :create_time, as: 'createTime'
           hash :labels, as: 'labels'
+          property :create_time, as: 'createTime'
           property :project_id, as: 'projectId'
+          property :client_id, as: 'clientId'
+          property :end_time, as: 'endTime'
+          collection :events, as: 'events', class: Google::Apis::GenomicsV1::OperationEvent, decorator: Google::Apis::GenomicsV1::OperationEvent::Representation
+      
+          property :start_time, as: 'startTime'
         end
       end
       
@@ -932,22 +1017,22 @@ module Google
       class ClinicalCondition
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          collection :names, as: 'names'
           property :omim_id, as: 'omimId'
           collection :external_ids, as: 'externalIds', class: Google::Apis::GenomicsV1::ExternalId, decorator: Google::Apis::GenomicsV1::ExternalId::Representation
       
           property :concept_id, as: 'conceptId'
+          collection :names, as: 'names'
         end
       end
       
       class Program
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :command_line, as: 'commandLine'
+          property :prev_program_id, as: 'prevProgramId'
           property :id, as: 'id'
           property :version, as: 'version'
           property :name, as: 'name'
-          property :command_line, as: 'commandLine'
-          property :prev_program_id, as: 'prevProgramId'
         end
       end
       
@@ -963,18 +1048,18 @@ module Google
       class ComputeEngine
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :instance_name, as: 'instanceName'
           property :zone, as: 'zone'
           property :machine_type, as: 'machineType'
           collection :disk_names, as: 'diskNames'
+          property :instance_name, as: 'instanceName'
         end
       end
       
       class ExternalId
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :id, as: 'id'
           property :source_name, as: 'sourceName'
+          property :id, as: 'id'
         end
       end
       
@@ -996,9 +1081,9 @@ module Google
         items
       end
       
-          property :number, as: 'number'
-          property :id, as: 'id'
           property :value, as: 'value'
+          property :id, as: 'id'
+          property :number, as: 'number'
           property :key, as: 'key'
           property :description, as: 'description'
         end
@@ -1020,11 +1105,11 @@ module Google
       class SearchReferenceSetsRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          collection :md5checksums, as: 'md5checksums'
           collection :accessions, as: 'accessions'
           property :page_token, as: 'pageToken'
           property :page_size, as: 'pageSize'
           property :assembly_id, as: 'assemblyId'
-          collection :md5checksums, as: 'md5checksums'
         end
       end
       
@@ -1058,20 +1143,8 @@ module Google
       class Read
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :read_group_set_id, as: 'readGroupSetId'
-          property :duplicate_fragment, as: 'duplicateFragment'
-          property :read_number, as: 'readNumber'
-          property :aligned_sequence, as: 'alignedSequence'
-          property :read_group_id, as: 'readGroupId'
-          property :next_mate_position, as: 'nextMatePosition', class: Google::Apis::GenomicsV1::Position, decorator: Google::Apis::GenomicsV1::Position::Representation
-      
-          hash :info, as: 'info', :class => Array do
-        include Representable::JSON::Collection
-        items
-      end
-      
-          property :proper_placement, as: 'properPlacement'
           property :supplementary_alignment, as: 'supplementaryAlignment'
+          property :proper_placement, as: 'properPlacement'
           property :fragment_length, as: 'fragmentLength'
           property :failed_vendor_quality_checks, as: 'failedVendorQualityChecks'
           collection :aligned_quality, as: 'alignedQuality'
@@ -1081,46 +1154,41 @@ module Google
           property :id, as: 'id'
           property :secondary_alignment, as: 'secondaryAlignment'
           property :fragment_name, as: 'fragmentName'
+          property :read_group_set_id, as: 'readGroupSetId'
+          property :duplicate_fragment, as: 'duplicateFragment'
+          property :read_number, as: 'readNumber'
+          property :aligned_sequence, as: 'alignedSequence'
+          property :read_group_id, as: 'readGroupId'
+          hash :info, as: 'info', :class => Array do
+        include Representable::JSON::Collection
+        items
+      end
+      
+          property :next_mate_position, as: 'nextMatePosition', class: Google::Apis::GenomicsV1::Position, decorator: Google::Apis::GenomicsV1::Position::Representation
+      
         end
       end
       
       class ReferenceSet
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :id, as: 'id'
+          collection :source_accessions, as: 'sourceAccessions'
+          property :description, as: 'description'
+          property :source_uri, as: 'sourceUri'
+          property :ncbi_taxon_id, as: 'ncbiTaxonId'
           collection :reference_ids, as: 'referenceIds'
           property :md5checksum, as: 'md5checksum'
           property :assembly_id, as: 'assemblyId'
-          property :id, as: 'id'
-          property :description, as: 'description'
-          collection :source_accessions, as: 'sourceAccessions'
-          property :source_uri, as: 'sourceUri'
-          property :ncbi_taxon_id, as: 'ncbiTaxonId'
         end
       end
       
       class CigarUnit
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :operation_length, as: 'operationLength'
           property :operation, as: 'operation'
           property :reference_sequence, as: 'referenceSequence'
-        end
-      end
-      
-      class AnnotationSet
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :id, as: 'id'
-          property :dataset_id, as: 'datasetId'
-          property :source_uri, as: 'sourceUri'
-          property :name, as: 'name'
-          property :reference_set_id, as: 'referenceSetId'
-          hash :info, as: 'info', :class => Array do
-        include Representable::JSON::Collection
-        items
-      end
-      
-          property :type, as: 'type'
+          property :operation_length, as: 'operationLength'
         end
       end
       
@@ -1132,6 +1200,23 @@ module Google
       
           property :coding_sequence, as: 'codingSequence', class: Google::Apis::GenomicsV1::CodingSequence, decorator: Google::Apis::GenomicsV1::CodingSequence::Representation
       
+        end
+      end
+      
+      class AnnotationSet
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :id, as: 'id'
+          property :source_uri, as: 'sourceUri'
+          property :dataset_id, as: 'datasetId'
+          property :name, as: 'name'
+          property :reference_set_id, as: 'referenceSetId'
+          hash :info, as: 'info', :class => Array do
+        include Representable::JSON::Collection
+        items
+      end
+      
+          property :type, as: 'type'
         end
       end
       
@@ -1182,101 +1267,16 @@ module Google
       class CallSet
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          collection :variant_set_ids, as: 'variantSetIds'
+          property :id, as: 'id'
+          property :created, as: 'created'
+          property :sample_id, as: 'sampleId'
           property :name, as: 'name'
           hash :info, as: 'info', :class => Array do
         include Representable::JSON::Collection
         items
       end
       
-          collection :variant_set_ids, as: 'variantSetIds'
-          property :id, as: 'id'
-          property :created, as: 'created'
-          property :sample_id, as: 'sampleId'
-        end
-      end
-      
-      class SearchAnnotationSetsResponse
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          collection :annotation_sets, as: 'annotationSets', class: Google::Apis::GenomicsV1::AnnotationSet, decorator: Google::Apis::GenomicsV1::AnnotationSet::Representation
-      
-          property :next_page_token, as: 'nextPageToken'
-        end
-      end
-      
-      class ImportVariantsRequest
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :format, as: 'format'
-          hash :info_merge_config, as: 'infoMergeConfig'
-          property :variant_set_id, as: 'variantSetId'
-          collection :source_uris, as: 'sourceUris'
-          property :normalize_reference_names, as: 'normalizeReferenceNames'
-        end
-      end
-      
-      class VariantAnnotation
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :effect, as: 'effect'
-          collection :transcript_ids, as: 'transcriptIds'
-          property :type, as: 'type'
-          property :alternate_bases, as: 'alternateBases'
-          property :gene_id, as: 'geneId'
-          property :clinical_significance, as: 'clinicalSignificance'
-          collection :conditions, as: 'conditions', class: Google::Apis::GenomicsV1::ClinicalCondition, decorator: Google::Apis::GenomicsV1::ClinicalCondition::Representation
-      
-        end
-      end
-      
-      class ListCoverageBucketsResponse
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :next_page_token, as: 'nextPageToken'
-          property :bucket_width, as: 'bucketWidth'
-          collection :coverage_buckets, as: 'coverageBuckets', class: Google::Apis::GenomicsV1::CoverageBucket, decorator: Google::Apis::GenomicsV1::CoverageBucket::Representation
-      
-        end
-      end
-      
-      class ExportVariantSetRequest
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :format, as: 'format'
-          property :bigquery_dataset, as: 'bigqueryDataset'
-          property :bigquery_table, as: 'bigqueryTable'
-          collection :call_set_ids, as: 'callSetIds'
-          property :project_id, as: 'projectId'
-        end
-      end
-      
-      class SearchAnnotationsRequest
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :reference_id, as: 'referenceId'
-          property :end, as: 'end'
-          property :page_token, as: 'pageToken'
-          property :page_size, as: 'pageSize'
-          property :start, as: 'start'
-          collection :annotation_set_ids, as: 'annotationSetIds'
-          property :reference_name, as: 'referenceName'
-        end
-      end
-      
-      class OperationEvent
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :start_time, as: 'startTime'
-          property :description, as: 'description'
-          property :end_time, as: 'endTime'
-        end
-      end
-      
-      class CodingSequence
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :start, as: 'start'
-          property :end, as: 'end'
         end
       end
     end

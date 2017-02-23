@@ -802,7 +802,6 @@ module Google
       class DealServingMetadata
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :alcohol_ads_allowed, as: 'alcoholAdsAllowed'
           property :deal_pause_status, as: 'dealPauseStatus', class: Google::Apis::AdexchangebuyerV1_4::DealServingMetadataDealPauseStatus, decorator: Google::Apis::AdexchangebuyerV1_4::DealServingMetadataDealPauseStatus::Representation
       
         end

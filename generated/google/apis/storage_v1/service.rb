@@ -425,8 +425,7 @@ module Google
         # @param [String] project
         #   A valid API project identifier.
         # @param [Fixnum] max_results
-        #   Maximum number of buckets to return in a single response. The service will use
-        #   this parameter or 1,000 items, whichever is smaller.
+        #   Maximum number of buckets to return.
         # @param [String] page_token
         #   A previously-returned page token representing part of the larger set of
         #   results to view.
@@ -1525,10 +1524,9 @@ module Google
         #   truncated after the delimiter, returned in prefixes. Duplicate prefixes are
         #   omitted.
         # @param [Fixnum] max_results
-        #   Maximum number of items plus prefixes to return in a single page of responses.
-        #   As duplicate prefixes are omitted, fewer total results may be returned than
-        #   requested. The service will use this parameter or 1,000 items, whichever is
-        #   smaller.
+        #   Maximum number of items plus prefixes to return. As duplicate prefixes are
+        #   omitted, fewer total results may be returned than requested. The default value
+        #   of this parameter is 1,000 items.
         # @param [String] page_token
         #   A previously-returned page token representing part of the larger set of
         #   results to view.
@@ -1842,10 +1840,9 @@ module Google
         #   truncated after the delimiter, returned in prefixes. Duplicate prefixes are
         #   omitted.
         # @param [Fixnum] max_results
-        #   Maximum number of items plus prefixes to return in a single page of responses.
-        #   As duplicate prefixes are omitted, fewer total results may be returned than
-        #   requested. The service will use this parameter or 1,000 items, whichever is
-        #   smaller.
+        #   Maximum number of items plus prefixes to return. As duplicate prefixes are
+        #   omitted, fewer total results may be returned than requested. The default value
+        #   of this parameter is 1,000 items.
         # @param [String] page_token
         #   A previously-returned page token representing part of the larger set of
         #   results to view.
