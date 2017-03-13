@@ -20,13 +20,13 @@ module Google
   module Apis
     # Google Partners API
     #
-    # Searches certified companies and creates contact leads with them, and also
-    # audits the usage of clients.
+    # Lets advertisers search certified companies and create contact leads with them,
+    # and also audits the usage of clients.
     #
     # @see https://developers.google.com/partners/
     module PartnersV2
       VERSION = 'V2'
-      REVISION = '20170303'
+      REVISION = '20151009'
     end
   end
 end

@@ -22,13 +22,13 @@ module Google
   module Apis
     module ManufacturersV1
       
-      class Issue
+      class ListProductsResponse
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class Product
+      class Issue
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
@@ -40,62 +40,62 @@ module Google
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class ListProductsResponse
+      class Product
         class Representation < Google::Apis::Core::JsonRepresentation; end
       
         include Google::Apis::Core::JsonObjectSupport
       end
       
-      class Issue
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          property :description, as: 'description'
-          property :type, as: 'type'
-          property :attribute, as: 'attribute'
-          property :severity, as: 'severity'
-        end
-      end
-      
-      class Product
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          collection :manually_deleted_attributes, as: 'manuallyDeletedAttributes'
-          collection :issues, as: 'issues', class: Google::Apis::ManufacturersV1::Issue, decorator: Google::Apis::ManufacturersV1::Issue::Representation
-      
-          property :final_attributes, as: 'finalAttributes', class: Google::Apis::ManufacturersV1::Attributes, decorator: Google::Apis::ManufacturersV1::Attributes::Representation
-      
-          property :product_id, as: 'productId'
-          property :uploaded_attributes, as: 'uploadedAttributes', class: Google::Apis::ManufacturersV1::Attributes, decorator: Google::Apis::ManufacturersV1::Attributes::Representation
-      
-          property :parent, as: 'parent'
-          property :manually_provided_attributes, as: 'manuallyProvidedAttributes', class: Google::Apis::ManufacturersV1::Attributes, decorator: Google::Apis::ManufacturersV1::Attributes::Representation
-      
-          property :target_country, as: 'targetCountry'
-          property :content_language, as: 'contentLanguage'
-          property :name, as: 'name'
-        end
-      end
-      
-      class Attributes
-        # @private
-        class Representation < Google::Apis::Core::JsonRepresentation
-          collection :gtin, as: 'gtin'
-          property :title, as: 'title'
-          property :product_line, as: 'productLine'
-          property :brand, as: 'brand'
-          property :product_name, as: 'productName'
-          collection :product_type, as: 'productType'
-          property :mpn, as: 'mpn'
-          property :product_page_url, as: 'productPageUrl'
-        end
-      end
-      
       class ListProductsResponse
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :next_page_token, as: 'nextPageToken'
           collection :products, as: 'products', class: Google::Apis::ManufacturersV1::Product, decorator: Google::Apis::ManufacturersV1::Product::Representation
       
-          property :next_page_token, as: 'nextPageToken'
+        end
+      end
+      
+      class Issue
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :severity, as: 'severity'
+          property :description, as: 'description'
+          property :attribute, as: 'attribute'
+          property :type, as: 'type'
+        end
+      end
+      
+      class Attributes
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :product_page_url, as: 'productPageUrl'
+          property :mpn, as: 'mpn'
+          property :title, as: 'title'
+          property :product_line, as: 'productLine'
+          property :product_name, as: 'productName'
+          property :brand, as: 'brand'
+          collection :product_type, as: 'productType'
+          collection :gtin, as: 'gtin'
+        end
+      end
+      
+      class Product
+        # @private
+        class Representation < Google::Apis::Core::JsonRepresentation
+          property :parent, as: 'parent'
+          property :target_country, as: 'targetCountry'
+          property :content_language, as: 'contentLanguage'
+          collection :manually_deleted_attributes, as: 'manuallyDeletedAttributes'
+          property :product_id, as: 'productId'
+          property :final_attributes, as: 'finalAttributes', class: Google::Apis::ManufacturersV1::Attributes, decorator: Google::Apis::ManufacturersV1::Attributes::Representation
+      
+          collection :issues, as: 'issues', class: Google::Apis::ManufacturersV1::Issue, decorator: Google::Apis::ManufacturersV1::Issue::Representation
+      
+          property :name, as: 'name'
+          property :uploaded_attributes, as: 'uploadedAttributes', class: Google::Apis::ManufacturersV1::Attributes, decorator: Google::Apis::ManufacturersV1::Attributes::Representation
+      
+          property :manually_provided_attributes, as: 'manuallyProvidedAttributes', class: Google::Apis::ManufacturersV1::Attributes, decorator: Google::Apis::ManufacturersV1::Attributes::Representation
+      
         end
       end
     end

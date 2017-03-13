@@ -427,7 +427,8 @@ module Google
         # The method used to deliver the notification. Possible values are:
         # - "email" - Reminders are sent via email.
         # - "sms" - Reminders are sent via SMS. This value is read-only and is ignored
-        # on inserts and updates. SMS reminders are only available for G Suite customers.
+        # on inserts and updates. SMS reminders are only available for Google Apps for
+        # Work, Education, and Government customers.
         # Corresponds to the JSON property `method`
         # @return [String]
         attr_accessor :delivery_method
@@ -1345,8 +1346,9 @@ module Google
       
         # The method used by this reminder. Possible values are:
         # - "email" - Reminders are sent via email.
-        # - "sms" - Reminders are sent via SMS. These are only available for G Suite
-        # customers. Requests to set SMS reminders for other account types are ignored.
+        # - "sms" - Reminders are sent via SMS. These are only available for Google Apps
+        # for Work, Education, and Government customers. Requests to set SMS reminders
+        # for other account types are ignored.
         # - "popup" - Reminders are sent via a UI popup.
         # Corresponds to the JSON property `method`
         # @return [String]
