@@ -88,10 +88,10 @@ module Google
       class ExecutionRequest
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
-          property :session_state, as: 'sessionState'
           property :function, as: 'function'
           property :dev_mode, as: 'devMode'
           collection :parameters, as: 'parameters'
+          property :session_state, as: 'sessionState'
         end
       end
       
@@ -105,12 +105,12 @@ module Google
       class Operation
         # @private
         class Representation < Google::Apis::Core::JsonRepresentation
+          property :done, as: 'done'
           hash :response, as: 'response'
           property :name, as: 'name'
           property :error, as: 'error', class: Google::Apis::ScriptV1::Status, decorator: Google::Apis::ScriptV1::Status::Representation
       
           hash :metadata, as: 'metadata'
-          property :done, as: 'done'
         end
       end
     end

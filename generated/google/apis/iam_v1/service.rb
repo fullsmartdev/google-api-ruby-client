@@ -48,12 +48,10 @@ module Google
           super('https://iam.googleapis.com/', '')
         end
         
-        # Creates a ServiceAccount
-        # and returns it.
-        # @param [String] name
-        #   Required. The resource name of the project associated with the service
-        #   accounts, such as `projects/my-project-123`.
-        # @param [Google::Apis::IamV1::CreateServiceAccountRequest] create_service_account_request_object
+        # Queries roles that can be granted on a particular resource.
+        # A role is grantable if it can be used as the role in a binding for a policy
+        # for that resource.
+        # @param [Google::Apis::IamV1::QueryGrantableRolesRequest] query_grantable_roles_request_object
         # @param [String] fields
         #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
@@ -63,164 +61,20 @@ module Google
         #   Request-specific options
         #
         # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::IamV1::ServiceAccount] parsed result object
+        # @yieldparam result [Google::Apis::IamV1::QueryGrantableRolesResponse] parsed result object
         # @yieldparam err [StandardError] error object if request failed
         #
-        # @return [Google::Apis::IamV1::ServiceAccount]
+        # @return [Google::Apis::IamV1::QueryGrantableRolesResponse]
         #
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def create_service_account(name, create_service_account_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'v1/{+name}/serviceAccounts', options)
-          command.request_representation = Google::Apis::IamV1::CreateServiceAccountRequest::Representation
-          command.request_object = create_service_account_request_object
-          command.response_representation = Google::Apis::IamV1::ServiceAccount::Representation
-          command.response_class = Google::Apis::IamV1::ServiceAccount
-          command.params['name'] = name unless name.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Signs a JWT using a service account's system-managed private key.
-        # If no expiry time (`exp`) is provided in the `SignJwtRequest`, IAM sets an
-        # an expiry time of one hour by default. If you request an expiry time of
-        # more than one hour, the request will fail.
-        # @param [String] name
-        #   The resource name of the service account in the following format:
-        #   `projects/`PROJECT_ID`/serviceAccounts/`SERVICE_ACCOUNT_EMAIL``.
-        #   Using `-` as a wildcard for the project will infer the project from
-        #   the account. The `account` value can be the `email` address or the
-        #   `unique_id` of the service account.
-        # @param [Google::Apis::IamV1::SignJwtRequest] sign_jwt_request_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::IamV1::SignJwtResponse] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::IamV1::SignJwtResponse]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def sign_service_account_jwt(name, sign_jwt_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'v1/{+name}:signJwt', options)
-          command.request_representation = Google::Apis::IamV1::SignJwtRequest::Representation
-          command.request_object = sign_jwt_request_object
-          command.response_representation = Google::Apis::IamV1::SignJwtResponse::Representation
-          command.response_class = Google::Apis::IamV1::SignJwtResponse
-          command.params['name'] = name unless name.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Sets the IAM access control policy for a
-        # ServiceAccount.
-        # @param [String] resource
-        #   REQUIRED: The resource for which the policy is being specified.
-        #   `resource` is usually specified as a path. For example, a Project
-        #   resource is specified as `projects/`project``.
-        # @param [Google::Apis::IamV1::SetIamPolicyRequest] set_iam_policy_request_object
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::IamV1::Policy] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::IamV1::Policy]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def set_service_account_iam_policy(resource, set_iam_policy_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'v1/{+resource}:setIamPolicy', options)
-          command.request_representation = Google::Apis::IamV1::SetIamPolicyRequest::Representation
-          command.request_object = set_iam_policy_request_object
-          command.response_representation = Google::Apis::IamV1::Policy::Representation
-          command.response_class = Google::Apis::IamV1::Policy
-          command.params['resource'] = resource unless resource.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Returns the IAM access control policy for a
-        # ServiceAccount.
-        # @param [String] resource
-        #   REQUIRED: The resource for which the policy is being requested.
-        #   `resource` is usually specified as a path. For example, a Project
-        #   resource is specified as `projects/`project``.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::IamV1::Policy] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::IamV1::Policy]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_project_service_account_iam_policy(resource, fields: nil, quota_user: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'v1/{+resource}:getIamPolicy', options)
-          command.response_representation = Google::Apis::IamV1::Policy::Representation
-          command.response_class = Google::Apis::IamV1::Policy
-          command.params['resource'] = resource unless resource.nil?
-          command.query['fields'] = fields unless fields.nil?
-          command.query['quotaUser'] = quota_user unless quota_user.nil?
-          execute_or_queue_command(command, &block)
-        end
-        
-        # Gets a ServiceAccount.
-        # @param [String] name
-        #   The resource name of the service account in the following format:
-        #   `projects/`PROJECT_ID`/serviceAccounts/`SERVICE_ACCOUNT_EMAIL``.
-        #   Using `-` as a wildcard for the project will infer the project from
-        #   the account. The `account` value can be the `email` address or the
-        #   `unique_id` of the service account.
-        # @param [String] fields
-        #   Selector specifying which fields to include in a partial response.
-        # @param [String] quota_user
-        #   Available to use for quota purposes for server-side applications. Can be any
-        #   arbitrary string assigned to a user, but should not exceed 40 characters.
-        # @param [Google::Apis::RequestOptions] options
-        #   Request-specific options
-        #
-        # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::IamV1::ServiceAccount] parsed result object
-        # @yieldparam err [StandardError] error object if request failed
-        #
-        # @return [Google::Apis::IamV1::ServiceAccount]
-        #
-        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
-        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
-        # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def get_project_service_account(name, fields: nil, quota_user: nil, options: nil, &block)
-          command =  make_simple_command(:get, 'v1/{+name}', options)
-          command.response_representation = Google::Apis::IamV1::ServiceAccount::Representation
-          command.response_class = Google::Apis::IamV1::ServiceAccount
-          command.params['name'] = name unless name.nil?
+        def query_grantable_roles(query_grantable_roles_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:post, 'v1/roles:queryGrantableRoles', options)
+          command.request_representation = Google::Apis::IamV1::QueryGrantableRolesRequest::Representation
+          command.request_object = query_grantable_roles_request_object
+          command.response_representation = Google::Apis::IamV1::QueryGrantableRolesResponse::Representation
+          command.response_class = Google::Apis::IamV1::QueryGrantableRolesResponse
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)
@@ -272,8 +126,7 @@ module Google
         # for a ServiceAccount.
         # @param [String] resource
         #   REQUIRED: The resource for which the policy detail is being requested.
-        #   `resource` is usually specified as a path. For example, a Project
-        #   resource is specified as `projects/`project``.
+        #   See the operation documentation for the appropriate value for this field.
         # @param [Google::Apis::IamV1::TestIamPermissionsRequest] test_iam_permissions_request_object
         # @param [String] fields
         #   Selector specifying which fields to include in a partial response.
@@ -416,15 +269,12 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
-        # Creates a ServiceAccountKey
+        # Creates a ServiceAccount
         # and returns it.
         # @param [String] name
-        #   The resource name of the service account in the following format:
-        #   `projects/`PROJECT_ID`/serviceAccounts/`SERVICE_ACCOUNT_EMAIL``.
-        #   Using `-` as a wildcard for the project will infer the project from
-        #   the account. The `account` value can be the `email` address or the
-        #   `unique_id` of the service account.
-        # @param [Google::Apis::IamV1::CreateServiceAccountKeyRequest] create_service_account_key_request_object
+        #   Required. The resource name of the project associated with the service
+        #   accounts, such as `projects/my-project-123`.
+        # @param [Google::Apis::IamV1::CreateServiceAccountRequest] create_service_account_request_object
         # @param [String] fields
         #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
@@ -434,20 +284,161 @@ module Google
         #   Request-specific options
         #
         # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::IamV1::ServiceAccountKey] parsed result object
+        # @yieldparam result [Google::Apis::IamV1::ServiceAccount] parsed result object
         # @yieldparam err [StandardError] error object if request failed
         #
-        # @return [Google::Apis::IamV1::ServiceAccountKey]
+        # @return [Google::Apis::IamV1::ServiceAccount]
         #
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def create_service_account_key(name, create_service_account_key_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'v1/{+name}/keys', options)
-          command.request_representation = Google::Apis::IamV1::CreateServiceAccountKeyRequest::Representation
-          command.request_object = create_service_account_key_request_object
-          command.response_representation = Google::Apis::IamV1::ServiceAccountKey::Representation
-          command.response_class = Google::Apis::IamV1::ServiceAccountKey
+        def create_service_account(name, create_service_account_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:post, 'v1/{+name}/serviceAccounts', options)
+          command.request_representation = Google::Apis::IamV1::CreateServiceAccountRequest::Representation
+          command.request_object = create_service_account_request_object
+          command.response_representation = Google::Apis::IamV1::ServiceAccount::Representation
+          command.response_class = Google::Apis::IamV1::ServiceAccount
+          command.params['name'] = name unless name.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Signs a JWT using a service account's system-managed private key.
+        # If no expiry time (`exp`) is provided in the `SignJwtRequest`, IAM sets an
+        # an expiry time of one hour by default. If you request an expiry time of
+        # more than one hour, the request will fail.
+        # @param [String] name
+        #   The resource name of the service account in the following format:
+        #   `projects/`PROJECT_ID`/serviceAccounts/`SERVICE_ACCOUNT_EMAIL``.
+        #   Using `-` as a wildcard for the project will infer the project from
+        #   the account. The `account` value can be the `email` address or the
+        #   `unique_id` of the service account.
+        # @param [Google::Apis::IamV1::SignJwtRequest] sign_jwt_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::IamV1::SignJwtResponse] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::IamV1::SignJwtResponse]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def sign_service_account_jwt(name, sign_jwt_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:post, 'v1/{+name}:signJwt', options)
+          command.request_representation = Google::Apis::IamV1::SignJwtRequest::Representation
+          command.request_object = sign_jwt_request_object
+          command.response_representation = Google::Apis::IamV1::SignJwtResponse::Representation
+          command.response_class = Google::Apis::IamV1::SignJwtResponse
+          command.params['name'] = name unless name.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Sets the IAM access control policy for a
+        # ServiceAccount.
+        # @param [String] resource
+        #   REQUIRED: The resource for which the policy is being specified.
+        #   See the operation documentation for the appropriate value for this field.
+        # @param [Google::Apis::IamV1::SetIamPolicyRequest] set_iam_policy_request_object
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::IamV1::Policy] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::IamV1::Policy]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def set_service_account_iam_policy(resource, set_iam_policy_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:post, 'v1/{+resource}:setIamPolicy', options)
+          command.request_representation = Google::Apis::IamV1::SetIamPolicyRequest::Representation
+          command.request_object = set_iam_policy_request_object
+          command.response_representation = Google::Apis::IamV1::Policy::Representation
+          command.response_class = Google::Apis::IamV1::Policy
+          command.params['resource'] = resource unless resource.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Returns the IAM access control policy for a
+        # ServiceAccount.
+        # @param [String] resource
+        #   REQUIRED: The resource for which the policy is being requested.
+        #   See the operation documentation for the appropriate value for this field.
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::IamV1::Policy] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::IamV1::Policy]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def get_project_service_account_iam_policy(resource, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:post, 'v1/{+resource}:getIamPolicy', options)
+          command.response_representation = Google::Apis::IamV1::Policy::Representation
+          command.response_class = Google::Apis::IamV1::Policy
+          command.params['resource'] = resource unless resource.nil?
+          command.query['fields'] = fields unless fields.nil?
+          command.query['quotaUser'] = quota_user unless quota_user.nil?
+          execute_or_queue_command(command, &block)
+        end
+        
+        # Gets a ServiceAccount.
+        # @param [String] name
+        #   The resource name of the service account in the following format:
+        #   `projects/`PROJECT_ID`/serviceAccounts/`SERVICE_ACCOUNT_EMAIL``.
+        #   Using `-` as a wildcard for the project will infer the project from
+        #   the account. The `account` value can be the `email` address or the
+        #   `unique_id` of the service account.
+        # @param [String] fields
+        #   Selector specifying which fields to include in a partial response.
+        # @param [String] quota_user
+        #   Available to use for quota purposes for server-side applications. Can be any
+        #   arbitrary string assigned to a user, but should not exceed 40 characters.
+        # @param [Google::Apis::RequestOptions] options
+        #   Request-specific options
+        #
+        # @yield [result, err] Result & error if block supplied
+        # @yieldparam result [Google::Apis::IamV1::ServiceAccount] parsed result object
+        # @yieldparam err [StandardError] error object if request failed
+        #
+        # @return [Google::Apis::IamV1::ServiceAccount]
+        #
+        # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
+        # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
+        # @raise [Google::Apis::AuthorizationError] Authorization is required
+        def get_project_service_account(name, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:get, 'v1/{+name}', options)
+          command.response_representation = Google::Apis::IamV1::ServiceAccount::Representation
+          command.response_class = Google::Apis::IamV1::ServiceAccount
           command.params['name'] = name unless name.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
@@ -566,10 +557,15 @@ module Google
           execute_or_queue_command(command, &block)
         end
         
-        # Queries roles that can be granted on a particular resource.
-        # A role is grantable if it can be used as the role in a binding for a policy
-        # for that resource.
-        # @param [Google::Apis::IamV1::QueryGrantableRolesRequest] query_grantable_roles_request_object
+        # Creates a ServiceAccountKey
+        # and returns it.
+        # @param [String] name
+        #   The resource name of the service account in the following format:
+        #   `projects/`PROJECT_ID`/serviceAccounts/`SERVICE_ACCOUNT_EMAIL``.
+        #   Using `-` as a wildcard for the project will infer the project from
+        #   the account. The `account` value can be the `email` address or the
+        #   `unique_id` of the service account.
+        # @param [Google::Apis::IamV1::CreateServiceAccountKeyRequest] create_service_account_key_request_object
         # @param [String] fields
         #   Selector specifying which fields to include in a partial response.
         # @param [String] quota_user
@@ -579,20 +575,21 @@ module Google
         #   Request-specific options
         #
         # @yield [result, err] Result & error if block supplied
-        # @yieldparam result [Google::Apis::IamV1::QueryGrantableRolesResponse] parsed result object
+        # @yieldparam result [Google::Apis::IamV1::ServiceAccountKey] parsed result object
         # @yieldparam err [StandardError] error object if request failed
         #
-        # @return [Google::Apis::IamV1::QueryGrantableRolesResponse]
+        # @return [Google::Apis::IamV1::ServiceAccountKey]
         #
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
         # @raise [Google::Apis::ClientError] The request is invalid and should not be retried without modification
         # @raise [Google::Apis::AuthorizationError] Authorization is required
-        def query_grantable_roles(query_grantable_roles_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
-          command =  make_simple_command(:post, 'v1/roles:queryGrantableRoles', options)
-          command.request_representation = Google::Apis::IamV1::QueryGrantableRolesRequest::Representation
-          command.request_object = query_grantable_roles_request_object
-          command.response_representation = Google::Apis::IamV1::QueryGrantableRolesResponse::Representation
-          command.response_class = Google::Apis::IamV1::QueryGrantableRolesResponse
+        def create_service_account_key(name, create_service_account_key_request_object = nil, fields: nil, quota_user: nil, options: nil, &block)
+          command =  make_simple_command(:post, 'v1/{+name}/keys', options)
+          command.request_representation = Google::Apis::IamV1::CreateServiceAccountKeyRequest::Representation
+          command.request_object = create_service_account_key_request_object
+          command.response_representation = Google::Apis::IamV1::ServiceAccountKey::Representation
+          command.response_class = Google::Apis::IamV1::ServiceAccountKey
+          command.params['name'] = name unless name.nil?
           command.query['fields'] = fields unless fields.nil?
           command.query['quotaUser'] = quota_user unless quota_user.nil?
           execute_or_queue_command(command, &block)

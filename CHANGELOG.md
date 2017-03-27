@@ -1,3 +1,10 @@
+# 0.10.2
+* Regenerate APIs
+
+# 0.10.1
+* Regenerate APIs
+* Add `cloudkms:v1`
+
 # 0.10.0
 * Regenerate APIs
 * Some exceptions are more descriptive for specific errors

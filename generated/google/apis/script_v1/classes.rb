@@ -130,20 +130,6 @@ module Google
       class ExecutionRequest
         include Google::Apis::Core::Hashable
       
-        # For Android add-ons only. An ID that represents the user's current session
-        # in the Android app for Google Docs or Sheets, included as extra data in the
-        # [`Intent`](https://developer.android.com/guide/components/intents-filters.html)
-        # that launches the add-on. When an Android add-on is run with a session
-        # state, it gains the privileges of a
-        # [bound](https://developers.google.com/apps-script/guides/bound) script &mdash;
-        # that is, it can access information like the user's current cursor position
-        # (in Docs) or selected cell (in Sheets). To retrieve the state, call
-        # `Intent.getStringExtra("com.google.android.apps.docs.addons.SessionState")`.
-        # Optional.
-        # Corresponds to the JSON property `sessionState`
-        # @return [String]
-        attr_accessor :session_state
-      
         # The name of the function to execute in the given script. The name does not
         # include parentheses or parameters.
         # Corresponds to the JSON property `function`
@@ -167,16 +153,30 @@ module Google
         # @return [Array<Object>]
         attr_accessor :parameters
       
+        # For Android add-ons only. An ID that represents the user's current session
+        # in the Android app for Google Docs or Sheets, included as extra data in the
+        # [`Intent`](https://developer.android.com/guide/components/intents-filters.html)
+        # that launches the add-on. When an Android add-on is run with a session
+        # state, it gains the privileges of a
+        # [bound](https://developers.google.com/apps-script/guides/bound) script &mdash;
+        # that is, it can access information like the user's current cursor position
+        # (in Docs) or selected cell (in Sheets). To retrieve the state, call
+        # `Intent.getStringExtra("com.google.android.apps.docs.addons.SessionState")`.
+        # Optional.
+        # Corresponds to the JSON property `sessionState`
+        # @return [String]
+        attr_accessor :session_state
+      
         def initialize(**args)
            update!(**args)
         end
       
         # Update properties of this object
         def update!(**args)
-          @session_state = args[:session_state] if args.key?(:session_state)
           @function = args[:function] if args.key?(:function)
           @dev_mode = args[:dev_mode] if args.key?(:dev_mode)
           @parameters = args[:parameters] if args.key?(:parameters)
+          @session_state = args[:session_state] if args.key?(:session_state)
         end
       end
       
@@ -225,6 +225,12 @@ module Google
       class Operation
         include Google::Apis::Core::Hashable
       
+        # This field is not used.
+        # Corresponds to the JSON property `done`
+        # @return [Boolean]
+        attr_accessor :done
+        alias_method :done?, :done
+      
         # If the script function returns successfully, this field will contain an `
         # ExecutionResponse` object with the function's return value as the object's `
         # result` field.
@@ -249,23 +255,17 @@ module Google
         # @return [Hash<String,Object>]
         attr_accessor :metadata
       
-        # This field is not used.
-        # Corresponds to the JSON property `done`
-        # @return [Boolean]
-        attr_accessor :done
-        alias_method :done?, :done
-      
         def initialize(**args)
            update!(**args)
         end
       
         # Update properties of this object
         def update!(**args)
+          @done = args[:done] if args.key?(:done)
           @response = args[:response] if args.key?(:response)
           @name = args[:name] if args.key?(:name)
           @error = args[:error] if args.key?(:error)
           @metadata = args[:metadata] if args.key?(:metadata)
-          @done = args[:done] if args.key?(:done)
         end
       end
     end
