@@ -33,7 +33,6 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
       attr_accessor :date_value
       attr_accessor :nil_date_value
       attr_accessor :bytes_value
-      attr_accessor :big_value
       attr_accessor :items
       attr_accessor :child
       attr_accessor :children
@@ -52,7 +51,6 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
       property :date_value, as: 'dateValue', type: DateTime
       property :nil_date_value, as: 'nullDateValue', type: DateTime
       property :bytes_value, as: 'bytesValue', base64: true
-      property :big_value, as: 'bigValue', numeric_string: true
       property :items
       property :child, class: klass do
         property :value
@@ -108,10 +106,6 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
     it 'serializes object collections' do
       expect(json).to be_json_eql(%([{"value" : "child"}])).at_path('children')
     end
-
-    it 'serializes numeric strings' do
-      expect(json).to be_json_eql(%("1208925819614629174706176")).at_path('bigValue')
-    end
   end
 
   context 'with model object' do
@@ -130,7 +124,6 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
       model.child.value = 'child'
       model.children = [model.child]
       model.nil_date_value = nil
-      model.big_value = 1208925819614629174706176
       model
     end
 
@@ -150,7 +143,6 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
         boolean_value_true: true,
         boolean_value_false: false,
         bytes_value: 'Hello world',
-        big_value: 1208925819614629174706176,
         items: [1, 2, 3],
         child: {
           value: 'child'
@@ -173,7 +165,6 @@ RSpec.describe Google::Apis::Core::JsonRepresentation do
   "numericValue": 123,
   "dateValue": "2015-05-01T12:00:00+00:00",
   "bytesValue": "SGVsbG8gd29ybGQ=",
-  "bigValue": "1208925819614629174706176",
   "items": [1,2,3],
   "child": {"value" : "hello"},
   "children": [{"value" : "hello"}]
@@ -213,10 +204,5 @@ EOF
     it 'serializes object collections' do
       expect(model.children[0].value).to eql 'hello'
     end
-
-    it 'deserializes numeric strings' do
-      expect(model.big_value).to eql 1208925819614629174706176
-    end
-
   end
 end

@@ -26,8 +26,7 @@ module Google
       :retries,
       :header,
       :timeout_sec,
-      :open_timeout_sec,
-      :normalize_unicode)
+      :open_timeout_sec)
 
     # General client options
     class ClientOptions
@@ -57,8 +56,6 @@ module Google
       #   @return [Fixnum] How long, in seconds, before failed connections time out
       # @!attribute [rw] header
       #   @return [Hash<String,String] Additional HTTP headers to include in requests
-      # @!attribute [rw] normalize_unicode
-      #   @return [Boolean] True if unicode strings should be normalized in path parameters
 
       # Get the default options
       # @return [Google::Apis::RequestOptions]
@@ -81,8 +78,8 @@ module Google
     ClientOptions.default.use_net_http = false
     ClientOptions.default.application_name = 'unknown'
     ClientOptions.default.application_version = '0.0.0'
+
     RequestOptions.default.retries = 0
     RequestOptions.default.open_timeout_sec = 20
-    RequestOptions.default.normalize_unicode = false
   end
 end

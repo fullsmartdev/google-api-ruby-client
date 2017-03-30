@@ -54,7 +54,7 @@ module Google
         def prepare!
           query[FIELDS_PARAM] = normalize_fields_param(query[FIELDS_PARAM]) if query.key?(FIELDS_PARAM)
           if request_representation && request_object
-            header['Content-Type'] ||= JSON_CONTENT_TYPE
+            header[:content_type] ||= JSON_CONTENT_TYPE
             self.body = request_representation.new(request_object).to_json(user_options: { skip_undefined: true })
           end
           super
@@ -82,7 +82,7 @@ module Google
         #
         # @param [Fixnum] status
         #   HTTP status code of response
-        # @param [Hash] header
+        # @param [Hurley::Header] header
         #   HTTP response headers
         # @param [String] body
         #   HTTP response body

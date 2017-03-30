@@ -17,6 +17,9 @@ require 'addressable/template'
 require 'google/apis/options'
 require 'google/apis/errors'
 require 'retriable'
+require 'hurley'
+require 'hurley/addressable'
+require 'hurley_patches'
 require 'google/apis/core/logging'
 require 'pp'
 
@@ -38,7 +41,7 @@ module Google
         attr_accessor :url
 
         # HTTP headers
-        # @return [Hash]
+        # @return [Hurley::Header]
         attr_accessor :header
 
         # Request body
@@ -50,7 +53,7 @@ module Google
         attr_accessor :method
 
         # HTTP Client
-        # @return [HTTPClient]
+        # @return [Hurley::Client]
         attr_accessor :connection
 
         # Query params
@@ -72,7 +75,7 @@ module Google
           self.url = url
           self.url = Addressable::Template.new(url) if url.is_a?(String)
           self.method = method
-          self.header = Hash.new
+          self.header = Hurley::Header.new
           self.body = body
           self.query = {}
           self.params = {}
@@ -80,7 +83,7 @@ module Google
 
         # Execute the command, retrying as necessary
         #
-        # @param [HTTPClient] client
+        # @param [Hurley::Client] client
         #   HTTP client
         # @yield [result, err] Result or error if block supplied
         # @return [Object]
@@ -139,12 +142,8 @@ module Google
         # @private
         # @return [void]
         def prepare!
-          normalize_unicode = true
-          if options
-            header.update(options.header) if options.header
-            normalize_unicode = options.normalize_unicode
-          end
-          self.url = url.expand(params, nil, normalize_unicode) if url.is_a?(Addressable::Template)
+          header.update(options.header) if options && options.header
+          self.url = url.expand(params) if url.is_a?(Addressable::Template)
           url.query_values = query.merge(url.query_values || {})
 
           if allow_form_encoding?
@@ -167,7 +166,7 @@ module Google
         #
         # @param [Fixnum] status
         #   HTTP status code of response
-        # @param [Hash] header
+        # @param [Hurley::Header] header
         #   Response headers
         # @param [String, #read] body
         #  Response body
@@ -178,7 +177,7 @@ module Google
         # @raise [Google::Apis::AuthorizationError] Authorization is required
         def process_response(status, header, body)
           check_status(status, header, body)
-          decode_response_body(header['Content-Type'].first, body)
+          decode_response_body(header[:content_type], body)
         end
 
         # Check the response and raise error if needed
@@ -186,7 +185,7 @@ module Google
         # @param [Fixnum] status
         #   HTTP status code of response
         # @param
-        # @param [Hash] header
+        # @param [Hurley::Header] header
         #   HTTP response headers
         # @param [String] body
         #   HTTP response body
@@ -202,14 +201,11 @@ module Google
           when 200...300
             nil
           when 301, 302, 303, 307
-            message ||= sprintf('Redirect to %s', header['Location'])
+            message ||= sprintf('Redirect to %s', header[:location])
             raise Google::Apis::RedirectError.new(message, status_code: status, header: header, body: body)
           when 401
             message ||= 'Unauthorized'
             raise Google::Apis::AuthorizationError.new(message, status_code: status, header: header, body: body)
-          when 429
-            message ||= 'Rate limit exceeded'
-            raise Google::Apis::RateLimitError.new(message, status_code: status, header: header, body: body)
           when 304, 400, 402...500
             message ||= 'Invalid request'
             raise Google::Apis::ClientError.new(message, status_code: status, header: header, body: body)
@@ -255,16 +251,7 @@ module Google
         # @raise [StandardError] if no block
         def error(err, rethrow: false, &block)
           logger.debug { sprintf('Error - %s', PP.pp(err, '')) }
-          if err.is_a?(HTTPClient::BadResponseError)
-            begin
-              res = err.res
-              check_status(res.status.to_i, res.header, res.body)
-            rescue Google::Apis::Error => e
-              err = e
-            end
-          elsif err.is_a?(HTTPClient::TimeoutError) || err.is_a?(SocketError)
-            err = Google::Apis::TransmissionError.new(err)
-          end
+          err = Google::Apis::TransmissionError.new(err) if err.is_a?(Hurley::ClientError) || err.is_a?(SocketError)
           block.call(nil, err) if block_given?
           fail err if rethrow || block.nil?
         end
@@ -272,7 +259,7 @@ module Google
         # Execute the command once.
         #
         # @private
-        # @param [HTTPClient] client
+        # @param [Hurley::Client] client
         #   HTTP client
         # @return [Object]
         # @raise [Google::Apis::ServerError] An error occurred on the server and the request can be retried
@@ -282,18 +269,21 @@ module Google
           body.rewind if body.respond_to?(:rewind)
           begin
             logger.debug { sprintf('Sending HTTP %s %s', method, url) }
-            request_header = header.dup
-            apply_request_options(request_header)
-
-            http_res = client.request(method.to_s.upcase,
-                                      url.to_s,
-                                      query: nil,
-                                      body: body,
-                                      header: request_header,
-                                      follow_redirect: true)
-            logger.debug { http_res.status }
-            logger.debug { http_res.inspect }
-            response = process_response(http_res.status.to_i, http_res.header, http_res.body)
+            response = client.send(method, url, body) do |req|
+              # Temporary workaround for Hurley bug where the connection preference
+              # is ignored and it uses nested anyway
+              unless form_encoded?
+                req.url.query_class = Hurley::Query::Flat
+                query.each do | k, v|
+                 req.url.query[k] = normalize_query_value(v)
+                end
+              end
+              # End workaround
+              apply_request_options(req)
+            end
+            logger.debug { response.status_code }
+            logger.debug { response.inspect }
+            response = process_response(response.status_code, response.header, response.body)
             success(response)
           rescue => e
             logger.debug { sprintf('Caught error %s', e) }
@@ -302,16 +292,18 @@ module Google
         end
 
         # Update the request with any specified options.
-        # @param [Hash] header
-        #  HTTP headers
+        # @param [Hurley::Request] req
+        #  HTTP request
         # @return [void]
-        def apply_request_options(req_header)
+        def apply_request_options(req)
           if options.authorization.respond_to?(:apply!)
-            options.authorization.apply!(req_header)
+            options.authorization.apply!(req.header)
           elsif options.authorization.is_a?(String)
-            req_header['Authorization'] = sprintf('Bearer %s', options.authorization)
+            req.header[:authorization] = sprintf('Bearer %s', options.authorization)
           end
-          req_header.update(header)
+          req.header.update(header)
+          req.options.timeout = options.timeout_sec
+          req.options.open_timeout = options.open_timeout_sec
         end
 
         def allow_form_encoding?
