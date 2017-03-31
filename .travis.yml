@@ -9,7 +9,6 @@ env:
   global:
     - JRUBY_OPTS='-X-C -J-Xmx1024m -J-XX:+UseConcMarkSweepGC'
   matrix:
-    - RAILS_VERSION="~>3.2"
     - RAILS_VERSION="~>4.0.0"
     - RAILS_VERSION="~>4.1.0"
     - RAILS_VERSION="~>4.2.0"
